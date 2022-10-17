@@ -5,9 +5,7 @@ labels : 'US'
 title : '[US] Code + name'
 ---
 
-# Modèle de création d'User Story
-
-<h3>Données du User Story</h3>
+## Données du User Story
 
 • En tant que <rôles du user en question>
 
