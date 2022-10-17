@@ -1,7 +1,7 @@
 ---
 name: User story
 about : Description d'une user story
-labels : 'US, Parent, Enfant, Gestionnaire, Professeur'
+labels : 'US'
 title : '[US] Code + name'
 ---
 
