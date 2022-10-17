@@ -1,6 +1,8 @@
 ---
 name: User story
+about : Description d'une user story
 ---
+
 # Modèle de création d'User Story
 
 Définition : 
