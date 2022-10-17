@@ -1,7 +1,7 @@
 ---
 name: User story
 about : Description d'une user story
-labels : 'User Story'
+labels : 'User Story', 'Parent', 'Enfant', 'Gestionnaire', 'Professeur'
 title : '[User Story] Code + name'
 ---
 
