@@ -1,8 +1,8 @@
 ---
 name: User story
 about : Description d'une user story
-labels : 'User Story, Parent, Enfant, Gestionnaire, Professeur'
-title : '[User Story] Code + name'
+labels : 'US, Parent, Enfant, Gestionnaire, Professeur'
+title : '[US] Code + name'
 ---
 
 # Modèle de création d'User Story
