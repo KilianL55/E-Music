@@ -1,6 +1,8 @@
 ---
 name: User story
 about : Description d'une user story
+labels : 'User Story'
+title : '[User Story] Code + name'
 ---
 
 # Modèle de création d'User Story
