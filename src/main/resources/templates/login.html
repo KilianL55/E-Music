@@ -1,0 +1,46 @@
+{{> partials/header}}
+<div style="background-color: rgb(29,29,29); padding-bottom: 5em">
+  <div class="ui vertical masthead center aligned segment">
+    <div class="ui container">
+      <div class="ui segment">
+        <div class="ui secondary pointing menu">
+          <a class="red item" href="/accueil">
+            Home
+          </a>
+          <a class="red item" href="index.html">
+            Messages
+          </a>
+          <div class="right menu">
+            <a class="active red item" href="/signup">
+              Sign Up
+            </a>
+            <a class="red item" href="index.html">
+              Logout
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui container" style="display: flex;justify-content: center; border: 1px solid white; border-radius: 25px;background: white; margin-top: 3em;width: 450px;padding: 3em">
+      <form method="POST" action="/login" class="ui form" style="width: 350px; display: flex;flex-direction: column">
+        <h2 style="color: black; margin-bottom: 1em">Connexion</h2>
+
+        <div class="field" style="text-align: left">
+          <label for="username"><i class="red mini star of life icon"></i>Email
+            <input required type="text" name="username" id="username" placeholder="Email">
+          </label>
+        </div>
+
+        <div class="field" style="text-align: left">
+          <label for="password"><i class="red mini star of life icon"></i>Password
+            <input required type="password" name="password" id="password" placeholder="Votre mot de passe">
+          </label>
+        </div>
+
+        <button class="ui red button" type="submit">Valider</button>
+      </form>
+    </div>
+  </div>
+</div>
+{{> partials/footer}}

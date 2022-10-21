@@ -4,8 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -13,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Responsable {
+public class Responsable implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -34,7 +37,7 @@ public class Responsable {
     @Column(length = 50)
     private String ville2;
 
-    @Column(length = 50)
+    @Column(length = 120)
     private String password;
 
     @Column(length = 5)
@@ -55,13 +58,47 @@ public class Responsable {
     @Column(length = 50)
     private String tel3;
 
-    @Column
-    private String code_verification;
+    @Column()
+    private int code_verification;
 
-    private boolean enabled;
+    @Column
+    private boolean enabled=false;
 
     @OneToMany(mappedBy = "responsable")
     private List<Enfant> enfant;
 
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public String getPassword() {
+        return this.password;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.email;
+    }
+
+    public boolean isEnabled() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
 }
