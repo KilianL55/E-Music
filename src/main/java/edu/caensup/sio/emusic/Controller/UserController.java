@@ -41,8 +41,8 @@ public class UserController {
         return "signupRecap";
    }
 
-    @RequestMapping("/sendSimpleEmail")
-    public String sendSimpleEmail(@ModelAttribute Responsable resp) throws MessagingException, UnsupportedEncodingException {
+    @RequestMapping("/sendEmailVerif")
+    public String sendEmailVerif(@ModelAttribute Responsable resp) throws MessagingException, UnsupportedEncodingException {
 
         try{
             emailService.sendEmail(resp.getEmail(), "test", "test");

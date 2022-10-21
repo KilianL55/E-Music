@@ -55,6 +55,11 @@ public class Responsable {
     @Column(length = 50)
     private String tel3;
 
+    @Column
+    private String code_verification;
+
+    private boolean enabled;
+
     @OneToMany(mappedBy = "responsable")
     private List<Enfant> enfant;
 
