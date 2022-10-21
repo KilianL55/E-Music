@@ -1,25 +1,18 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>E-Music</title>
-</head>
+{{> partials/header}}
 
-<body style="background: #1a1a1a">
+<div style="background-color: rgb(29,29,29); padding-bottom: 5em">
     <div class="ui vertical masthead center aligned segment">
         <div class="ui container">
             <div class="ui segment">
                 <div class="ui secondary pointing menu">
-                    <a class="red item" href="index.html">
+                    <a class="red item" href="/accueil">
                         Home
                     </a>
                     <a class="red item" href="index.html">
                         Messages
                     </a>
                     <div class="right menu">
-                        <a class="active red item" href="signup.html">
+                        <a class="active red item" href="/signup">
                             Sign Up
                         </a>
                         <a class="red item" href="index.html">
@@ -30,12 +23,6 @@
             </div>
         </div>
 
-<<<<<<< Updated upstream:signup.html
-        <div class="ui container" style="display: flex;justify-content: center; border: 1px solid white; border-radius: 25px;background: white; margin-top: 3em;width: 450px;padding: 3em">
-            <form class="ui form" style="width: 350px; display: flex;flex-direction: column">
-                <h2 style="color: black; margin-bottom: 1em">Inscription</h2>
-                <div class="two fields">
-=======
 
         <div v-if="state==false">
             <div class="ui container signup-form" style="display: flex;justify-content: center; border: 1px solid white; border-radius: 25px;background: white; margin-top: 3em;width: 450px;padding: 3em">
@@ -54,7 +41,6 @@
                         </div>
                     </div>
 
->>>>>>> Stashed changes:src/main/resources/templates/signup.html
                     <div class="field" style="text-align: left">
                         <label for="email"><i class="red mini star of life icon"></i>Email
                             <input required type="text" name="email" id="email" placeholder="Email">
@@ -67,25 +53,11 @@
                         </label>
                     </div>
 
-<<<<<<< Updated upstream:signup.html
-                <div class="field" style="text-align: left">
-                    <label for="email"><i class="red mini star of life icon"></i>Email
-                        <input required type="text" name="email" id="email" placeholder="Email">
-                    </label>
-                </div>
-
-                <div class="field" style="text-align: left">
-                    <label for="password"><i class="red mini star of life icon"></i>Mot de passe
-                        <input required type="text" name="password" id="password" placeholder="Email">
-                    </label>
-                </div>
-=======
                     <div class="field" style="text-align: left">
                         <label for="adresse"><i class="red mini star of life icon"></i>Adresse
                             <input required type="text" name="adresse" id="adresse" placeholder="Adresse">
                         </label>
                     </div>
->>>>>>> Stashed changes:src/main/resources/templates/signup.html
 
                     <div class="field" style="text-align: left">
                         <label for="adresse2">Adresse n°2
@@ -107,13 +79,8 @@
                     </div>
 
                     <div class="field" style="text-align: left">
-<<<<<<< Updated upstream:signup.html
-                        <label for="city"><i class="red mini star of life icon"></i>Ville
-                            <input required type="text" name="city" id="city" placeholder="Ville">
-=======
                         <label for="quotient_familial"><i class="red mini star of life icon"></i>Quotient Familial
                             <input required type="number" name="quotient_familial" id="quotient_familial" placeholder="Nombre">
->>>>>>> Stashed changes:src/main/resources/templates/signup.html
                         </label>
                     </div>
 
@@ -167,29 +134,16 @@
                     </div>
 
                     <div class="field" style="text-align: left">
-<<<<<<< Updated upstream:signup.html
-                        <label for="codePostal"><i class="red mini star of life icon"></i>Code Postal
-                            <input required type="text" name="codePostal" id="codePostal" placeholder="Ex : 14000">
-=======
                         <label for="email"><i class="red mini star of life icon"></i>Email
                             <input required type="text" name="email" placeholder="Email">
->>>>>>> Stashed changes:src/main/resources/templates/signup.html
                         </label>
                     </div>
 
-<<<<<<< Updated upstream:signup.html
-                <div class="field" style="text-align: left">
-                    <label for="quotfam"><i class="red mini star of life icon"></i>Quotient Familial
-                        <input required type="number" name="quotfam" id="quotfam" placeholder="Nombre">
-                    </label>
-                </div>
-=======
                     <div class="field" style="text-align: left">
                         <label for="password"><i class="red mini star of life icon"></i>Mot de passe
                             <input required type="password" name="password" placeholder="Mot de passe">
                         </label>
                     </div>
->>>>>>> Stashed changes:src/main/resources/templates/signup.html
 
                     <div class="field" style="text-align: left">
                         <label for="adresse"><i class="red mini star of life icon"></i>Adresse
@@ -222,18 +176,6 @@
                         </label>
                     </div>
 
-<<<<<<< Updated upstream:signup.html
-                <button class="ui button" type="submit">Submit</button>
-            </form>
-        </div>
-    </div>
-</body>
-<script src="https://kit.fontawesome.com/9626785de0.js" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.0/dist/semantic.min.css">
-<script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.0/dist/semantic.min.js"></script>
-</html>
-=======
                     <div class="three fields">
                         <div class="field" style="text-align: left">
                             <label for="tel1"><i class="red mini star of life icon"></i>Téléphone
@@ -260,4 +202,3 @@
 </div>
 {{> partials/footer}}
 {{{vue}}}
->>>>>>> Stashed changes:src/main/resources/templates/signup.html
