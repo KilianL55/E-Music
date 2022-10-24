@@ -1,0 +1,36 @@
+2022-10-24 10:38:31 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Valeur trop longue pour la colonne "code_postal CHARACTER VARYING(5)": "'sdfsdfds' (8)"
+Value too long for column "code_postal CHARACTER VARYING(5)": "'sdfsdfds' (8)"; SQL statement:
+insert into "responsable" ("adresse", "code_postal", "code_verification", "email", "enabled", "nom", "password", "prenom", "quotient_familial", "tel1", "tel2", "tel3", "ville", "ville2", "id") values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) [22001-214]
+2022-10-24 11:04:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Valeur trop longue pour la colonne "code_postal CHARACTER VARYING(5)": "'sdfsdf' (6)"
+Value too long for column "code_postal CHARACTER VARYING(5)": "'sdfsdf' (6)"; SQL statement:
+insert into "responsable" ("adresse", "code_postal", "code_verification", "email", "enabled", "nom", "password", "prenom", "quotient_familial", "tel1", "tel2", "tel3", "ville", "ville2", "id") values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) [22001-214]
+2022-10-24 11:04:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Valeur trop longue pour la colonne "code_postal CHARACTER VARYING(5)": "'fsddsfsdf' (9)"
+Value too long for column "code_postal CHARACTER VARYING(5)": "'fsddsfsdf' (9)"; SQL statement:
+insert into "responsable" ("adresse", "code_postal", "code_verification", "email", "enabled", "nom", "password", "prenom", "quotient_familial", "tel1", "tel2", "tel3", "ville", "ville2", "id") values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) [22001-214]
+2022-10-24 11:05:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Valeur trop longue pour la colonne "code_postal CHARACTER VARYING(5)": "'fdgdfg' (6)"
+Value too long for column "code_postal CHARACTER VARYING(5)": "'fdgdfg' (6)"; SQL statement:
+insert into "responsable" ("adresse", "code_postal", "code_verification", "email", "enabled", "nom", "password", "prenom", "quotient_familial", "tel1", "tel2", "tel3", "ville", "ville2", "id") values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) [22001-214]
+2022-10-24 11:06:36 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Valeur trop longue pour la colonne "code_postal CHARACTER VARYING(5)": "'dfgdfgdfg' (9)"
+Value too long for column "code_postal CHARACTER VARYING(5)": "'dfgdfgdfg' (9)"; SQL statement:
+insert into "responsable" ("adresse", "code_postal", "code_verification", "email", "enabled", "nom", "password", "prenom", "quotient_familial", "tel1", "tel2", "tel3", "ville", "ville2", "id") values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) [22001-214]
+2022-10-24 11:07:09 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Valeur trop longue pour la colonne "code_postal CHARACTER VARYING(5)": "'sdfsdfsdf' (9)"
+Value too long for column "code_postal CHARACTER VARYING(5)": "'sdfsdfsdf' (9)"; SQL statement:
+insert into "responsable" ("adresse", "code_postal", "code_verification", "email", "enabled", "nom", "password", "prenom", "quotient_familial", "tel1", "tel2", "tel3", "ville", "ville2", "id") values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) [22001-214]
+2022-10-24 11:09:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Valeur trop longue pour la colonne "code_postal CHARACTER VARYING(5)": "'dfgdfg' (6)"
+Value too long for column "code_postal CHARACTER VARYING(5)": "'dfgdfg' (6)"; SQL statement:
+insert into "responsable" ("adresse", "code_postal", "code_verification", "email", "enabled", "nom", "password", "prenom", "quotient_familial", "tel1", "tel2", "tel3", "ville", "ville2", "id") values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) [22001-214]
+2022-10-24 11:11:05 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Valeur trop longue pour la colonne "code_postal CHARACTER VARYING(5)": "'dfgdfg' (6)"
+Value too long for column "code_postal CHARACTER VARYING(5)": "'dfgdfg' (6)"; SQL statement:
+insert into "responsable" ("adresse", "code_postal", "code_verification", "email", "enabled", "nom", "password", "prenom", "quotient_familial", "tel1", "tel2", "tel3", "ville", "ville2", "id") values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) [22001-214]
+2022-10-24 11:11:41 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Valeur trop longue pour la colonne "code_postal CHARACTER VARYING(5)": "'fsdfsdfsdf' (10)"
+Value too long for column "code_postal CHARACTER VARYING(5)": "'fsdfsdfsdf' (10)"; SQL statement:
+insert into "responsable" ("adresse", "code_postal", "code_verification", "email", "enabled", "nom", "password", "prenom", "quotient_familial", "tel1", "tel2", "tel3", "ville", "ville2", "id") values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) [22001-214]

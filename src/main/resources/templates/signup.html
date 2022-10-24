@@ -23,86 +23,176 @@
             </div>
         </div>
 
-        <div class="ui container" style="display: flex;justify-content: center; border: 1px solid white; border-radius: 25px;background: white; margin-top: 3em;width: 450px;padding: 3em">
-            <form method="POST" action="/signup/register" class="ui form" style="width: 350px; display: flex;flex-direction: column">
-                <h2 style="color: black; margin-bottom: 1em">Inscription</h2>
-                <div class="two fields">
-                    <div class="field" style="text-align: left">
-                        <label for="nom"><i class="red mini star of life icon"></i>Nom
-                            <input required type="text" name="nom" id="nom" placeholder="Nom">
-                        </label>
-                    </div>
-                    <div class="field" style="text-align: left">
-                        <label for="prenom"><i class="red mini star of life icon"></i>Prénom
-                            <input required type="text" name="prenom" id="prenom" placeholder="Prénom">
-                        </label>
-                    </div>
-                </div>
+        <div v-if="state === true">
+            <div id="signup" style="animation: 1s ease-in-out slideInLeft">
+                <div class="ui container" style="display: flex;justify-content: center; border: 1px solid white; border-radius: 25px;background: white; margin-top: 3em;width: 450px;padding: 3em">
+                    <form onclick="return false" class="ui form" style="width: 350px; display: flex;flex-direction: column">
+                        <h2 style="color: black; margin-bottom: 1em">Inscription</h2>
+                        <div class="two fields">
+                            <div class="field" style="text-align: left">
+                                <label for="nom"><i class="red mini star of life icon"></i>Nom
+                                    <input required type="text" name="nom" placeholder="Nom" v-model="nom">
+                                </label>
+                            </div>
+                            <div class="field" style="text-align: left">
+                                <label for="prenom"><i class="red mini star of life icon"></i>Prénom
+                                    <input required type="text" name="prenom" placeholder="Prénom" v-model="prenom">
+                                </label>
+                            </div>
+                        </div>
 
-                <div class="field" style="text-align: left">
-                    <label for="email"><i class="red mini star of life icon"></i>Email
-                        <input required type="text" name="email" id="email" placeholder="Email">
-                    </label>
-                </div>
+                        <div class="field" style="text-align: left">
+                            <label for="email"><i class="red mini star of life icon"></i>Email
+                                <input required type="text" name="email" placeholder="Email" v-model="email">
+                            </label>
+                        </div>
 
-                <div class="field" style="text-align: left">
-                    <label for="password"><i class="red mini star of life icon"></i>Mot de passe
-                        <input required type="password" name="password" id="password" placeholder="Mot de passe">
-                    </label>
-                </div>
+                        <div class="field" style="text-align: left">
+                            <label for="password"><i class="red mini star of life icon"></i>Mot de passe
+                                <input required type="password" name="password" placeholder="Mot de passe" v-model="password">
+                            </label>
+                        </div>
 
-                <div class="field" style="text-align: left">
-                    <label for="adresse"><i class="red mini star of life icon"></i>Adresse
-                        <input required type="text" name="adresse" id="adresse" placeholder="Adresse">
-                    </label>
-                </div>
+                        <div class="field" style="text-align: left">
+                            <label for="adresse"><i class="red mini star of life icon"></i>Adresse
+                                <input required type="text" name="adresse" placeholder="Adresse" v-model="adresse">
+                            </label>
+                        </div>
 
-                <div class="field" style="text-align: left">
-                    <label for="adresse2">Adresse n°2
-                        <input type="text" name="adresse2" id="adresse2" placeholder="Adresse">
-                    </label>
-                </div>
+                        <div class="field" style="text-align: left">
+                            <label for="adresse2">Adresse n°2
+                                <input type="text" name="adresse2" placeholder="Adresse" v-model="adresse2">
+                            </label>
+                        </div>
 
-                <div class="two fields">
-                    <div class="field" style="text-align: left">
-                        <label for="ville"><i class="red mini star of life icon"></i>Ville
-                            <input required type="text" name="ville" id="ville" placeholder="Ville">
-                        </label>
-                    </div>
-                    <div class="field" style="text-align: left">
-                        <label for="code_postal"><i class="red mini star of life icon"></i>Code Postal
-                            <input required type="text" name="code_postal" id="code_postal" placeholder="Ex : 14000">
-                        </label>
-                    </div>
-                </div>
+                        <div class="two fields">
+                            <div class="field" style="text-align: left">
+                                <label for="ville"><i class="red mini star of life icon"></i>Ville
+                                    <input required type="text" name="ville" placeholder="Ville" v-model="ville">
+                                </label>
+                            </div>
+                            <div class="field" style="text-align: left">
+                                <label for="code_postal"><i class="red mini star of life icon"></i>Code Postal
+                                    <input required type="text" name="code_postal" placeholder="Ex : 14000" v-model="code_postal">
+                                </label>
+                            </div>
+                        </div>
 
-                <div class="field" style="text-align: left">
-                    <label for="quotient_familial"><i class="red mini star of life icon"></i>Quotient Familial
-                        <input required type="number" name="quotient_familial" id="quotient_familial" placeholder="Nombre">
-                    </label>
-                </div>
+                        <div class="field" style="text-align: left">
+                            <label for="quotient_familial"><i class="red mini star of life icon"></i>Quotient Familial
+                                <input required type="number" name="quotient_familial" placeholder="Nombre" v-model="quotient_familial">
+                            </label>
+                        </div>
 
-                <div class="three fields">
-                    <div class="field" style="text-align: left">
-                        <label for="tel1"><i class="red mini star of life icon"></i>Téléphone
-                            <input required type="text" name="tel1" id="tel1" placeholder="Numéro n°1">
-                        </label>
-                    </div>
-                    <div class="field" style="text-align: left">
-                        <label for="tel2">Téléphone
-                            <input type="text" name="tel2" id="tel2" placeholder="Numéro n°2">
-                        </label>
-                    </div>
-                    <div class="field" style="text-align: left">
-                        <label for="tel3">Téléphone
-                            <input type="text" name="tel3" id="tel3" placeholder="Numéro n°3">
-                        </label>
-                    </div>
-                </div>
+                        <div class="three fields">
+                            <div class="field" style="text-align: left">
+                                <label for="tel1"><i class="red mini star of life icon"></i>Téléphone
+                                    <input required type="text" name="tel1" placeholder="Numéro n°1" v-model="tel1">
+                                </label>
+                            </div>
+                            <div class="field" style="text-align: left">
+                                <label for="tel2">Téléphone
+                                    <input type="text" name="tel2" placeholder="Numéro n°2" v-model="tel2">
+                                </label>
+                            </div>
+                            <div class="field" style="text-align: left">
+                                <label for="tel3">Téléphone
+                                    <input type="text" name="tel3" placeholder="Numéro n°3" v-model="tel3">
+                                </label>
+                            </div>
+                        </div>
 
-                <button class="ui red button" type="submit">S'inscrire</button>
-            </form>
+                        <div class="ui red button test" @click="state = false">S'inscrire</div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div v-else>
+            <div id="signup-recap" style="animation: 1s ease-in-out slideInRight">
+                <div class="ui container" style="display: flex;justify-content: center; border: 1px solid white; border-radius: 25px;background: white; margin-top: 3em;width: 450px;padding: 3em">
+                    <form method="POST" action="/sendEmailVerif" class="ui form" style="width: 350px; display: flex;flex-direction: column">
+                        <h2 style="color: black; margin-bottom: 1em">Vos données sont-elles exactes ?</h2>
+                        <div class="two fields">
+                            <div class="field" style="text-align: left">
+                                <label for="nom"><i class="red mini star of life icon"></i>Nom
+                                    <input required type="text" name="nom" id="nom" placeholder="Nom" v-model="nom">
+                                </label>
+                            </div>
+                            <div class="field" style="text-align: left">
+                                <label for="prenom"><i class="red mini star of life icon"></i>Prénom
+                                    <input required type="text" name="prenom" id="prenom" placeholder="Prénom" v-model="prenom">
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="field" style="text-align: left">
+                            <label for="email"><i class="red mini star of life icon"></i>Email
+                                <input required type="text" name="email" id="email" placeholder="Email" v-model="email">
+                            </label>
+                        </div>
+
+                        <div class="field" style="text-align: left">
+                            <label for="password"><i class="red mini star of life icon"></i>Mot de passe
+                                <input required type="password" name="password" id="password" placeholder="Mot de passe" v-model="password">
+                            </label>
+                        </div>
+
+                        <div class="field" style="text-align: left">
+                            <label for="adresse"><i class="red mini star of life icon"></i>Adresse
+                                <input required type="text" name="adresse" id="adresse" placeholder="Adresse" v-model="adresse">
+                            </label>
+                        </div>
+
+                        <div class="field" style="text-align: left">
+                            <label for="adresse2">Adresse n°2
+                                <input type="text" name="adresse2" id="adresse2" placeholder="Adresse" v-model="adresse2">
+                            </label>
+                        </div>
+
+                        <div class="two fields">
+                            <div class="field" style="text-align: left">
+                                <label for="ville"><i class="red mini star of life icon"></i>Ville
+                                    <input required type="text" name="ville" id="ville" placeholder="Ville" v-model="ville">
+                                </label>
+                            </div>
+                            <div class="field" style="text-align: left">
+                                <label for="code_postal"><i class="red mini star of life icon"></i>Code Postal
+                                    <input required type="text" name="code_postal" id="code_postal" placeholder="Ex : 14000" v-model="code_postal">
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="field" style="text-align: left">
+                            <label for="quotient_familial"><i class="red mini star of life icon"></i>Quotient Familial
+                                <input required type="number" name="quotient_familial" id="quotient_familial" placeholder="Nombre" v-model="quotient_familial">
+                            </label>
+                        </div>
+
+                        <div class="three fields">
+                            <div class="field" style="text-align: left">
+                                <label for="tel1"><i class="red mini star of life icon"></i>Téléphone
+                                    <input required type="text" name="tel1" id="tel1" placeholder="Numéro n°1" v-model="tel1">
+                                </label>
+                            </div>
+                            <div class="field" style="text-align: left">
+                                <label for="tel2">Téléphone
+                                    <input type="text" name="tel2" id="tel2" placeholder="Numéro n°2" v-model="tel2">
+                                </label>
+                            </div>
+                            <div class="field" style="text-align: left">
+                                <label for="tel3">Téléphone
+                                    <input type="text" name="tel3" id="tel3" placeholder="Numéro n°3" v-model="tel3">
+                                </label>
+                            </div>
+                        </div>
+
+                        <button class="ui red button" type="submit">Confirmer</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 {{> partials/footer}}
+{{{vue}}}

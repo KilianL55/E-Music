@@ -3,6 +3,7 @@ package edu.caensup.sio.emusic.Controller;
 import edu.caensup.sio.emusic.EmailService;
 import edu.caensup.sio.emusic.models.Responsable;
 import edu.caensup.sio.emusic.repositories.IRepoResponsable;
+import io.github.jeemv.springboot.vuejs.VueJS;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -34,6 +35,14 @@ public class UserController {
     @Autowired
     PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private VueJS vue;
+
+    @ModelAttribute("vue")
+    public VueJS getVue() {
+        return this.vue;
+    }
+
     @GetMapping("accueil")
     public String indexAction(){
         return "index";
@@ -41,6 +50,8 @@ public class UserController {
 
     @GetMapping("/signup")
     public String formAction(){
+        vue.addData("state", true);
+        vue.addData("responsable", new Responsable());
         return "signup";
     }
 
