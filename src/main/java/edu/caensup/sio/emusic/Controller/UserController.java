@@ -1,6 +1,5 @@
 package edu.caensup.sio.emusic.Controller;
 
-import edu.caensup.sio.emusic.EmailService;
 import edu.caensup.sio.emusic.models.Responsable;
 import edu.caensup.sio.emusic.repositories.IRepoResponsable;
 import io.github.jeemv.springboot.vuejs.VueJS;
@@ -26,9 +25,6 @@ public class UserController {
     @Autowired
     private IRepoResponsable repoResponsable;
 
-    @Autowired
-    private EmailService emailService;
-
     @ModelAttribute("vue")
     public VueJS getVue() {
         return this.vue;
@@ -50,16 +46,4 @@ public class UserController {
         model.put("resp",resp);
         return "signupRecap";
    }
-
-    @RequestMapping("/sendEmailVerif")
-    public String sendEmailVerif(@ModelAttribute Responsable resp) throws MessagingException, UnsupportedEncodingException {
-
-        try{
-            emailService.sendEmail(resp.getEmail(), "test", "test");
-        } catch (UnsupportedEncodingException | MessagingException e) {
-            System.out.println(Arrays.toString(e.getStackTrace()));
-        }
-        return "signup";
-    }
-
 }
