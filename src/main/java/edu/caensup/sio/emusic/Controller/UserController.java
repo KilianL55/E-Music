@@ -48,20 +48,21 @@ public class UserController {
         return "index";
     }
 
-    @GetMapping("/signup")
+    @GetMapping("signup")
     public String formAction(){
         vue.addData("state", true);
         vue.addData("responsable", new Responsable());
         return "signup";
     }
 
-   @PostMapping("/signup/register")
+   @PostMapping("signup/register")
     public String registerAction(@ModelAttribute Responsable resp, ModelMap model){
         model.put("resp",resp);
+        System.out.println(resp.getUsername());
         return "signupRecap";
    }
 
-    @RequestMapping("/sendEmailVerif")
+    @RequestMapping("sendEmailVerif")
     public String sendEmailVerif(@ModelAttribute Responsable resp, ModelMap model) throws MessagingException, UnsupportedEncodingException {
         int randomCode = (int) (Math.random()*100000);
         resp.setCode_verification(randomCode);
@@ -69,7 +70,7 @@ public class UserController {
         resp.setPassword(passwordEncoder.encode(resp.getPassword()));
         repoResponsable.save(resp);
         try{
-            emailService.sendEmail(resp.getEmail(), "test", "Voici votre code de vérification : "+randomCode);
+            emailService.sendEmail(resp.getUsername(), "test", "Voici votre code de vérification : "+randomCode);
         } catch (UnsupportedEncodingException | MessagingException e) {
             System.out.println(Arrays.toString(e.getStackTrace()));
         }
@@ -77,9 +78,9 @@ public class UserController {
         return "signupVerif";
     }
 
-    @PostMapping("/codeVerif")
+    @PostMapping("codeVerif")
     public RedirectView codeVerifAction(@ModelAttribute Responsable resp){
-        Optional<Responsable> responsable = Optional.ofNullable(repoResponsable.findByEmail(resp.getEmail()));
+        Optional<Responsable> responsable = (Optional<Responsable>) Optional.ofNullable(repoResponsable.findByUsername(resp.getUsername()));
         if (responsable.isPresent()){
             if (resp.getCode_verification()==responsable.get().getCode_verification()){
                 responsable.get().setEnabled(true);
@@ -89,6 +90,7 @@ public class UserController {
             }
         }
         return new RedirectView("signup");
+
     }
 
 }

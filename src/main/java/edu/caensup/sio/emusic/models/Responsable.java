@@ -44,7 +44,7 @@ public class Responsable implements UserDetails {
     private String code_postal;
 
     @Column(length = 50)
-    private String email;
+    private String username;
 
     @Column(length = 11)
     private int quotient_familial;
@@ -80,7 +80,7 @@ public class Responsable implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.email;
+        return username;
     }
 
     public boolean isEnabled() {

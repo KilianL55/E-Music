@@ -15,12 +15,12 @@ public class DbUserLoginService implements UserDetailsService {
     private IRepoResponsable repoResponsable;
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Optional<Responsable> opt = Optional.ofNullable(repoResponsable.findByEmail(email));
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Optional<Responsable> opt = Optional.ofNullable(repoResponsable.findByUsername(username));
         if (opt.isPresent()) {
             return opt.get();
         }
-        throw new UsernameNotFoundException(email + " n'existe pas !");
+        throw new UsernameNotFoundException(username + " n'existe pas !");
     }
 
 
