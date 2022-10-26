@@ -43,14 +43,17 @@ public class UserController {
         return this.vue;
     }
 
-    @GetMapping("accueil")
+    @GetMapping({"accueil", "/"})
     public String indexAction(){
+        vue.addData("isActive", "accueil");
         return "index";
     }
 
     @GetMapping("signup")
     public String formAction(){
         vue.addData("state", true);
+        vue.addData("isActive", "signup");
+        System.out.println("signup page trouver");
         vue.addData("responsable", new Responsable());
         return "signup";
     }
