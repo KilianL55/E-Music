@@ -5,10 +5,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -16,7 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Responsable implements UserDetails {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -58,19 +61,28 @@ public class Responsable implements UserDetails {
     @Column(length = 50)
     private String tel3;
 
-    @Column()
+    @Column
     private int code_verification;
 
     @Column
     private boolean enabled=false;
 
-    @OneToMany(mappedBy = "responsable")
-    private List<Enfant> enfant;
+    @Column
+    private Date date_naissance;
 
+    private String authorities="Responsable";
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        if(authorities==null){
+            authorities="";
+        }
+        String[] auths = authorities.split(",");
+        List<SimpleGrantedAuthority> authoritiesObjects = new ArrayList<SimpleGrantedAuthority>();
+        for (String role : auths) {
+            authoritiesObjects.add(new SimpleGrantedAuthority("ROLE_" + role));
+        }
+        return authoritiesObjects; // (3)
     }
 
     @Override

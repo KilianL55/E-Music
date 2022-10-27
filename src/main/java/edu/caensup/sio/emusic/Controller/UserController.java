@@ -1,10 +1,9 @@
 package edu.caensup.sio.emusic.Controller;
 
 import edu.caensup.sio.emusic.EmailService;
-import edu.caensup.sio.emusic.models.Responsable;
-import edu.caensup.sio.emusic.repositories.IRepoResponsable;
+import edu.caensup.sio.emusic.models.User;
+import edu.caensup.sio.emusic.repositories.IRepoUser;
 import io.github.jeemv.springboot.vuejs.VueJS;
-import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -19,15 +18,13 @@ import javax.mail.MessagingException;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.Optional;
-import java.util.Random;
-import java.util.random.RandomGenerator;
 
 @Controller
 @RequestMapping("/")
 public class UserController {
 
     @Autowired
-    private IRepoResponsable repoResponsable;
+    private IRepoUser repoResponsable;
 
     @Autowired
     private EmailService emailService;
@@ -54,19 +51,19 @@ public class UserController {
         vue.addData("state", true);
         vue.addData("isActive", "signup");
         System.out.println("signup page trouver");
-        vue.addData("responsable", new Responsable());
+        vue.addData("responsable", new User());
         return "signup";
     }
 
    @PostMapping("signup/register")
-    public String registerAction(@ModelAttribute Responsable resp, ModelMap model){
+    public String registerAction(@ModelAttribute User resp, ModelMap model){
         model.put("resp",resp);
         System.out.println(resp.getUsername());
         return "signupRecap";
    }
 
     @RequestMapping("sendEmailVerif")
-    public String sendEmailVerif(@ModelAttribute Responsable resp, ModelMap model) throws MessagingException, UnsupportedEncodingException {
+    public String sendEmailVerif(@ModelAttribute User resp, ModelMap model) throws MessagingException, UnsupportedEncodingException {
         int randomCode = (int) (Math.random()*100000);
         resp.setCode_verification(randomCode);
         resp.setEnabled(false);
@@ -82,12 +79,13 @@ public class UserController {
     }
 
     @PostMapping("codeVerif")
-    public RedirectView codeVerifAction(@ModelAttribute Responsable resp){
-        Optional<Responsable> responsable = (Optional<Responsable>) Optional.ofNullable(repoResponsable.findByUsername(resp.getUsername()));
+    public RedirectView codeVerifAction(@ModelAttribute User resp){
+        Optional<User> responsable = repoResponsable.findByUsername(resp.getUsername());
         if (responsable.isPresent()){
             if (resp.getCode_verification()==responsable.get().getCode_verification()){
                 responsable.get().setEnabled(true);
                 responsable.get().setPassword(passwordEncoder.encode(responsable.get().getPassword()));
+                responsable.get().setAuthorities("RESPONSABLE");
                 repoResponsable.save(responsable.get());
                 return new RedirectView("accueil");
             }

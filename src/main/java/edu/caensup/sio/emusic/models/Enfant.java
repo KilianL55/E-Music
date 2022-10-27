@@ -26,9 +26,5 @@ public class Enfant {
     @Column(length = 50)
     private String prenom;
 
-    private Date date_naissance;
-
-    @ManyToOne()
-    private Responsable responsable;
 
 }
