@@ -1,9 +1,12 @@
 package edu.caensup.sio.emusic.Controller;
 
 import edu.caensup.sio.emusic.EmailService;
-import edu.caensup.sio.emusic.models.User;
-import edu.caensup.sio.emusic.repositories.IRepoUser;
+import edu.caensup.sio.emusic.models.Enfant;
+import edu.caensup.sio.emusic.models.Responsable;
+import edu.caensup.sio.emusic.repositories.IRepoEnfant;
+import edu.caensup.sio.emusic.repositories.IRepoResponsable;
 import io.github.jeemv.springboot.vuejs.VueJS;
+import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -18,19 +21,24 @@ import javax.mail.MessagingException;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.Optional;
+import java.util.Random;
+import java.util.random.RandomGenerator;
 
 @Controller
 @RequestMapping("/")
 public class UserController {
 
     @Autowired
-    private IRepoUser repoResponsable;
+    private IRepoResponsable repoResponsable;
 
     @Autowired
     private EmailService emailService;
 
     @Autowired
     PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private IRepoEnfant repoEnfant;
 
     @Autowired
     private VueJS vue;
@@ -51,19 +59,19 @@ public class UserController {
         vue.addData("state", true);
         vue.addData("isActive", "signup");
         System.out.println("signup page trouver");
-        vue.addData("responsable", new User());
+        vue.addData("responsable", new Responsable());
         return "signup";
     }
 
    @PostMapping("signup/register")
-    public String registerAction(@ModelAttribute User resp, ModelMap model){
+    public String registerAction(@ModelAttribute Responsable resp, ModelMap model){
         model.put("resp",resp);
         System.out.println(resp.getUsername());
         return "signupRecap";
    }
 
     @RequestMapping("sendEmailVerif")
-    public String sendEmailVerif(@ModelAttribute User resp, ModelMap model) throws MessagingException, UnsupportedEncodingException {
+    public String sendEmailVerif(@ModelAttribute Responsable resp, ModelMap model) throws MessagingException, UnsupportedEncodingException {
         int randomCode = (int) (Math.random()*100000);
         resp.setCode_verification(randomCode);
         resp.setEnabled(false);
@@ -79,13 +87,12 @@ public class UserController {
     }
 
     @PostMapping("codeVerif")
-    public RedirectView codeVerifAction(@ModelAttribute User resp){
-        Optional<User> responsable = repoResponsable.findByUsername(resp.getUsername());
+    public RedirectView codeVerifAction(@ModelAttribute Responsable resp){
+        Optional<Responsable> responsable = (Optional<Responsable>) Optional.ofNullable(repoResponsable.findByUsername(resp.getUsername()));
         if (responsable.isPresent()){
             if (resp.getCode_verification()==responsable.get().getCode_verification()){
                 responsable.get().setEnabled(true);
                 responsable.get().setPassword(passwordEncoder.encode(responsable.get().getPassword()));
-                responsable.get().setAuthorities("RESPONSABLE");
                 repoResponsable.save(responsable.get());
                 return new RedirectView("accueil");
             }
@@ -93,5 +100,27 @@ public class UserController {
         return new RedirectView("signup");
 
     }
+
+    @GetMapping("dashboard")
+    public String dashboardAction(){
+        return "dashboard/index";
+    }
+
+    @GetMapping("/dashboard/addChildren")
+    public String addChildren(){
+        return "dashboard/signupChildren";
+    }
+
+    @PostMapping("/dashboard/saveChildren")
+    public RedirectView saveChildren(@ModelAttribute Enfant enfant){
+        enfant.setUsername(enfant.getPrenom()+"."+enfant.getNom());
+        enfant.setPassword(passwordEncoder.encode(enfant.getPassword()));
+        enfant.setEnabled(true);
+        repoEnfant.save(enfant);
+        return new RedirectView("dashboard");
+    }
+
+
+
 
 }

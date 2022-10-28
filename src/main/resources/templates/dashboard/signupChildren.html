@@ -1,0 +1,38 @@
+{{> partials/header}}
+<div style="background-color: rgb(29,29,29); padding-bottom: 5em">
+</div>
+  <div class="ui container" style="display: flex;justify-content: center; border: 1px solid white; border-radius: 25px;background: white; margin-top: 3em;width: 450px;padding: 3em">
+    <form method="POST" action="/dashboard/saveChildren" class="ui form" style="width: 350px; display: flex;flex-direction: column">
+      <h2 style="color: black; margin-bottom: 1em">Inscription de votre enfant</h2>
+
+      <div class="two fields">
+        <div class="field" style="text-align: left">
+          <label for="nom"><i class="red mini star of life icon"></i>Nom
+            <input required type="text" name="nom" id="nom" placeholder="Nom" >
+          </label>
+        </div>
+        <div class="field" style="text-align: left">
+          <label for="prenom"><i class="red mini star of life icon"></i>Prénom
+            <input required type="text" name="prenom" id="prenom" placeholder="Prénom" >
+          </label>
+        </div>
+      </div>
+
+      <div class="field" style="text-align: left">
+        <label for="date_naissance"><i class="red mini star of life icon"></i>Date de naissance
+          <input required type=date name="date_naissance" id="date_naissance" placeholder="Date de naissance">
+        </label>
+      </div>
+
+      <div class="field" style="text-align: left">
+        <label for="password"><i class="red mini star of life icon"></i>Mot de passe
+          <input required type="password" name="password" id="password" placeholder="Mot de passe">
+        </label>
+      </div>
+
+      <button class="ui red button" type="submit">Confirmer</button>
+    </form>
+  </div>
+</div>
+
+{{> partials/footer}}

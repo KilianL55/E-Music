@@ -15,14 +15,15 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
-public class User implements UserDetails {
+@NoArgsConstructor
+@AllArgsConstructor
+public class Enfant implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(length = 11)
     private int id;
 
     @Column(length = 50)
@@ -31,52 +32,24 @@ public class User implements UserDetails {
     @Column(length = 50)
     private String prenom;
 
-    @Column(length = 50)
-    private String adresse;
-
-    @Column(length = 50)
-    private String ville;
-
-    @Column(length = 50)
-    private String ville2;
-
-    @Column(length = 120)
-    private String password;
-
-    @Column(length = 5)
-    private String code_postal;
+    private Date date_naissance;
 
     @Column(length = 50)
     private String username;
 
-    @Column(length = 11)
-    private int quotient_familial;
-
     @Column(length = 50)
-    private String tel1;
-
-    @Column(length = 50)
-    private String tel2;
-
-    @Column(length = 50)
-    private String tel3;
+    private String password;
 
     @Column
-    private int code_verification;
+    private boolean enabled;
 
-    @Column
-    private boolean enabled=false;
+    @ManyToOne()
+    private Responsable responsable;
 
-    @Column
-    private Date date_naissance;
-
-    private String authorities="Responsable";
+    private String authorities="ENFANT"; // (2)
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if(authorities==null){
-            authorities="";
-        }
         String[] auths = authorities.split(",");
         List<SimpleGrantedAuthority> authoritiesObjects = new ArrayList<SimpleGrantedAuthority>();
         for (String role : auths) {
