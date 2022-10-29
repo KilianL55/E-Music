@@ -106,15 +106,17 @@ public class UserController {
         return "dashboard/index";
     }
 
-    @GetMapping("/dashboard/addChildren")
+    @GetMapping("addChildren")
     public String addChildren(){
         return "dashboard/signupChildren";
     }
 
-    @PostMapping("/dashboard/saveChildren")
+    @PostMapping("saveChildren")
     public RedirectView saveChildren(@ModelAttribute Enfant enfant){
+        Responsable resp = repoResponsable.findByUsername(enfant.getEmail_parent());
         enfant.setUsername(enfant.getPrenom()+"."+enfant.getNom());
         enfant.setPassword(passwordEncoder.encode(enfant.getPassword()));
+        enfant.setResponsable(resp);
         enfant.setEnabled(true);
         repoEnfant.save(enfant);
         return new RedirectView("dashboard");

@@ -32,19 +32,22 @@ public class Enfant implements UserDetails {
     @Column(length = 50)
     private String prenom;
 
-    private Date date_naissance;
+    private String date_naissance;
 
     @Column(length = 50)
     private String username;
 
-    @Column(length = 50)
+    @Column(length = 120)
     private String password;
 
     @Column
     private boolean enabled;
 
+    @Transient
+    private String email_parent;
+
     @ManyToOne()
-    private Responsable responsable;
+    private Responsable responsable= new Responsable();
 
     private String authorities="ENFANT"; // (2)
 
