@@ -1,6 +1,121 @@
 {{> partials/header}}
+<h1 class="ui header" style="font-size: 3em; margin-top: 1em; color: #fa2f2f;">Tableau de bord</h1>
+</div>
 
-<a class="ui button" href="/addChildren">Ajouter un enfant</a>
+<!--<a class="ui button" href="/addChildren">Ajouter un enfant</a>-->
+<div class="ui container" style="margin-top: 2em">
 
+    <div class="ui grid">
+        <div class="four wide column">
+            <div class="ui secondary vertical pointing menu">
+                <a class="red item active">
+                    <div>
+                        <i class="user icon"></i>
+                        <span>Mon compte</span>
+                    </div>
+                </a>
+                <a class="item">
+                    <div>
+                        <i class="child icon"></i>
+                        <span>Mes enfants</span>
+                    </div>
+                </a>
+                <a class="item">
+                    <div>
+                        <i class="music icon"></i>
+                        <span>Cours</span>
+                    </div>
+                </a>
+                <a class="item">
+                    <div>
+                        <i class="file icon"></i>
+                        <span>Facturation</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="ten wide column">
+            <form onclick="return false" class="ui form" style="display: flex;flex-direction: column">
+                <h2>Informations du compte</h2>
+                <div class="two fields">
+                    <div class="field" style="text-align: left">
+                        <label for="nom"><i class="red mini star of life icon"></i>Nom
+                            <input required type="text" name="nom" placeholder="Nom" v-model="nom">
+                        </label>
+                    </div>
+                    <div class="field" style="text-align: left">
+                        <label for="prenom"><i class="red mini star of life icon"></i>Prénom
+                            <input required type="text" name="prenom" placeholder="Prénom" v-model="prenom">
+                        </label>
+                    </div>
+                </div>
+
+                <div class="field" style="text-align: left">
+                    <label for="email"><i class="red mini star of life icon"></i>Email
+                        <input required type="text" name="username" placeholder="Email" v-model="email">
+                    </label>
+                </div>
+
+                <div class="field" style="text-align: left">
+                    <label for="password"><i class="red mini star of life icon"></i>Mot de passe
+                        <input required type="password" name="password" placeholder="Mot de passe" v-model="password">
+                    </label>
+                </div>
+
+                <div class="field" style="text-align: left">
+                    <label for="adresse"><i class="red mini star of life icon"></i>Adresse
+                        <input required type="text" name="adresse" placeholder="Adresse" v-model="adresse">
+                    </label>
+                </div>
+
+                <div class="field" style="text-align: left">
+                    <label for="adresse2">Adresse n°2
+                        <input type="text" name="adresse2" placeholder="Adresse" v-model="adresse2">
+                    </label>
+                </div>
+
+                <div class="two fields">
+                    <div class="field" style="text-align: left">
+                        <label for="ville"><i class="red mini star of life icon"></i>Ville
+                            <input required type="text" name="ville" placeholder="Ville" v-model="ville">
+                        </label>
+                    </div>
+                    <div class="field" style="text-align: left">
+                        <label for="code_postal"><i class="red mini star of life icon"></i>Code Postal
+                            <input required type="text" name="code_postal" placeholder="Ex : 14000" v-model="code_postal">
+                        </label>
+                    </div>
+                </div>
+
+                <div class="field" style="text-align: left">
+                    <label for="quotient_familial"><i class="red mini star of life icon"></i>Quotient Familial
+                        <input required type="number" name="quotient_familial" placeholder="Nombre" v-model="quotient_familial">
+                    </label>
+                </div>
+
+                <div class="three fields">
+                    <div class="field" style="text-align: left">
+                        <label for="tel1"><i class="red mini star of life icon"></i>Téléphone
+                            <input required type="text" name="tel1" placeholder="Numéro n°1" v-model="tel1">
+                        </label>
+                    </div>
+                    <div class="field" style="text-align: left">
+                        <label for="tel2">Téléphone
+                            <input type="text" name="tel2" placeholder="Numéro n°2" v-model="tel2">
+                        </label>
+                    </div>
+                    <div class="field" style="text-align: left">
+                        <label for="tel3">Téléphone
+                            <input type="text" name="tel3" placeholder="Numéro n°3" v-model="tel3">
+                        </label>
+                    </div>
+                </div>
+
+                <div class="ui red button test" style="margin-bottom: 2em">S'inscrire</div>
+            </form>
+        </div>
+    </div>
+</div>
 
 {{> partials/footer}}
