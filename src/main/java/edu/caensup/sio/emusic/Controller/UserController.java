@@ -1,8 +1,10 @@
 package edu.caensup.sio.emusic.Controller;
 
 import edu.caensup.sio.emusic.EmailService;
+import edu.caensup.sio.emusic.models.Cours;
 import edu.caensup.sio.emusic.models.Enfant;
 import edu.caensup.sio.emusic.models.Responsable;
+import edu.caensup.sio.emusic.repositories.IRepoCour;
 import edu.caensup.sio.emusic.repositories.IRepoEnfant;
 import edu.caensup.sio.emusic.repositories.IRepoResponsable;
 import io.github.jeemv.springboot.vuejs.VueJS;
@@ -33,6 +35,9 @@ public class UserController {
 
     @Autowired
     private IRepoResponsable repoResponsable;
+
+    @Autowired
+    private IRepoCour repoCour;
 
     @Autowired
     private EmailService emailService;
@@ -106,15 +111,16 @@ public class UserController {
     @RequestMapping("dashboard")
     public String dashboardAction(ModelMap model){
         Object responsable = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if(responsable instanceof Enfant){
-            Enfant enfant=(Enfant) responsable;
+        if(responsable instanceof Enfant enfant){
             model.put("enfant",enfant);
             return "enfant/index";
         }else {
 
          Responsable parent = (Responsable) responsable;
+            Iterable<Cours> cours = repoCour.findAll();
             parent.setAdresse2("");
             model.put("responsable", parent);
+            model.put("cours", cours);
             vue.addData("isActive", "account");
             vue.addData("active", "disable");
             return "parent/index";
