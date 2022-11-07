@@ -38,88 +38,130 @@
         </div>
         {{#responsable}}
         <div class="ten wide column">
-            <form onclick="return false" class="ui form" style="display: flex;flex-direction: column">
-                <h2>Informations du compte</h2>
-                <div class="two fields">
+            <div v-show="isActive === 'account'">
+                <form onclick="return false" class="ui form" style="display: flex;flex-direction: column">
+                    <h2>Informations du compte</h2>
+                    <div class="two fields">
+                        <div class="field" style="text-align: left">
+                            <label for="nom"><i class="red mini star of life icon"></i>Nom
+                                <input required type="text" name="nom" placeholder="Nom" value={{nom}}>
+                            </label>
+                        </div>
+                        <div class="field" style="text-align: left">
+                            <label for="prenom"><i class="red mini star of life icon"></i>Prénom
+                                <input required type="text" name="prenom" placeholder="Prénom">
+                            </label>
+                        </div>
+                    </div>
+
                     <div class="field" style="text-align: left">
-                        <label for="nom"><i class="red mini star of life icon"></i>Nom
-                            <input required type="text" name="nom" placeholder="Nom" value={{nom}}>
+                        <label for="email"><i class="red mini star of life icon"></i>Email
+                            <input required type="text" name="username" placeholder="Email">
                         </label>
                     </div>
+
                     <div class="field" style="text-align: left">
-                        <label for="prenom"><i class="red mini star of life icon"></i>Prénom
-                            <input required type="text" name="prenom" placeholder="Prénom">
+                        <label for="password"><i class="red mini star of life icon"></i>Mot de passe
+                            <input required type="password" name="password" placeholder="Mot de passe">
                         </label>
                     </div>
-                </div>
 
-                <div class="field" style="text-align: left">
-                    <label for="email"><i class="red mini star of life icon"></i>Email
-                        <input required type="text" name="username" placeholder="Email">
-                    </label>
-                </div>
-
-                <div class="field" style="text-align: left">
-                    <label for="password"><i class="red mini star of life icon"></i>Mot de passe
-                        <input required type="password" name="password" placeholder="Mot de passe">
-                    </label>
-                </div>
-
-                <div class="field" style="text-align: left">
-                    <label for="adresse"><i class="red mini star of life icon"></i>Adresse
-                        <input required type="text" name="adresse" placeholder="Adresse">
-                    </label>
-                </div>
-
-                <div class="field" style="text-align: left">
-                    <label for="adresse2">Adresse n°2
-                        <input type="text" name="adresse2" placeholder="Adresse">
-                    </label>
-                </div>
-
-                <div class="two fields">
                     <div class="field" style="text-align: left">
-                        <label for="ville"><i class="red mini star of life icon"></i>Ville
-                            <input required type="text" name="ville" placeholder="Ville">
+                        <label for="adresse"><i class="red mini star of life icon"></i>Adresse
+                            <input required type="text" name="adresse" placeholder="Adresse">
                         </label>
                     </div>
-                    <div class="field" style="text-align: left">
-                        <label for="code_postal"><i class="red mini star of life icon"></i>Code Postal
-                            <input required type="text" name="code_postal" placeholder="Ex : 14000">
-                        </label>
-                    </div>
-                </div>
 
-                <div class="field" style="text-align: left">
-                    <label for="quotient_familial"><i class="red mini star of life icon"></i>Quotient Familial
-                        <input required type="number" name="quotient_familial" placeholder="Nombre">
-                    </label>
-                </div>
+                    <div class="field" style="text-align: left">
+                        <label for="adresse2">Adresse n°2
+                            <input type="text" name="adresse2" placeholder="Adresse">
+                        </label>
+                    </div>
 
-                <div class="three fields">
-                    <div class="field" style="text-align: left">
-                        <label for="tel1"><i class="red mini star of life icon"></i>Téléphone
-                            <input required type="text" name="tel1" placeholder="Numéro n°1">
-                        </label>
+                    <div class="two fields">
+                        <div class="field" style="text-align: left">
+                            <label for="ville"><i class="red mini star of life icon"></i>Ville
+                                <input required type="text" name="ville" placeholder="Ville">
+                            </label>
+                        </div>
+                        <div class="field" style="text-align: left">
+                            <label for="code_postal"><i class="red mini star of life icon"></i>Code Postal
+                                <input required type="text" name="code_postal" placeholder="Ex : 14000">
+                            </label>
+                        </div>
                     </div>
-                    <div class="field" style="text-align: left">
-                        <label for="tel2">Téléphone
-                            <input type="text" name="tel2" placeholder="Numéro n°2">
-                        </label>
-                    </div>
-                    <div class="field" style="text-align: left">
-                        <label for="tel3">Téléphone
-                            <input type="text" name="tel3" placeholder="Numéro n°3">
-                        </label>
-                    </div>
-                </div>
 
-                <div class="ui red button test" style="margin-bottom: 2em">S'inscrire</div>
-            </form>
+                    <div class="field" style="text-align: left">
+                        <label for="quotient_familial"><i class="red mini star of life icon"></i>Quotient Familial
+                            <input required type="number" name="quotient_familial" placeholder="Nombre">
+                        </label>
+                    </div>
+
+                    <div class="three fields">
+                        <div class="field" style="text-align: left">
+                            <label for="tel1"><i class="red mini star of life icon"></i>Téléphone
+                                <input required type="text" name="tel1" placeholder="Numéro n°1">
+                            </label>
+                        </div>
+                        <div class="field" style="text-align: left">
+                            <label for="tel2">Téléphone
+                                <input type="text" name="tel2" placeholder="Numéro n°2">
+                            </label>
+                        </div>
+                        <div class="field" style="text-align: left">
+                            <label for="tel3">Téléphone
+                                <input type="text" name="tel3" placeholder="Numéro n°3">
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="ui red button test" style="margin-bottom: 2em">S'inscrire</div>
+                </form>
+            </div>
+            <div v-show="isActive === 'children'">
+                <h2>Enfant</h2>
+            </div>
+            <div v-show="isActive === 'classes'">
+                <h2>Cours</h2>
+                <div style="width: 800px; height: 450px; margin-bottom: 10em" class="ui calendar celled" id="inline_calendar">
+                </div>
+            </div>
+            <div v-show="isActive === 'billing'">
+                <h2>Facturation</h2>
+            </div>
         </div>
         {{/responsable}}
     </div>
 </div>
 
 {{> partials/footer}}
+
+<script>
+    $().ready(function(){
+        $('.ui.calendar').calendar({
+            text: {
+                days: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+                dayNamesShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+                dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+                months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Decembre'],
+                monthsShort: ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aou', 'Sep', 'Oct', 'Nov', 'Dec'],
+                today: 'Aujourd\'hui',
+                now: 'Maintenant',
+                am: 'AM',
+                pm: 'PM',
+                weekNo: 'Semaine'
+            },
+            formatter: {
+                // do whatever you like to the given cell
+                // cellOptions is an object containing values for {mode,adjacent,disabled,active,today}
+                // Every other method can either be a token string
+                // or a function(date,settings) which has to return a string
+                cellTime: 'H \'h\' mm',
+                date: 'MMMM D, YYYY',
+                datetime: 'MMMM D, YYYY h \'h\' mm',
+            },
+            type: 'datetime'
+        });
+    });
+</script>
 {{{vue}}}

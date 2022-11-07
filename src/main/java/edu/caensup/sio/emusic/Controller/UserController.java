@@ -108,6 +108,7 @@ public class UserController {
         Responsable responsable = (Responsable) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         System.out.println(responsable.getNom());
         model.put("responsable", responsable);
+        vue.addData("isActive", "account");
         return "dashboard/index";
     }
 
