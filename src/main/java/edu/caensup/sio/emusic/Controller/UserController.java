@@ -111,6 +111,24 @@ public class UserController {
         return "dashboard/index";
     }
 
+    @PostMapping("/updateResponsable")
+    public RedirectView updateResponsable( @ModelAttribute Responsable responsable){
+        Responsable resp = (Responsable) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        resp.setNom(responsable.getNom());
+        resp.setPrenom(responsable.getPrenom());
+        resp.setUsername(responsable.getUsername());
+        resp.setAdresse(responsable.getAdresse());
+        resp.setAdresse2(responsable.getAdresse2());
+        resp.setVille(responsable.getVille());
+        resp.setCode_postal(responsable.getCode_postal());
+        resp.setQuotient_familial(responsable.getQuotient_familial());
+        resp.setTel1(responsable.getTel1());
+        resp.setTel2(responsable.getTel2());
+        resp.setTel3(responsable.getTel3());
+        repoResponsable.save(resp);
+        return new RedirectView("dashboard");
+    }
+
     @GetMapping("addChildren")
     public String addChildren(){
         return "dashboard/signupChildren";
