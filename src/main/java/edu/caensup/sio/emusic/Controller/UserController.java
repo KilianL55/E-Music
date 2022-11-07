@@ -110,18 +110,39 @@ public class UserController {
 
     @RequestMapping("dashboard")
     public String dashboardAction(ModelMap model){
-        Responsable responsable = (Responsable) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Iterable<Cours> cours = repoCour.findAll();
-        System.out.println(responsable.getNom());
-        model.put("responsable", responsable);
-        vue.addData("isActive", "account");
-        model.put("cours", cours);
-        return "dashboard/index";
+        Object responsable = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(responsable instanceof Enfant enfant){
+            model.put("enfant",enfant);
+            return "enfant/index";
+        }else {
+
+         Responsable parent = (Responsable) responsable;
+            Iterable<Cours> cours = repoCour.findAll();
+            parent.setAdresse2("");
+            model.put("responsable", parent);
+            model.put("cours", cours);
+            vue.addData("isActive", "account");
+            vue.addData("active", "disable");
+            return "parent/index";
+        }
     }
 
-    @GetMapping("addChildren")
-    public String addChildren(){
-        return "dashboard/signupChildren";
+    @PostMapping("/updateResponsable")
+    public RedirectView updateResponsable( @ModelAttribute Responsable responsable){
+        Responsable resp = (Responsable) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        resp.setNom(responsable.getNom());
+        resp.setPrenom(responsable.getPrenom());
+        resp.setUsername(responsable.getUsername());
+        resp.setAdresse(responsable.getAdresse());
+        resp.setAdresse2(responsable.getAdresse2());
+        resp.setVille(responsable.getVille());
+        resp.setCode_postal(responsable.getCode_postal());
+        resp.setQuotient_familial(responsable.getQuotient_familial());
+        resp.setTel1(responsable.getTel1());
+        resp.setTel2(responsable.getTel2());
+        resp.setTel3(responsable.getTel3());
+        repoResponsable.save(resp);
+        return new RedirectView("dashboard");
     }
 
     @PostMapping("saveChildren")
@@ -131,11 +152,10 @@ public class UserController {
         enfant.setPassword(passwordEncoder.encode(enfant.getPassword()));
         enfant.setResponsable(resp);
         enfant.setEnabled(true);
+        vue.addData("isActive","children");
+        vue.addData("active","disable");
         repoEnfant.save(enfant);
         return new RedirectView("dashboard");
     }
-
-
-
 
 }

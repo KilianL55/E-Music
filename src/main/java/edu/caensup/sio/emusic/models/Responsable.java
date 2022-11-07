@@ -37,7 +37,7 @@ public class Responsable implements UserDetails {
     private String ville;
 
     @Column(length = 50)
-    private String ville2;
+    private String adresse2="";
 
     @Column(length = 120)
     private String password;
