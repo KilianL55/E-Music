@@ -105,10 +105,20 @@ public class UserController {
 
     @RequestMapping("dashboard")
     public String dashboardAction(ModelMap model){
-        Responsable responsable = (Responsable) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        System.out.println(responsable.getNom());
-        model.put("responsable", responsable);
-        return "dashboard/index";
+        Object responsable = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(responsable instanceof Enfant){
+            Enfant enfant=(Enfant) responsable;
+            model.put("enfant",enfant);
+            return "enfant/index";
+        }else {
+
+         Responsable parent = (Responsable) responsable;
+            parent.setAdresse2("");
+            model.put("responsable", parent);
+            vue.addData("isActive", "account");
+            vue.addData("active", "disable");
+            return "parent/index";
+        }
     }
 
     @PostMapping("/updateResponsable")
@@ -129,11 +139,6 @@ public class UserController {
         return new RedirectView("dashboard");
     }
 
-    @GetMapping("addChildren")
-    public String addChildren(){
-        return "dashboard/signupChildren";
-    }
-
     @PostMapping("saveChildren")
     public RedirectView saveChildren(@ModelAttribute Enfant enfant){
         Responsable resp = repoResponsable.findByUsername(enfant.getEmail_parent());
@@ -141,11 +146,10 @@ public class UserController {
         enfant.setPassword(passwordEncoder.encode(enfant.getPassword()));
         enfant.setResponsable(resp);
         enfant.setEnabled(true);
+        vue.addData("isActive","children");
+        vue.addData("active","disable");
         repoEnfant.save(enfant);
         return new RedirectView("dashboard");
     }
-
-
-
 
 }
