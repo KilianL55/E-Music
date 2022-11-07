@@ -1,34 +1,37 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="/css/style.css">
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Fasthand&display=swap');
-  </style>
-  <title>E-Music</title>
-</head>
+<div class="main-container">
 
-<body>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Fasthand&display=swap');
+    </style>
+    <title>E-Music</title>
+  </head>
 
-<div id="app">
-  <div class="ui inverted vertical masthead center aligned segment">
-    <div class="ui container">
-      <div class="ui segment">
-        <div class="ui secondary pointing menu">
-            <a :class="{ active : isActive === 'accueil' }" class="red item" href="/accueil">
-              Accueil
-            </a>
-          <div class="right menu">
-            <a :class="{ active : isActive === 'signup' }" class="red item" href="/signup">
-              Inscription
-            </a>
-            <a :class="{ active : isActive === 'login' }" class="red item" href="/dashboard">
-              Connexion
-            </a>
+  <body>
+
+  <main>
+    <div id="app">
+      <div class="ui inverted vertical masthead center aligned segment">
+        <div class="ui container">
+          <div class="ui segment">
+            <div class="ui secondary pointing menu">
+                <a :class="{ active : isActive === 'accueil' }" class="red item" href="/accueil">
+                  Accueil
+                </a>
+              <div class="right menu">
+                <a :class="{ active : isActive === 'signup' }" class="red item" href="/signup">
+                  Inscription
+                </a>
+                <a :class="{ active : isActive === 'login' }" class="red item" href="/dashboard">
+                  Connexion
+                </a>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>

@@ -1,3 +1,13 @@
+.main-container{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
 .disableSignup {
     animation: 1s ease-in-out slideInLeftToRight;
     display: none;
@@ -38,4 +48,48 @@
         transform: translateX(0);
         opacity: 1;
     }
+}
+
+.cours-box-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    width: 885px;
+}
+
+.cours-box {
+    width: 275px;
+    height: 200px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    overflow: hidden;
+    position: relative;
+    transition: 1s;
+    margin: 10px;
+}
+
+.cours-box:hover {
+    transition: 1s;
+    transform: translateY(-10px);
+}
+
+.cours-box > h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.cours-box > .instru-box {
+    position: absolute;
+    bottom: 1em;
+    right: 10px;
+    z-index: 99;
+}
+
+.cours-box > .date-box {
+    position: absolute;
+    bottom: 0;
+    z-index: 9999;
 }
