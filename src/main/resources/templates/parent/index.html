@@ -9,7 +9,7 @@
         <div class="four wide column">
             <div class="ui secondary vertical pointing menu">
                 <div>
-                    <a  @click="isActive='account'" :class="{ active : isActive === 'account' }" class="red item">
+                    <a @click="isActive='account'" :class="{ active : isActive === 'account' }" class="red item">
                         <div>
                             <i class="user icon"></i>
                             <span>Mon compte</span>
@@ -21,25 +21,34 @@
                             <span>Mes enfants</span>
                         </div>
                     </a>
-                    <a @click="isActive='classes'"  :class="{ active : isActive === 'classes' }" class="red item">
+                    <a @click="isActive='classes'" :class="{ active : isActive === 'classes' }" class="red item">
                         <div>
                             <i class="music icon"></i>
                             <span>Cours</span>
                         </div>
                     </a>
-                    <a  @click="isActive = 'billing'" :class="{ active : isActive === 'billing' }" class="red item">
+                    <a @click="isActive = 'billing'" :class="{ active : isActive === 'billing' }" class="red item">
                         <div>
                             <i class="file icon"></i>
                             <span>Facturation</span>
                         </div>
                     </a>
+                    <a @click="isActive = 'remove'" :class="{ active : isActive === 'remove' }" class="red item">
+                        <div>
+                            <i class="remove icon"></i>
+                            <span>Supprimer votre compte</span>
+                        </div>
+                    </a>
                 </div>
             </div>
+            <a @click="isAcitve='remove'" class="ui mini button">Supprimer votre compte</a>
         </div>
         {{#responsable}}
         <div class="ten wide column">
+
             <div v-show="isActive === 'account'">
-                <form method="post" action="/updateResponsable" class="ui form" style="display: flex;flex-direction: column">
+                <form method="post" action="/updateResponsable" class="ui form"
+                      style="display: flex;flex-direction: column">
                     <h2>Informations du compte</h2>
                     <div class="two fields">
                         <div class="field" style="text-align: left">
@@ -80,14 +89,16 @@
                         </div>
                         <div class="field" style="text-align: left">
                             <label for="code_postal"><i class="red mini star of life icon"></i>Code Postal
-                                <input required type="text" name="code_postal" placeholder="Ex : 14000" value="{{code_postal}}">
+                                <input required type="text" name="code_postal" placeholder="Ex : 14000"
+                                       value="{{code_postal}}">
                             </label>
                         </div>
                     </div>
 
                     <div class="field" style="text-align: left">
                         <label for="quotient_familial"><i class="red mini star of life icon"></i>Quotient Familial
-                            <input required type="number" name="quotient_familial" placeholder="Nombre" value="{{quotient_familial}}">
+                            <input required type="number" name="quotient_familial" placeholder="Nombre"
+                                   value="{{quotient_familial}}">
                         </label>
                     </div>
 
@@ -108,50 +119,59 @@
                             </label>
                         </div>
                     </div>
-                    <button type="submit" class="ui red button test" style="margin-bottom: 2em">Modifier vos informations</button>
+                    <button type="submit" class="ui red button test" style="margin-bottom: 2em">Modifier vos
+                        informations
+                    </button>
                 </form>
             </div>
             <div v-show="isActive === 'children'">
                 <h2>Enfant</h2>
-                <button v-show="active === 'disable'" @click="active = 'childrenForm'" class="ui red button ">Ajouter un enfant</button>
+                <button v-show="active === 'disable'" @click="active = 'childrenForm'" class="ui red button ">Ajouter un
+                    enfant
+                </button>
 
                 <div v-show="active === 'childrenForm'">
-                    <button @click="active = 'disable'"class="ui black button" type="submit">Retour</button>
-                    <form method="POST" action="/saveChildren" class="ui form" style="display: flex;flex-direction: column">
+                    <button @click="active = 'disable'" class="ui black button" type="submit">Retour</button>
+                    <form method="POST" action="/saveChildren" class="ui form"
+                          style="display: flex;flex-direction: column">
                         <div class="two fields">
                             <div class="field" style="text-align: left">
                                 <label for="nom"><i class="red mini star of life icon"></i>Nom
-                                    <input required type="text" name="nom" id="nom" placeholder="Nom" >
+                                    <input required type="text" name="nom" id="nom" placeholder="Nom">
                                 </label>
                             </div>
                             <div class="field" style="text-align: left">
                                 <label for="prenom"><i class="red mini star of life icon"></i>Prénom
-                                    <input required type="text" name="prenom" id="prenom" placeholder="Prénom" >
+                                    <input required type="text" name="prenom" id="prenom" placeholder="Prénom">
                                 </label>
                             </div>
                         </div>
 
                         <div class="field" style="text-align: left">
                             <label for="date_naissance"><i class="red mini star of life icon"></i>Date de naissance
-                                <input required type=date name="date_naissance" id="date_naissance" placeholder="Date de naissance">
+                                <input required type=date name="date_naissance" id="date_naissance"
+                                       placeholder="Date de naissance">
                             </label>
                         </div>
 
                         <div class="field" style="text-align: left">
                             <label for="password"><i class="red mini star of life icon"></i>Mot de passe
-                                <input required type="password" name="password" id="password" placeholder="Mot de passe">
+                                <input required type="password" name="password" id="password"
+                                       placeholder="Mot de passe">
                             </label>
                         </div>
 
                         <div class="field" style="text-align: left">
                             <label for="email_parent"><i class="red mini star of life icon"></i>Email du parent
-                                <input required type="hidden" name="email_parent" id="email_parent" value="{{username}}">
+                                <input required type="hidden" name="email_parent" id="email_parent"
+                                       value="{{username}}">
                             </label>
                         </div>
 
                         <button class="ui red button" type="submit">Confirmer</button>
                     </form>
                 </div>
+
             </div>
             <div v-show="isActive === 'classes'">
                 <h2>Enfant</h2>
@@ -159,8 +179,19 @@
             <div v-show="isActive === 'billing'">
                 <h2>Enfant</h2>
             </div>
+            <div v-show="isActive === 'remove'">
+                <div class="ui warning message">
+                    <i class="close icon"></i>
+                    <div class="header">
+                        Vous êtes sur de vouloir supprimer votre compte ?
+                    </div>
+                    <a class="ui green button" href="/removeAccount"> Oui</a>
+                    <button class="ui red button" @click="isActive='account'">Non</button>
+                </div>
+            </div>
         </div>
         {{/responsable}}
+
     </div>
 </div>
 

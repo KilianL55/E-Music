@@ -158,4 +158,11 @@ public class UserController {
         return new RedirectView("dashboard");
     }
 
+    @GetMapping("removeAccount")
+    public RedirectView removeAction(){
+        Responsable resp = (Responsable) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        repoResponsable.deleteById(resp.getId());
+        return new RedirectView("/");
+    }
+
 }
