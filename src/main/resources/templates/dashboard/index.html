@@ -8,30 +8,32 @@
     <div class="ui grid">
         <div class="four wide column">
             <div class="ui secondary vertical pointing menu">
-                <a class="red item active">
-                    <div>
-                        <i class="user icon"></i>
-                        <span>Mon compte</span>
-                    </div>
-                </a>
-                <a class="item">
-                    <div>
-                        <i class="child icon"></i>
-                        <span>Mes enfants</span>
-                    </div>
-                </a>
-                <a class="item">
-                    <div>
-                        <i class="music icon"></i>
-                        <span>Cours</span>
-                    </div>
-                </a>
-                <a class="item">
-                    <div>
-                        <i class="file icon"></i>
-                        <span>Facturation</span>
-                    </div>
-                </a>
+                <div>
+                    <a  @click="isActive='account'" :class="{ active : isActive === 'account' }" class="red item">
+                        <div>
+                            <i class="user icon"></i>
+                            <span>Mon compte</span>
+                        </div>
+                    </a>
+                    <a @click="isActive='children'" :class="{ active : isActive === 'children' }" class="red item">
+                        <div>
+                            <i class="child icon"></i>
+                            <span>Mes enfants</span>
+                        </div>
+                    </a>
+                    <a @click="isActive='classes'"  :class="{ active : isActive === 'classes' }" class="red item">
+                        <div>
+                            <i class="music icon"></i>
+                            <span>Cours</span>
+                        </div>
+                    </a>
+                    <a  @click="isActive = 'billing'" :class="{ active : isActive === 'billing' }" class="red item">
+                        <div>
+                            <i class="file icon"></i>
+                            <span>Facturation</span>
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
         {{#responsable}}
@@ -120,3 +122,4 @@
 </div>
 
 {{> partials/footer}}
+{{{vue}}}
