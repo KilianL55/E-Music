@@ -121,24 +121,13 @@
             <div v-show="isActive === 'children'">
                 <h2>Enfant</h2>
             </div>
-            <div v-show="isActive === 'billing'">
-                <h2>Facturation</h2>
-            </div>
             <div v-show="isActive === 'classes'">
                 <h2>Cours</h2>
-<!--                <div style="width: 800px; height: 450px; margin-bottom: 10em" class="ui calendar celled" id="inline_calendar">-->
-                    <div class="cours-box-container" style="margin-bottom: 10em">
-                        {{#cours}}
-                            <div class="cours-box">
-                                <h3>{{libelle}}</h3>
-                                <p><strong>Age requis :</strong> {{ageMin}} ans</p>
-                                <p><strong>Age maximum :</strong> {{ageMax}} ans</p>
-                                <p class="date-box"><i class="user icon"></i>{{nbPlaceMax}}</p>
-                                <p class="instru-box">{{instrument.intitule}} <i class="guitar icon"></i></p>
-                            </div>
-                        {{/cours}}
-                    </div>
+                <div style="width: 800px; height: 450px; margin-bottom: 10em" class="ui calendar celled" id="inline_calendar">
                 </div>
+            </div>
+            <div v-show="isActive === 'billing'">
+                <h2>Facturation</h2>
             </div>
         </div>
         {{/responsable}}
@@ -147,32 +136,32 @@
 
 {{> partials/footer}}
 
-<!--<script>-->
-<!--    $().ready(function(){-->
-<!--        $('.ui.calendar').calendar({-->
-<!--            text: {-->
-<!--                days: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],-->
-<!--                dayNamesShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],-->
-<!--                dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],-->
-<!--                months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Decembre'],-->
-<!--                monthsShort: ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aou', 'Sep', 'Oct', 'Nov', 'Dec'],-->
-<!--                today: 'Aujourd\'hui',-->
-<!--                now: 'Maintenant',-->
-<!--                am: 'AM',-->
-<!--                pm: 'PM',-->
-<!--                weekNo: 'Semaine'-->
-<!--            },-->
-<!--            formatter: {-->
-<!--                // do whatever you like to the given cell-->
-<!--                // cellOptions is an object containing values for {mode,adjacent,disabled,active,today}-->
-<!--                // Every other method can either be a token string-->
-<!--                // or a function(date,settings) which has to return a string-->
-<!--                cellTime: 'H \'h\' mm',-->
-<!--                date: 'MMMM D, YYYY',-->
-<!--                datetime: 'MMMM D, YYYY h \'h\' mm',-->
-<!--            },-->
-<!--            type: 'datetime'-->
-<!--        });-->
-<!--    });-->
-<!--</script>-->
+<script>
+    $().ready(function(){
+        $('.ui.calendar').calendar({
+            text: {
+                days: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+                dayNamesShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+                dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+                months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Decembre'],
+                monthsShort: ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aou', 'Sep', 'Oct', 'Nov', 'Dec'],
+                today: 'Aujourd\'hui',
+                now: 'Maintenant',
+                am: 'AM',
+                pm: 'PM',
+                weekNo: 'Semaine'
+            },
+            formatter: {
+                // do whatever you like to the given cell
+                // cellOptions is an object containing values for {mode,adjacent,disabled,active,today}
+                // Every other method can either be a token string
+                // or a function(date,settings) which has to return a string
+                cellTime: 'H \'h\' mm',
+                date: 'MMMM D, YYYY',
+                datetime: 'MMMM D, YYYY h \'h\' mm',
+            },
+            type: 'datetime'
+        });
+    });
+</script>
 {{{vue}}}

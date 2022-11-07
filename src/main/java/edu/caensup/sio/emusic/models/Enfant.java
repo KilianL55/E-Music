@@ -49,6 +49,9 @@ public class Enfant implements UserDetails {
     @ManyToOne()
     private Responsable responsable= new Responsable();
 
+    @ManyToMany
+    private List<Cours> cours = new ArrayList<>();
+
     private String authorities="ENFANT"; // (2)
 
     @Override

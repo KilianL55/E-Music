@@ -20,17 +20,17 @@ public class Cours {
     private int id;
 
     @Column(length = 50)
-    private String libelle;
+    private String nom;
 
-    @Column(length = 5)
-    private int ageMin;
+    @Column(length = 50)
+    private String type;
 
-    @Column(length = 5)
-    private int ageMax;
+    @ManyToMany
+    private List<Enfant> enfants;
 
-    @Column(length = 5)
-    private int nbPlaceMax;
+    @ManyToMany
+    private List<Responsable> responsables;
 
-    @ManyToOne
-    private Instrument instrument;
+
+
 }

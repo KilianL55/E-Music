@@ -1,10 +1,8 @@
 package edu.caensup.sio.emusic.Controller;
 
 import edu.caensup.sio.emusic.EmailService;
-import edu.caensup.sio.emusic.models.Cours;
 import edu.caensup.sio.emusic.models.Enfant;
 import edu.caensup.sio.emusic.models.Responsable;
-import edu.caensup.sio.emusic.repositories.IRepoCour;
 import edu.caensup.sio.emusic.repositories.IRepoEnfant;
 import edu.caensup.sio.emusic.repositories.IRepoResponsable;
 import io.github.jeemv.springboot.vuejs.VueJS;
@@ -35,9 +33,6 @@ public class UserController {
 
     @Autowired
     private IRepoResponsable repoResponsable;
-
-    @Autowired
-    private IRepoCour repoCour;
 
     @Autowired
     private EmailService emailService;
@@ -111,11 +106,9 @@ public class UserController {
     @RequestMapping("dashboard")
     public String dashboardAction(ModelMap model){
         Responsable responsable = (Responsable) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Iterable<Cours> cours = repoCour.findAll();
         System.out.println(responsable.getNom());
         model.put("responsable", responsable);
         vue.addData("isActive", "account");
-        model.put("cours", cours);
         return "dashboard/index";
     }
 
