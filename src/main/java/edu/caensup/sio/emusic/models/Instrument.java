@@ -13,24 +13,15 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Cours {
+public class Instrument {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @Column(length = 50)
-    private String libelle;
+    private String intitule;
 
-    @Column(length = 5)
-    private int ageMin;
-
-    @Column(length = 5)
-    private int ageMax;
-
-    @Column(length = 5)
-    private int nbPlaceMax;
-
-    @ManyToOne
-    private Instrument instrument;
+    @OneToMany
+    private List<Cours> cours;
 }
