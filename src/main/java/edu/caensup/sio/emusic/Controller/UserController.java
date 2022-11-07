@@ -58,7 +58,6 @@ public class UserController {
     public String formAction(){
         vue.addData("state", true);
         vue.addData("isActive", "signup");
-        System.out.println("signup page trouver");
         vue.addData("responsable", new Responsable());
         return "signup";
     }
@@ -103,6 +102,7 @@ public class UserController {
 
     @GetMapping("dashboard")
     public String dashboardAction(){
+        vue.addData("isActive", "account");
         return "dashboard/index";
     }
 
