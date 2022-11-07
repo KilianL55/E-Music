@@ -17,10 +17,10 @@ public class WebSecurityConfig {
     @Bean // (2)
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers( "/","/h2-console/**","/admin/**", "/img/**", "/css/**","/accueil", "/signup", "/sendEmailVerif", "/codeVerif","/dashboard/**","/saveChildren","/addChildren").permitAll() // (3)
+                .antMatchers( "/","/h2-console/**","/admin/**", "/img/**", "/css/**","/accueil", "/signup", "/sendEmailVerif", "/codeVerif","/saveChildren","/addChildren").permitAll() // (3)
                 .anyRequest().authenticated() // (4)
                 .and().formLogin() // (5)
-                .loginPage("/login").defaultSuccessUrl("/accueil")// (5)
+                .loginPage("/login").defaultSuccessUrl("/dashboard")// (5)
                 .permitAll().and().logout().logoutSuccessUrl("/exit")// (6)
                 .permitAll().and().httpBasic().and().exceptionHandling().accessDeniedPage("/403");
         http.headers().frameOptions().sameOrigin(); //// (8)

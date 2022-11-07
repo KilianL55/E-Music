@@ -8,8 +8,11 @@ import edu.caensup.sio.emusic.repositories.IRepoResponsable;
 import io.github.jeemv.springboot.vuejs.VueJS;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -75,7 +78,6 @@ public class UserController {
         int randomCode = (int) (Math.random()*100000);
         resp.setCode_verification(randomCode);
         resp.setEnabled(false);
-        resp.setPassword(passwordEncoder.encode(resp.getPassword()));
         repoResponsable.save(resp);
         try{
             emailService.sendEmail(resp.getUsername(), "test", "Voici votre code de vérification : "+randomCode);
@@ -101,8 +103,11 @@ public class UserController {
 
     }
 
-    @GetMapping("dashboard")
-    public String dashboardAction(){
+    @RequestMapping("dashboard")
+    public String dashboardAction(ModelMap model){
+        Responsable responsable = (Responsable) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        System.out.println(responsable.getNom());
+        model.put("responsable", responsable);
         return "dashboard/index";
     }
 

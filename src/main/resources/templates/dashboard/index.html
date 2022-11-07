@@ -34,80 +34,80 @@
                 </a>
             </div>
         </div>
-
+        {{#responsable}}
         <div class="ten wide column">
             <form onclick="return false" class="ui form" style="display: flex;flex-direction: column">
                 <h2>Informations du compte</h2>
                 <div class="two fields">
                     <div class="field" style="text-align: left">
                         <label for="nom"><i class="red mini star of life icon"></i>Nom
-                            <input required type="text" name="nom" placeholder="Nom" v-model="nom">
+                            <input required type="text" name="nom" placeholder="Nom" value={{nom}}>
                         </label>
                     </div>
                     <div class="field" style="text-align: left">
                         <label for="prenom"><i class="red mini star of life icon"></i>Prénom
-                            <input required type="text" name="prenom" placeholder="Prénom" v-model="prenom">
+                            <input required type="text" name="prenom" placeholder="Prénom">
                         </label>
                     </div>
                 </div>
 
                 <div class="field" style="text-align: left">
                     <label for="email"><i class="red mini star of life icon"></i>Email
-                        <input required type="text" name="username" placeholder="Email" v-model="email">
+                        <input required type="text" name="username" placeholder="Email">
                     </label>
                 </div>
 
                 <div class="field" style="text-align: left">
                     <label for="password"><i class="red mini star of life icon"></i>Mot de passe
-                        <input required type="password" name="password" placeholder="Mot de passe" v-model="password">
+                        <input required type="password" name="password" placeholder="Mot de passe">
                     </label>
                 </div>
 
                 <div class="field" style="text-align: left">
                     <label for="adresse"><i class="red mini star of life icon"></i>Adresse
-                        <input required type="text" name="adresse" placeholder="Adresse" v-model="adresse">
+                        <input required type="text" name="adresse" placeholder="Adresse">
                     </label>
                 </div>
 
                 <div class="field" style="text-align: left">
                     <label for="adresse2">Adresse n°2
-                        <input type="text" name="adresse2" placeholder="Adresse" v-model="adresse2">
+                        <input type="text" name="adresse2" placeholder="Adresse">
                     </label>
                 </div>
 
                 <div class="two fields">
                     <div class="field" style="text-align: left">
                         <label for="ville"><i class="red mini star of life icon"></i>Ville
-                            <input required type="text" name="ville" placeholder="Ville" v-model="ville">
+                            <input required type="text" name="ville" placeholder="Ville">
                         </label>
                     </div>
                     <div class="field" style="text-align: left">
                         <label for="code_postal"><i class="red mini star of life icon"></i>Code Postal
-                            <input required type="text" name="code_postal" placeholder="Ex : 14000" v-model="code_postal">
+                            <input required type="text" name="code_postal" placeholder="Ex : 14000">
                         </label>
                     </div>
                 </div>
 
                 <div class="field" style="text-align: left">
                     <label for="quotient_familial"><i class="red mini star of life icon"></i>Quotient Familial
-                        <input required type="number" name="quotient_familial" placeholder="Nombre" v-model="quotient_familial">
+                        <input required type="number" name="quotient_familial" placeholder="Nombre">
                     </label>
                 </div>
 
                 <div class="three fields">
                     <div class="field" style="text-align: left">
                         <label for="tel1"><i class="red mini star of life icon"></i>Téléphone
-                            <input required type="text" name="tel1" placeholder="Numéro n°1" v-model="tel1">
+                            <input required type="text" name="tel1" placeholder="Numéro n°1">
                         </label>
                     </div>
                     <div class="field" style="text-align: left">
                         <label for="tel2">Téléphone
-                            <input type="text" name="tel2" placeholder="Numéro n°2" v-model="tel2">
+                            <input type="text" name="tel2" placeholder="Numéro n°2">
                         </label>
                     </div>
                     <div class="field" style="text-align: left">
                         <label for="tel3">Téléphone
-                            <input type="text" name="tel3" placeholder="Numéro n°3" v-model="tel3">
+                            <input type="text" name="tel3" placeholder="Numéro n°3">
                         </label>
                     </div>
                 </div>
@@ -115,6 +115,7 @@
                 <div class="ui red button test" style="margin-bottom: 2em">S'inscrire</div>
             </form>
         </div>
+        {{/responsable}}
     </div>
 </div>
 
