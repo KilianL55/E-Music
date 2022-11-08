@@ -23,6 +23,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.Optional;
@@ -159,7 +162,18 @@ public class UserController {
     }
 
     @GetMapping("removeAccount")
-    public RedirectView removeAction(){
+    public RedirectView removeAction(HttpServletRequest request, HttpServletResponse response){
+        Cookie[] cookies = request.getCookies();
+        for(int i = 0; i< cookies.length ; ++i){
+            if(cookies[i].getName().equals("JSESSIONID")){
+                //Cookie cookie = new Cookie("user", cookies[i].getValue());
+                //cookie.setMaxAge(0);
+                //response.addCookie(cookie);
+                cookies[i].setMaxAge(0);
+                response.addCookie(cookies[i]);
+                break;
+            }
+        }
         Responsable resp = (Responsable) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         repoResponsable.deleteById(resp.getId());
         return new RedirectView("/");
