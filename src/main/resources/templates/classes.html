@@ -1,0 +1,56 @@
+{{> partials/header}}
+<h1 class="ui header" style="font-size: 5em; margin-top: 1em; color: #fa2f2f; font-family: 'Fasthand', cursive;">E-Music</h1>
+<h2 style="margin-bottom: 2em">Les cours proposés dans l'école</h2>
+</div>
+
+<div class="ui container" style="margin-top: 3em">
+    <div v-if="isConnected">
+        <div class="cours-box-container">
+            {{#cours}}
+            <div class="cours-box">
+                <div class="in-box">
+                    <div class="title-box">
+                        <h3>{{libelle}}</h3>
+                    </div>
+
+                    <div class="age-box">
+                        <p><strong>Age requis :</strong> {{ageMin}} ans</p>
+                        <p><strong>Age maximum :</strong> {{ageMax}} ans</p>
+                    </div>
+
+                    <div class="bottom-box">
+                        <p class="date-box"><i class="user icon"></i>{{nbPlaceMax}}</p>
+                        <p class="instru-box"><i class="guitar icon"></i>{{instrument.intitule}}</p>
+                    </div>
+                    <a href="/addCours/{{id}}" class="ui mini red button">S'inscrire</a>
+                </div>
+            </div>
+            {{/cours}}
+        </div>
+    </div>
+    <div v-else>
+        <div class="cours-box-container">
+            {{#cours}}
+            <div class="cours-box">
+                <div class="in-box">
+                    <div class="title-box">
+                        <h3>{{libelle}}</h3>
+                    </div>
+
+                    <div class="age-box">
+                        <p><strong>Age requis :</strong> {{ageMin}} ans</p>
+                        <p><strong>Age maximum :</strong> {{ageMax}} ans</p>
+                    </div>
+
+                    <div class="bottom-box">
+                        <p class="date-box"><i class="user icon"></i>{{nbPlaceMax}}</p>
+                        <p class="instru-box"><i class="guitar icon"></i>{{instrument.intitule}}</p>
+                    </div>
+                </div>
+            </div>
+            {{/cours}}
+        </div>
+    </div>
+</div>
+{{> partials/footer}}
+{{{vue}}}

@@ -16,10 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.mail.MessagingException;
@@ -60,6 +57,30 @@ public class UserController {
     public String indexAction(){
         vue.addData("isActive", "accueil");
         return "index";
+    }
+
+    @GetMapping({"classes"})
+    public String classesAction(ModelMap model){
+        Object responsable = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (responsable == "anonymousUser") {
+            Iterable<Cours> cours = repoCour.findAll();
+            model.put("cours", cours);
+            vue.addData("isActive", "classes");
+        } else {
+            Iterable<Cours> cours = repoCour.findAll();
+            model.put("cours", cours);
+            vue.addData("isActive", "classes");
+            vue.addData("isConnected", true);
+            System.out.println("isConnected");
+        }
+        return "classes";
+    }
+
+    @RequestMapping("addClasses")
+    public RedirectView addClassesAction(ModelMap model){
+        model.put("cours", new Cours());
+        vue.addData("isActive", "classes");
+        return new RedirectView("dashboard");
     }
 
     @GetMapping("signup")
@@ -117,14 +138,34 @@ public class UserController {
         }else {
 
          Responsable parent = (Responsable) responsable;
-            Iterable<Cours> cours = repoCour.findAll();
             parent.setAdresse2("");
             model.put("responsable", parent);
-            model.put("cours", cours);
             vue.addData("isActive", "account");
             vue.addData("active", "disable");
             return "parent/index";
         }
+    }
+
+    @RequestMapping("addCours/{id}")
+    public RedirectView addCoursAction(ModelMap model, @PathVariable int id){
+        System.out.println(id);
+        Object responsable = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Responsable parent = (Responsable) responsable;
+        Optional<Cours> cours = repoCour.findById(id);
+        cours.ifPresent(c -> {
+            parent.addCours(c);
+            repoResponsable.save(parent);
+        });
+
+        return new RedirectView("/dashboard/cours");
+    }
+
+    @RequestMapping("dashboard/cours")
+    public String dashboardClassesAction(ModelMap model){
+        String result=dashboardAction(model);
+
+        vue.addData("isActive", "cours");
+        return result;
     }
 
     @PostMapping("/updateResponsable")

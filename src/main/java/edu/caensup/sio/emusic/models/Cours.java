@@ -31,6 +31,6 @@ public class Cours {
     @Column(length = 5)
     private int nbPlaceMax;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Instrument instrument;
 }

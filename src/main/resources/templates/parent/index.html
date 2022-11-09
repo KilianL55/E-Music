@@ -21,7 +21,7 @@
                             <span>Mes enfants</span>
                         </div>
                     </a>
-                    <a @click="isActive='classes'"  :class="{ active : isActive === 'classes' }" class="red item">
+                    <a @click="isActive='cours'"  :class="{ active : isActive === 'cours' }" class="red item">
                         <div>
                             <i class="music icon"></i>
                             <span>Cours</span>
@@ -153,7 +153,7 @@
                     </form>
                 </div>
             </div>
-            <div v-show="isActive === 'classes'">
+            <div v-show="isActive === 'cours'">
                 <h2>Enfant</h2>
             </div>
             <div v-show="isActive === 'billing'">

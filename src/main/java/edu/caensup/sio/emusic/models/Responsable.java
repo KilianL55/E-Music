@@ -69,6 +69,10 @@ public class Responsable implements UserDetails {
     @OneToMany(mappedBy = "responsable")
     private List<Enfant> enfant;
 
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    private List<Cours> cours=new ArrayList<>();
+
+
     private String authorities="RESPONSABLE"; // (2)
 
     @Override
@@ -108,5 +112,9 @@ public class Responsable implements UserDetails {
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
+    }
+
+    public void addCours(Cours cours) {
+        this.cours.add(cours);
     }
 }
