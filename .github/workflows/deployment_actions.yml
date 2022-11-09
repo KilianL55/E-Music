@@ -34,7 +34,7 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: ${{ secrets.SERVER_PORT }}
-          source: "target/messagerie.war"
+          source: "target/E-Music.war"
           target: "/tmp/source"
 
       - name: Start Service
