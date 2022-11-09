@@ -28,6 +28,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 import java.util.random.RandomGenerator;
@@ -118,12 +119,13 @@ public class UserController {
             model.put("enfant",enfant);
             return "enfant/index";
         }else {
-
-         Responsable parent = (Responsable) responsable;
+            Responsable parent = (Responsable) responsable;
+            List<Enfant> enfants = repoEnfant.findByResponsable(parent);
             Iterable<Cours> cours = repoCour.findAll();
             parent.setAdresse2("");
             model.put("responsable", parent);
             model.put("cours", cours);
+            model.put("enfants", enfants);
             vue.addData("isActive", "account");
             vue.addData("active", "disable");
             return "parent/index";
@@ -166,9 +168,6 @@ public class UserController {
         Cookie[] cookies = request.getCookies();
         for(int i = 0; i< cookies.length ; ++i){
             if(cookies[i].getName().equals("JSESSIONID")){
-                //Cookie cookie = new Cookie("user", cookies[i].getValue());
-                //cookie.setMaxAge(0);
-                //response.addCookie(cookie);
                 cookies[i].setMaxAge(0);
                 response.addCookie(cookies[i]);
                 break;
