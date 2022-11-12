@@ -129,6 +129,18 @@
                     enfant
                 </button>
 
+
+                <div class="ui equal width grid">
+                    <div class="row">
+                        {{#enfants}}
+                        <div class="column">
+                            <div class="ui segment">
+                                {{nom}}
+                                <a class="ui mini red button" href="/removeChildren/{{id}}">Retirer de votre famille</a>
+                            </div>
+                        </div>
+                        {{/enfants}}
+                    </div>
                 <div v-show="active === 'childrenForm'">
                     <button @click="active = 'disable'" class="ui black button" type="submit">Retour</button>
                     <form method="POST" action="/saveChildren" class="ui form"

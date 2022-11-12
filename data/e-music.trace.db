@@ -14,3 +14,11 @@ INSERT INTO "PUBLIC"."cours"("id","age_max","age_min","libelle","nb_place_max","
 org.h2.jdbc.JdbcSQLDataException: Erreur lors de la conversion de données "'' (cours: ""id"" INTEGER NOT NULL)"
 Data conversion error converting "'' (cours: ""id"" INTEGER NOT NULL)"; SQL statement:
 INSERT INTO "PUBLIC"."cours"("id","age_max","age_min","libelle","nb_place_max","instrument_id")VALUES(?,?,?,?,?,?) [22018-214]
+2022-11-12 16:08:34 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Erreur de syntaxe dans l'instruction SQL "[*]""responsable"""
+Syntax error in SQL statement "[*]""responsable"""; SQL statement:
+"responsable" [42000-214]
+2022-11-12 16:09:06 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Erreur de syntaxe dans l'instruction SQL "[*]""enfant"""""
+Syntax error in SQL statement "[*]""enfant"""""; SQL statement:
+"enfant"" [42000-214]

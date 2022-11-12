@@ -16,10 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.mail.MessagingException;
@@ -28,6 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 import java.util.random.RandomGenerator;
@@ -120,10 +118,14 @@ public class UserController {
         }else {
 
          Responsable parent = (Responsable) responsable;
+            List<Enfant> enfants = repoEnfant.findByResponsable(parent);
             Iterable<Cours> cours = repoCour.findAll();
             parent.setAdresse2("");
             model.put("responsable", parent);
             model.put("cours", cours);
+            if(enfants.size() >= 1){
+                model.put("enfants",enfants);
+            }
             vue.addData("isActive", "account");
             vue.addData("active", "disable");
             return "parent/index";
@@ -159,6 +161,12 @@ public class UserController {
         vue.addData("active","disable");
         repoEnfant.save(enfant);
         return new RedirectView("dashboard");
+    }
+
+    @RequestMapping("removeChildren/{id}")
+    public RedirectView removeChildren(@PathVariable int id){
+        repoEnfant.deleteById(id);
+        return new RedirectView("/dashboard");
     }
 
     @GetMapping("removeAccount")
