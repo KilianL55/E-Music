@@ -28,6 +28,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 import java.util.random.RandomGenerator;
@@ -120,10 +121,14 @@ public class UserController {
         }else {
 
          Responsable parent = (Responsable) responsable;
+            List<Enfant> enfants = repoEnfant.findByResponsable(parent);
             Iterable<Cours> cours = repoCour.findAll();
             parent.setAdresse2("");
             model.put("responsable", parent);
             model.put("cours", cours);
+            if(enfants.size() >= 1){
+                model.put("enfants",enfants);
+            }
             vue.addData("isActive", "account");
             vue.addData("active", "disable");
             return "parent/index";
