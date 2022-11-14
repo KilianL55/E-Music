@@ -181,6 +181,10 @@
                             </label>
                         </div>
 
+                        {{#_csrf}}
+                        <input type="hidden" name="{{parameterName}}" value="{{token}}">
+                        {{/_csrf}}
+
                         <button class="ui red button" type="submit">Confirmer</button>
                     </form>
                 </div>
