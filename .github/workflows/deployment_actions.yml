@@ -46,4 +46,5 @@ jobs:
           port: ${{ secrets.SERVER_PORT }}
           script: |
             echo ${{ secrets.SERVER_PASSWORD }} | sudo -S mv /tmp/source/target/E-Music.war /var/lib/tomcat9/webapps/E-Music.war -f
+            echo ${{ secrets.SERVER_PASSWORD }} | sudo -S mv /var/lib/tomcat9/webapps/E-Music/data/e-music.mv.db /var/lib/tomcat9/data -f
             echo ${{ secrets.SERVER_PASSWORD }} | sudo -S systemctl restart tomcat9
