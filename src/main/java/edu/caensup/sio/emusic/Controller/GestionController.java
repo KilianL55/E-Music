@@ -28,9 +28,4 @@ public class GestionController {
   public @ResponseBody String formSubmitAction(@RequestParam("name") String name) {
     return name;
   }
-
-  @RequestMapping("/error")
-  public String errorHandlingAction() {
-    return "/errorView";
-  }
 }
