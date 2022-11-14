@@ -2,9 +2,9 @@ package edu.caensup.sio.emusic.Controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -25,7 +25,12 @@ public class GestionController {
   }
 
   @PostMapping("/formSubmit")
-  public @ResponseBody String formSubmitAction(@ModelAttribute String name) {
+  public @ResponseBody String formSubmitAction(@RequestParam("name") String name) {
     return name;
+  }
+
+  @RequestMapping("/error")
+  public String errorHandlingAction() {
+    return "/errorView";
   }
 }
