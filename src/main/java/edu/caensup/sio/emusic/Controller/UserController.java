@@ -160,7 +160,7 @@ public class UserController {
         vue.addData("isActive","children");
         vue.addData("active","disable");
         repoEnfant.save(enfant);
-        return new RedirectView("dashboard");
+        return new RedirectView("/dashboard");
     }
 
     @RequestMapping("removeChildren/{id}")
