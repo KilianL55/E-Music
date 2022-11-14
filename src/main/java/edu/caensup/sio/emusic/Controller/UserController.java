@@ -22,6 +22,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.mail.MessagingException;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 import java.util.random.RandomGenerator;
@@ -74,13 +75,6 @@ public class UserController {
             System.out.println("isConnected");
         }
         return "classes";
-    }
-
-    @RequestMapping("addClasses")
-    public RedirectView addClassesAction(ModelMap model){
-        model.put("cours", new Cours());
-        vue.addData("isActive", "classes");
-        return new RedirectView("dashboard");
     }
 
     @GetMapping("signup")
@@ -153,7 +147,8 @@ public class UserController {
         Responsable parent = (Responsable) responsable;
         Optional<Cours> cours = repoCour.findById(id);
         cours.ifPresent(c -> {
-            parent.addCours(c);
+            parent.getCours().clear();
+            parent.getCours().add(c);
             repoResponsable.save(parent);
         });
 

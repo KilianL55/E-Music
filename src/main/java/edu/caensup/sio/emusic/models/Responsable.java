@@ -9,9 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @AllArgsConstructor
@@ -69,8 +67,8 @@ public class Responsable implements UserDetails {
     @OneToMany(mappedBy = "responsable")
     private List<Enfant> enfant;
 
-    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-    private List<Cours> cours=new ArrayList<>();
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
+    private Set<Cours> cours=new HashSet<>();
 
 
     private String authorities="RESPONSABLE"; // (2)
@@ -112,9 +110,5 @@ public class Responsable implements UserDetails {
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
-    }
-
-    public void addCours(Cours cours) {
-        this.cours.add(cours);
     }
 }

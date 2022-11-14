@@ -1,5 +1,6 @@
 package edu.caensup.sio.emusic.repositories;
 
+import edu.caensup.sio.emusic.models.Cours;
 import edu.caensup.sio.emusic.models.Responsable;
 import org.springframework.data.repository.CrudRepository;
 
