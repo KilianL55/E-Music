@@ -144,7 +144,8 @@
                     </div>
                 </div>
                 <div v-show="active === 'edit'">
-                    <form method="POST" action="./saveChildren" class="ui form" style="display: flex;flex-direction: column">
+                    <form method="POST" action="./editChildren" class="ui form" style="display: flex;flex-direction: column">
+                        {{#enfant}}
                         <div class="two fields">
                             <div class="field" style="text-align: left">
                                 <label for="nom"><i class="red mini star of life icon"></i>Nom
@@ -159,9 +160,10 @@
                         </div>
                         <div class="field" style="text-align: left">
                             <label for="date_naissance"><i class="red mini star of life icon"></i>Date de naissance
-                                <input required type=date name="date_naissance" id="date_naissance" value="">
+                                <input required type=date name="date_naissance" id="date_naissance" value="date_naissance">
                             </label>
                         </div>
+                        {{/enfant}}
                     </form>
                 </div>
                 <div v-show="active === 'childrenForm'">
