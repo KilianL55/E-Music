@@ -160,7 +160,7 @@ public class UserController {
         vue.addData("isActive","children");
         vue.addData("active","disable");
         repoEnfant.save(enfant);
-        return new RedirectView("./dashboard");
+        return new RedirectView("dashboard");
     }
 
     @RequestMapping("removeChildren/{id}")
@@ -174,9 +174,6 @@ public class UserController {
         Cookie[] cookies = request.getCookies();
         for(int i = 0; i< cookies.length ; ++i){
             if(cookies[i].getName().equals("JSESSIONID")){
-                //Cookie cookie = new Cookie("user", cookies[i].getValue());
-                //cookie.setMaxAge(0);
-                //response.addCookie(cookie);
                 cookies[i].setMaxAge(0);
                 response.addCookie(cookies[i]);
                 break;
