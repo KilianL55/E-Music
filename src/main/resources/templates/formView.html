@@ -6,6 +6,9 @@
 </head>
 <body>
 <form method="POST" action="formSubmit">
+	{{#_csrf}}
+		<input type="hidden" name="{{parameterName}}" value="{{token}}">
+	{{/_csrf}}
 	<input type="text" name="name">
 </form>
 
