@@ -114,7 +114,7 @@ public class UserController {
         Object responsable = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if(responsable instanceof Enfant enfant){
             model.put("enfant",enfant);
-            return "enfant/index";
+            return "/enfant/index";
         }else {
 
          Responsable parent = (Responsable) responsable;
@@ -128,7 +128,7 @@ public class UserController {
             }
             vue.addData("isActive", "account");
             vue.addData("active", "disable");
-            return "parent/index";
+            return "/parent/index";
         }
     }
 
