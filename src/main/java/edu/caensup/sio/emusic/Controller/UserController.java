@@ -184,4 +184,23 @@ public class UserController {
         return new RedirectView("/");
     }
 
+    @RequestMapping("manageChildren/{id}")
+    public String manageAction(@PathVariable int id, ModelMap modelMap){
+        Optional<Enfant> enfant=repoEnfant.findById(id);
+        modelMap.put("enfant",enfant.get());
+        vue.addData("manage","edit");
+        return "/parent/manageChildren";
+    }
+
+    @PostMapping("editChildren/{id}")
+    public RedirectView editAction(@ModelAttribute Enfant enfant, @PathVariable int id){
+        Responsable resp = (Responsable) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Enfant enfantSave = repoEnfant.findByUsernameAndResponsable(enfant.getUsername(),resp);
+        enfantSave.setDate_naissance(enfant.getDate_naissance());
+        enfantSave.setNom(enfant.getNom());
+        enfantSave.setPrenom(enfant.getPrenom());
+        repoEnfant.save(enfantSave);
+        return new RedirectView("/dashboard");
+    }
+
 }
