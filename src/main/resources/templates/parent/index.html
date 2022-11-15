@@ -1,10 +1,8 @@
 {{> partials/header}}
 <h1 class="ui header" style="font-size: 3em; margin-top: 1em; color: #fa2f2f;">Tableau de bord</h1>
 </div>
-
 <!--<a class="ui button" href="/addChildren">Ajouter un enfant</a>-->
 <div class="ui container" style="margin-top: 2em">
-
     <div class="ui grid">
         <div class="four wide column">
             <div class="ui secondary vertical pointing menu">
@@ -44,7 +42,6 @@
         </div>
         {{#responsable}}
         <div class="ten wide column">
-
             <div v-show="isActive === 'account'">
                 <form method="post" action="./updateResponsable" class="ui form"
                       style="display: flex;flex-direction: column">
@@ -128,44 +125,19 @@
                 <button v-show="active === 'disable'" @click="active = 'childrenForm'" class="ui red button ">Ajouter un
                     enfant
                 </button>
-
-
-                <div class="ui equal width grid">
+                <div v-show="active === 'disable'" class="ui equal width grid">
                     <div class="row">
                         {{#enfants}}
                         <div class="column">
                             <div class="ui segment">
-                                {{nom}}
-                                <a class="ui mini red button" href="./removeChildren/{{id}}">Retirer de votre famille</a>
-                                <a @click="active='edit'" class="ui mini black button">Modifiez le infos de votre enfant</a>
+                                {{nom}} {{prenom}}
+                                <a href="./manageChildren/{{id}}" class="ui mini blue button">Gérer votre enfant</a>
                             </div>
                         </div>
                         {{/enfants}}
                     </div>
                 </div>
-                <div v-show="active === 'edit'">
-                    <form method="POST" action="./editChildren" class="ui form" style="display: flex;flex-direction: column">
-                        {{#enfant}}
-                        <div class="two fields">
-                            <div class="field" style="text-align: left">
-                                <label for="nom"><i class="red mini star of life icon"></i>Nom
-                                    <input required type="text" name="nom" id="nom" value="{{nom}}">
-                                </label>
-                            </div>
-                            <div class="field" style="text-align: left">
-                                <label for="prenom"><i class="red mini star of life icon"></i>Prénom
-                                    <input required type="text" name="prenom" id="prenom" value="{{prenom}}">
-                                </label>
-                            </div>
-                        </div>
-                        <div class="field" style="text-align: left">
-                            <label for="date_naissance"><i class="red mini star of life icon"></i>Date de naissance
-                                <input required type=date name="date_naissance" id="date_naissance" value="date_naissance">
-                            </label>
-                        </div>
-                        {{/enfant}}
-                    </form>
-                </div>
+
                 <div v-show="active === 'childrenForm'">
                     <button @click="active = 'disable'" class="ui black button" type="submit">Retour</button>
                     <form method="POST" action="./saveChildren" class="ui form"
@@ -198,16 +170,16 @@
                         </div>
 
                         <div class="field" style="text-align: left">
-                            <label for="email_parent"><i class="red mini star of life icon"></i>Email du parent
-                                <input required type="hidden" name="email_parent" id="email_parent"
-                                       value="{{username}}">
-                            </label>
+                            <input required type="hidden" name="email_parent" id="email_parent" value="{{username}}">
                         </div>
+
+                        {{#_csrf}}
+                        <input type="hidden" name="{{parameterName}}" value="{{token}}">
+                        {{/_csrf}}
 
                         <button class="ui red button" type="submit">Confirmer</button>
                     </form>
                 </div>
-
             </div>
             <div v-show="isActive === 'classes'">
                 <h2>Enfant</h2>
@@ -227,7 +199,6 @@
             </div>
         </div>
         {{/responsable}}
-
     </div>
 </div>
 

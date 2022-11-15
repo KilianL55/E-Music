@@ -1,0 +1,72 @@
+{{> partials/header}}
+{{#enfant}}
+<h1 class="ui header" style="font-size: 3em; margin-top: 1em; color: #fa2f2f;">Gérer {{nom}} {{prenom}}</h1>
+</div>
+<div class="ui container" style="margin-top: 2em">
+  <div class="ui grid">
+    <div class="four wide column">
+      <div class="ui secondary vertical pointing menu">
+        <div>
+          <a @click="manage='edit'" :class="{ active : manage === 'edit' }" class="red item">
+            <div>
+              <i class="child icon"></i>
+              <span>Modifier les informations des enfants</span>
+            </div>
+          </a>
+          <a @click="manage='remove'" :class="{ active : manage === 'remove' }" class="red item">
+            <div>
+              <span>Retirer l'enfant de votre famille</span>
+            </div>
+          </a>
+
+          <a @click="manage='back'" :class="{ active : manage === 'back' }" class="red item" href="../dashboard">
+            <div>
+              <i class="child icon"></i>
+              <span>Retour au tableau de bord</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="ten wide column">
+      <div v-show="manage === 'edit'">
+        <form method="POST" action="../editChildren/{{id}}" class="ui form" style="display: flex;flex-direction: column">
+          <div class="two fields">
+            <div class="field" style="text-align: left">
+              <label for="nom"><i class="red mini star of life icon"></i>Nom
+                <input required type="text" name="nom" id="nom" value="{{nom}}">
+              </label>
+            </div>
+            <div class="field" style="text-align: left">
+              <label for="prenom"><i class="red mini star of life icon"></i>Prénom
+                <input required type="text" name="prenom" id="prenom" value="{{prenom}}">
+              </label>
+            </div>
+          </div>
+          <div class="field" style="text-align: left">
+            <label for="date_naissance"><i class="red mini star of life icon"></i>Date de naissance
+              <input required type=date name="date_naissance" id="date_naissance" value="{{date_naissance}}">
+            </label>
+          </div>
+          <input required type="hidden" name="username" value="{{username}}">
+          <div class="field">
+            <button type="submit" class="ui green button">Valider</button>
+          </div>
+        </form>
+      </div>
+      <div v-show="manage === 'remove'">
+        <div class="ui warning message">
+          <i class="close icon"></i>
+          <div class="header">
+            Vous êtes sur de vouloir le retirer de votre famille ?
+          </div>
+          <a class="ui green button" href="../removeChildren/{{id}}"> Oui</a>
+          <button class="ui red button" @click="manage='edit'">Non</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{/enfant}}
+{{> partials/footer}}
+{{{vue}}}
