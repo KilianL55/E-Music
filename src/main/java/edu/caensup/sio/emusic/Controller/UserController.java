@@ -151,7 +151,7 @@ public class UserController {
     }
 
     @PostMapping("saveChildren")
-    public @ResponseBody Enfant saveChildren(@ModelAttribute Enfant enfant){
+    public RedirectView saveChildren(@ModelAttribute Enfant enfant){
         Responsable resp = repoResponsable.findByUsername(enfant.getEmail_parent());
         enfant.setUsername(enfant.getPrenom()+"."+enfant.getNom());
         enfant.setPassword(passwordEncoder.encode(enfant.getPassword()));
@@ -160,7 +160,7 @@ public class UserController {
         vue.addData("isActive","children");
         vue.addData("active","disable");
         repoEnfant.save(enfant);
-        return enfant;
+        return new RedirectView("dashboard");
     }
 
     @RequestMapping("removeChildren/{id}")
