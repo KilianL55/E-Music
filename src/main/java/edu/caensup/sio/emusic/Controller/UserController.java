@@ -200,7 +200,7 @@ public class UserController {
         enfantSave.setNom(enfant.getNom());
         enfantSave.setPrenom(enfant.getPrenom());
         repoEnfant.save(enfantSave);
-        return new RedirectView("/dashboard");
+        return new RedirectView("dashboard");
     }
 
 }
