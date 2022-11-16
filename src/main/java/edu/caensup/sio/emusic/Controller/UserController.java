@@ -192,8 +192,8 @@ public class UserController {
         return "/parent/manageChildren";
     }
 
-    @PostMapping("editChildren/{id}")
-    public RedirectView editAction(@ModelAttribute Enfant enfant, @PathVariable int id){
+    @PostMapping("editChildren")
+    public RedirectView editAction(@ModelAttribute Enfant enfant){
         Responsable resp = (Responsable) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Enfant enfantSave = repoEnfant.findByUsernameAndResponsable(enfant.getUsername(),resp);
         enfantSave.setDate_naissance(enfant.getDate_naissance());
