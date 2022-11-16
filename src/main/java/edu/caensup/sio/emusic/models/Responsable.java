@@ -69,6 +69,9 @@ public class Responsable implements UserDetails {
     @OneToMany(mappedBy = "responsable")
     private List<Enfant> enfant;
 
+    @OneToMany(mappedBy = "responsable")
+    private List<Facture> factures;
+
     private String authorities="RESPONSABLE"; // (2)
 
     @Override
