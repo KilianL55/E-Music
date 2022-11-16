@@ -69,9 +69,9 @@ public class UserController {
             Responsable parent = (Responsable) responsable;
             Responsable realParent = repoResponsable.findById(parent.getId()).get();
             model.put("cours", cours);
+            model.put("parent", realParent);
             vue.addData("isActive", "classes");
             vue.addData("isConnected", true);
-            vue.addData("courses", realParent.getCours());
             System.out.println(realParent.getCours());
         }
         return "classes";

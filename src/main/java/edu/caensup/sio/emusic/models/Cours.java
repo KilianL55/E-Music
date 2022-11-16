@@ -33,4 +33,8 @@ public class Cours {
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Instrument instrument;
+
+    public boolean isInscrit(User user) {
+        return user.getCours().contains(this);
+    }
 }

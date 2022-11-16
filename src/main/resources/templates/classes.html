@@ -22,12 +22,11 @@
                         <p class="date-box"><i class="user icon"></i>{{nbPlaceMax}}</p>
                         <p class="instru-box"><i class="guitar icon"></i>{{instrument.intitule}}</p>
                     </div>
-
-                    <div v-if="courses.contains({{cours}})">
-                        <a class="ui mini red button" href="/addCours/{{id}}">S'inscrire</a>
+                    <div v-if="{{isInscrit {{#parent}} {{.}} {{/parent}} }}">
+                        <a href="/addCours/{{id}}" class="ui mini red button">S'inscrire</a>
                     </div>
                     <div v-else>
-                        <a class="ui mini red button">Déjà inscrit</a>
+                        <a class="ui button" href="/cours/{{id}}">Déjà inscrit</a>
                     </div>
                 </div>
             </div>

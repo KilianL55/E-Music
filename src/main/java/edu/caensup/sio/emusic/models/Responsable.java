@@ -16,7 +16,7 @@ import java.util.*;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Responsable implements UserDetails {
+public class Responsable extends User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
