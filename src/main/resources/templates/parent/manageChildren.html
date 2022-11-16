@@ -31,7 +31,7 @@
     </div>
     <div class="ten wide column">
       <div v-show="manage === 'edit'">
-        <form method="POST" action="../editChildren" class="ui form" style="display: flex;flex-direction: column">
+        <form method="POST" action="./../editChildren" class="ui form" style="display: flex;flex-direction: column">
           <div class="two fields">
             <div class="field" style="text-align: left">
               <label for="nom"><i class="red mini star of life icon"></i>Nom
@@ -65,7 +65,7 @@
           <div class="header">
             Vous êtes sur de vouloir le retirer de votre famille ?
           </div>
-          <a class="ui green button" href="../removeChildren/{{id}}"> Oui</a>
+          <a class="ui green button" href="./../removeChildren/{{id}}"> Oui</a>
           <button class="ui red button" @click="manage='edit'">Non</button>
         </div>
       </div>
