@@ -15,13 +15,14 @@
           </a>
           <a @click="manage='remove'" :class="{ active : manage === 'remove' }" class="red item">
             <div>
+              <i class="child icon"></i>
               <span>Retirer l'enfant de votre famille</span>
             </div>
           </a>
 
           <a @click="manage='back'" :class="{ active : manage === 'back' }" class="red item" href="../dashboard">
             <div>
-              <i class="child icon"></i>
+              <i class="sign out alternate icon"></i>
               <span>Retour au tableau de bord</span>
             </div>
           </a>
