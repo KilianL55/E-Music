@@ -21,10 +21,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.mail.MessagingException;
 import java.io.UnsupportedEncodingException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
 import java.util.random.RandomGenerator;
 
 @Controller
@@ -69,10 +66,14 @@ public class UserController {
             vue.addData("isActive", "classes");
         } else {
             Iterable<Cours> cours = repoCour.findAll();
+            Responsable parent = (Responsable) responsable;
+            Responsable realParent = repoResponsable.findById(parent.getId()).get();
             model.put("cours", cours);
             vue.addData("isActive", "classes");
             vue.addData("isConnected", true);
-            System.out.println("isConnected");
+            if (realParent.getCours() !)
+            vue.addData("courses", realParent.getCours());
+            System.out.println(realParent.getCours());
         }
         return "classes";
     }
@@ -142,14 +143,13 @@ public class UserController {
 
     @RequestMapping("addCours/{id}")
     public RedirectView addCoursAction(ModelMap model, @PathVariable int id){
-        System.out.println(id);
         Object responsable = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Responsable parent = (Responsable) responsable;
         Optional<Cours> cours = repoCour.findById(id);
+        Responsable realParent = repoResponsable.findById(parent.getId()).get();
         cours.ifPresent(c -> {
-            parent.getCours().clear();
-            parent.getCours().add(c);
-            repoResponsable.save(parent);
+            realParent.getCours().add(c);
+            repoResponsable.save(realParent);
         });
 
         return new RedirectView("/dashboard/cours");
