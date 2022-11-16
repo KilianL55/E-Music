@@ -166,7 +166,7 @@ public class UserController {
     @RequestMapping("removeChildren/{id}")
     public RedirectView removeChildren(@PathVariable int id){
         repoEnfant.deleteById(id);
-        return new RedirectView("/dashboard");
+        return new RedirectView("dashboard");
     }
 
     @GetMapping("removeAccount")
