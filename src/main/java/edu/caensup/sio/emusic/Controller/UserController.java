@@ -71,7 +71,6 @@ public class UserController {
             model.put("cours", cours);
             vue.addData("isActive", "classes");
             vue.addData("isConnected", true);
-            if (realParent.getCours() !)
             vue.addData("courses", realParent.getCours());
             System.out.println(realParent.getCours());
         }
