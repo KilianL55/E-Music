@@ -9,16 +9,14 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class Responsable implements UserDetails {
+public class Responsable extends User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -68,6 +66,10 @@ public class Responsable implements UserDetails {
 
     @OneToMany(mappedBy = "responsable")
     private List<Enfant> enfant;
+
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
+    private Set<Cours> cours=new HashSet<>();
+
 
     private String authorities="RESPONSABLE"; // (2)
 
