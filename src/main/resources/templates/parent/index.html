@@ -122,10 +122,10 @@
             </div>
             <div v-show="isActive === 'children'">
                 <h2>Enfant</h2>
-                <button v-show="active === 'disable'" @click="active = 'childrenForm'" class="ui red button ">Ajouter un
+                <button v-show="activeChildren === 'disable'" @click="activeChildren = 'childrenForm'" class="ui red button ">Ajouter un
                     enfant
                 </button>
-                <div v-show="active === 'disable'" class="ui equal width grid">
+                <div v-show="activeChildren === 'disable'" class="ui equal width grid">
                     <div class="row">
                         {{#enfants}}
                         <div class="column">
@@ -138,8 +138,8 @@
                     </div>
                 </div>
 
-                <div v-show="active === 'childrenForm'">
-                    <button @click="active = 'disable'" class="ui black button" type="submit">Retour</button>
+                <div v-show="activeChildren === 'childrenForm'">
+                    <button @click="activeChildren = 'disable'" class="ui black button" type="submit">Retour</button>
                     <form method="POST" action="./saveChildren" class="ui form"
                           style="display: flex;flex-direction: column">
                         <div class="two fields">
@@ -185,7 +185,27 @@
                 <h2>Enfant</h2>
             </div>
             <div v-show="isActive === 'billing'">
-                <h2>Factures</h2>
+                {{#factures}}
+                <div class="cours-box">
+                    <div class="in-box">
+                        <div class="title-box">
+                            <h3>}</h3>
+                        </div>
+
+                        <div class="age-box">
+                            <p><strong>Age requis :</strong>  ans</p>
+                            <p><strong>Age maximum :</strong>  ans</p>
+                        </div>
+
+                        <div class="bottom-box">
+                            <p class="date-box"><i class="user icon"></i></p>
+                            <p class="instru-box"><i class="guitar icon"></i></p>
+                        </div>
+                        <a href="/removeCours/{{id}}" class="ui mini red button">Se désinscrire</a>
+                    </div>
+                </div>
+                {{/factures}}
+                <a  class="ui red button ">Afficher facture(s)</a>
             </div>
             <div v-show="isActive === 'remove'">
                 <div class="ui warning message">

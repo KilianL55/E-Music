@@ -3,9 +3,11 @@ package edu.caensup.sio.emusic.Controller;
 import edu.caensup.sio.emusic.EmailService;
 import edu.caensup.sio.emusic.models.Cours;
 import edu.caensup.sio.emusic.models.Enfant;
+import edu.caensup.sio.emusic.models.Facture;
 import edu.caensup.sio.emusic.models.Responsable;
 import edu.caensup.sio.emusic.repositories.IRepoCour;
 import edu.caensup.sio.emusic.repositories.IRepoEnfant;
+import edu.caensup.sio.emusic.repositories.IRepoFacture;
 import edu.caensup.sio.emusic.repositories.IRepoResponsable;
 import io.github.jeemv.springboot.vuejs.VueJS;
 import net.bytebuddy.utility.RandomString;
@@ -51,6 +53,9 @@ public class UserController {
 
     @Autowired
     private VueJS vue;
+
+    @Autowired
+    private IRepoFacture repoFacture;
 
     @ModelAttribute("vue")
     public VueJS getVue() {
@@ -120,14 +125,18 @@ public class UserController {
          Responsable parent = (Responsable) responsable;
             List<Enfant> enfants = repoEnfant.findByResponsable(parent);
             Iterable<Cours> cours = repoCour.findAll();
+            Iterable<Facture> factures = repoFacture.findAll();
             parent.setAdresse2("");
             model.put("responsable", parent);
             model.put("cours", cours);
+            model.put("factures", factures);
             if(enfants.size() >= 1){
                 model.put("enfants",enfants);
             }
             vue.addData("isActive", "account");
-            vue.addData("active", "disable");
+            vue.addData("activeChildren", "disable");
+            vue.addData("activeBilling", "disable");
+
             return "/parent/index";
         }
     }
