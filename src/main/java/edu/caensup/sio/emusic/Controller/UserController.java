@@ -17,8 +17,13 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/")
@@ -130,15 +135,18 @@ public class UserController {
             return "enfant/index";
         } else {
             Responsable parent = (Responsable) responsable;
+            List<Enfant> enfants = repoEnfant.findByResponsable(parent);
             Responsable realParent = repoResponsable.findById(parent.getId()).get();
-            System.out.println(realParent.getCours());
             model.put("cours", realParent.getCours());
             parent.setAdresse2("");
             model.put("responsable", realParent);
+            if(enfants.size() >= 1){
+                model.put("enfants",enfants);
+            }
             vue.addData("isActive", "account");
             vue.addData("haveCours", realParent.getCours().size());
             vue.addData("active", "disable");
-            return "parent/index";
+            return "/parent/index";
         }
 
     }
@@ -209,5 +217,44 @@ public class UserController {
 
     }
 
+    @RequestMapping("removeChildren/{id}")
+    public RedirectView removeChildren(@PathVariable int id){
+        repoEnfant.deleteById(id);
+        return new RedirectView("dashboard");
+    }
+
+    @GetMapping("removeAccount")
+    public RedirectView removeAction(HttpServletRequest request, HttpServletResponse response){
+        Cookie[] cookies = request.getCookies();
+        for(int i = 0; i< cookies.length ; ++i){
+            if(cookies[i].getName().equals("JSESSIONID")){
+                cookies[i].setMaxAge(0);
+                response.addCookie(cookies[i]);
+                break;
+            }
+        }
+        Responsable resp = (Responsable) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        repoResponsable.deleteById(resp.getId());
+        return new RedirectView("/");
+    }
+
+    @RequestMapping("manageChildren/{id}")
+    public String manageAction(@PathVariable int id, ModelMap modelMap){
+        Optional<Enfant> enfant=repoEnfant.findById(id);
+        modelMap.put("enfant",enfant.get());
+        vue.addData("manage","edit");
+        return "/parent/manageChildren";
+    }
+
+    @PostMapping("editChildren")
+    public RedirectView editAction(@ModelAttribute Enfant enfant){
+        Responsable resp = (Responsable) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Enfant enfantSave = repoEnfant.findByUsernameAndResponsable(enfant.getUsername(),resp);
+        enfantSave.setDate_naissance(enfant.getDate_naissance());
+        enfantSave.setNom(enfant.getNom());
+        enfantSave.setPrenom(enfant.getPrenom());
+        repoEnfant.save(enfantSave);
+        return new RedirectView("dashboard");
+    }
 
 }

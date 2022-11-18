@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>formView</title>
+</head>
+<body>
+<form method="POST" action="formSubmit">
+	{{#_csrf}}
+		<input type="hidden" name="{{parameterName}}" value="{{token}}">
+	{{/_csrf}}
+	<input type="text" name="name">
+</form>
+
+</body>
+</html>

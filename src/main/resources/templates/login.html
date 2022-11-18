@@ -2,7 +2,7 @@
 <div style="background-color: rgb(29,29,29); padding-bottom: 27.5em">
 
     <div class="ui container" style="display: flex;justify-content: center; border: 1px solid white; border-radius: 25px;background: white; margin-top: 3em;width: 450px;padding: 3em">
-      <form method="POST" action="/login" class="ui form" style="width: 350px; display: flex;flex-direction: column">
+      <form method="POST" action="./login" class="ui form" style="width: 350px; display: flex;flex-direction: column">
         <h2 style="color: black; margin-bottom: 1em">Connexion</h2>
 
         <div class="field" style="text-align: left">
@@ -16,6 +16,10 @@
             <input required type="password" name="password" id="password" placeholder="Votre mot de passe">
           </label>
         </div>
+
+        {{#_csrf}}
+        <input type="hidden" name="{{parameterName}}" value="{{token}}">
+        {{/_csrf}}
 
         <button class="ui red button" type="submit">Valider</button>
       </form>

@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="fr">
-<div class="main-container">
 
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <base href="https://srv2-vm-2107.sts-sio-caen.info/E-Music/">
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Fasthand&display=swap');
     </style>
     <title>E-Music</title>
   </head>
 
+  <div class="main-container">
   <body>
 
   <main>
@@ -21,17 +22,17 @@
         <div class="ui container">
           <div class="ui segment">
             <div class="ui secondary pointing menu">
-                <a :class="{ active : isActive === 'accueil' }" class="red item" href="/accueil">
+                <a :class="{ active : isActive === 'accueil' }" class="red item" href="./accueil">
                   Accueil
                 </a>
                 <a :class="{ active : isActive === 'classes' }" class="red item" href="/classes">
                   Cours
                 </a>
               <div class="right menu">
-                <a :class="{ active : isActive === 'signup' }" class="red item" href="/signup">
+                <a :class="{ active : isActive === 'signup' }" class="red item" href="./signup">
                   Inscription
                 </a>
-                <a :class="{ active : isActive === 'login' }" class="red item" href="/dashboard">
+                <a :class="{ active : isActive === 'login' }" class="red item" href="./dashboard">
                   Connexion
                 </a>
               </div>
