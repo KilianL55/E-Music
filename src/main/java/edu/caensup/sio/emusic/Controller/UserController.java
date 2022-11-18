@@ -8,13 +8,10 @@ import edu.caensup.sio.emusic.repositories.IRepoCour;
 import edu.caensup.sio.emusic.repositories.IRepoEnfant;
 import edu.caensup.sio.emusic.repositories.IRepoResponsable;
 import io.github.jeemv.springboot.vuejs.VueJS;
-import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
@@ -22,7 +19,6 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.mail.MessagingException;
 import java.io.UnsupportedEncodingException;
 import java.util.*;
-import java.util.random.RandomGenerator;
 
 @Controller
 @RequestMapping("/")
@@ -72,6 +68,9 @@ public class UserController {
             model.put("parent", realParent);
             vue.addData("isActive", "classes");
             vue.addData("isConnected", true);
+            for (Cours cour : cours) {
+                vue.addData("isInscrit"+cour.getId(), cour.isInscrit(realParent));
+            }
             System.out.println(realParent.getCours());
         }
         return "classes";
@@ -129,15 +128,19 @@ public class UserController {
         if(responsable instanceof Enfant enfant){
             model.put("enfant",enfant);
             return "enfant/index";
-        }else {
-
-         Responsable parent = (Responsable) responsable;
+        } else {
+            Responsable parent = (Responsable) responsable;
+            Responsable realParent = repoResponsable.findById(parent.getId()).get();
+            System.out.println(realParent.getCours());
+            model.put("cours", realParent.getCours());
             parent.setAdresse2("");
-            model.put("responsable", parent);
+            model.put("responsable", realParent);
             vue.addData("isActive", "account");
+            vue.addData("haveCours", realParent.getCours().size());
             vue.addData("active", "disable");
             return "parent/index";
         }
+
     }
 
     @RequestMapping("addCours/{id}")
@@ -150,14 +153,25 @@ public class UserController {
             realParent.getCours().add(c);
             repoResponsable.save(realParent);
         });
+        return new RedirectView("/dashboard/cours");
+    }
 
+    @RequestMapping("removeCours/{id}")
+    public RedirectView removeCoursAction(ModelMap model, @PathVariable int id){
+        Object responsable = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Responsable parent = (Responsable) responsable;
+        Optional<Cours> cours = repoCour.findById(id);
+        Responsable realParent = repoResponsable.findById(parent.getId()).get();
+        cours.ifPresent(c -> {
+            realParent.getCours().remove(c);
+            repoResponsable.save(realParent);
+        });
         return new RedirectView("/dashboard/cours");
     }
 
     @RequestMapping("dashboard/cours")
     public String dashboardClassesAction(ModelMap model){
         String result=dashboardAction(model);
-
         vue.addData("isActive", "cours");
         return result;
     }
@@ -178,6 +192,7 @@ public class UserController {
         resp.setTel3(responsable.getTel3());
         repoResponsable.save(resp);
         return new RedirectView("dashboard");
+
     }
 
     @PostMapping("saveChildren")
@@ -191,6 +206,8 @@ public class UserController {
         vue.addData("active","disable");
         repoEnfant.save(enfant);
         return new RedirectView("dashboard");
+
     }
+
 
 }
