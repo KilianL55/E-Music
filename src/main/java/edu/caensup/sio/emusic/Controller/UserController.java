@@ -26,10 +26,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
 import java.util.random.RandomGenerator;
 
 @Controller
@@ -215,7 +212,11 @@ public class UserController {
     @RequestMapping("viewFacture/{id}")
     public String viewFacture(@PathVariable int id, ModelMap modelMap){
         Optional<Facture> facture=repoFacture.findById(id);
+        String[] desciption = facture.get().getDescription().split(",");
         modelMap.put("facture",facture.get());
+        modelMap.put("desc",desciption);
+        System.out.println();
+        System.out.println();
         return "/parent/facture";
     }
 

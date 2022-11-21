@@ -16,34 +16,36 @@
 <body>
   <h1>E-Music</h1>
 
+  {{#facture}}
   <h2>Numéro de facture :</h2>
   <p></p>
 
   <div>
-    <h2>Entreprise :</h2>
+    <h2> <strong> Entreprise : </strong></h2>
     <p>E-Music</p>
     <p>10 rue du Vercors</p>
     <p>14123, Ifs</p>
   </div>
 
   <div>
-    <h2>Client :</h2>
-    <p>nom prénom</p>
-    <p>addr postale</p>
-    <p>cp, ville</p>
+    <h2> <strong> Client : </strong></h2>
+    <p>{{nom}} {{prenom}}</p>
+    <p>{{addresse}}</p>
+    <p>{{codePostale}}, {{ville}}</p>
   </div>
 
   <div>
-    <p><strong Date de facturation :></p>
+    <p><strong> Date de facturation : </strong></p>
 
-    <p><strong Echéance :></p>
+    <p><strong> Echéance : </strong></p>
 
-    <p><strong Paiement :></p>
+    <p><strong> Paiement :</strong> 1 an</p>
   </div>
 
 
   <table class="ui striped table">
     <thead>
+
     <tr>
       <th>Description</th>
       <th>Quantité</th>
@@ -52,21 +54,19 @@
     </tr>
     </thead>
     <tbody>
+    {{/facture}}
+    {{#desc}}
     <tr>
-      <td>Cours</td>
-      <td>2</td>
-      <td>250</td>
-      <td>340€</td>
+      <td>{{.}}</td>
+      {{#facture}}
+      <td>{{quantité}}</td>
+      {{/facture}}
+      <td>{{quotientFamilial}}</td>
+      <td>{{prix}}</td>
     </tr>
-    <tr>
-      <td>Instrument prêté</td>
-      <td>1</td>
-      <td></td>
-      <td>€€</td>
-    </tr>
+    {{/desc}}
     </tbody>
   </table>
-
 </body>
 </html>
 
