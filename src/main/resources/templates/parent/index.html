@@ -7,6 +7,12 @@
         <div class="four wide column">
             <div class="ui secondary vertical pointing menu">
                 <div>
+                    <a @click="isActive='planning'" :class="{ active : isActive === 'planning' }" class="red item">
+                        <div>
+                            <i class="clock icon"></i>
+                            <span>Mon planning</span>
+                        </div>
+                    </a>
                     <a @click="isActive='account'" :class="{ active : isActive === 'account' }" class="red item">
                         <div>
                             <i class="user icon"></i>
@@ -44,6 +50,11 @@
         </div>
         {{#responsable}}
         <div class="ten wide column">
+            <div v-show="isActive === 'planning'">
+                <h2>Planning</h2>
+                <div class="ui calendar" id="eventdates_calendar">
+                </div>
+            </div>
             <div v-show="isActive === 'account'">
                 <form method="post" action="./updateResponsable" class="ui form"
                       style="display: flex;flex-direction: column">
@@ -201,6 +212,7 @@
                                 <div class="age-box">
                                     <p><strong>Age requis :</strong> {{ageMin}} ans</p>
                                     <p><strong>Age maximum :</strong> {{ageMax}} ans</p>
+                                    <p><strong>Date du cours :</strong> {{{dateFormat date "E d MMMM YYYY H'h'mm" Date}}}</p>
                                 </div>
 
                                 <div class="bottom-box">
@@ -233,4 +245,32 @@
 </div>
 
 {{> partials/footer}}
+<script>
+    $(function(){
+    $('#eventdates_calendar').calendar({
+        text: {
+            days: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+            dayNamesShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+            dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+            months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Decembre'],
+            monthsShort: ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aou', 'Sep', 'Oct', 'Nov', 'Dec'],
+            today: 'Aujourd\'hui',
+            now: 'Maintenant',
+            am: 'AM',
+            pm: 'PM',
+            weekNo: 'Semaine'
+        },
+
+        eventDates: [
+            {{#cours}}
+            {
+                date: new Date("{{date}}"),
+                message: '{{libelle}} {{{dateFormat date "E H\'h\'mm" Date}}}',
+                class: 'inverted green'
+            },
+            {{/cours}}
+        ]
+    })});
+</script>
+
 {{{vue}}}
