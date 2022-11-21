@@ -192,6 +192,19 @@
                         <h3>Facture #{{id}}</h3>
 
                         <a href="/viewFacture/{{id}}"  class="ui mini red button">Afficher la facture</a>
+                        <div class="ui facture modal">
+                            <i class="close icon"></i>
+                            <div class="actions">
+                                <div class="ui black deny button">
+                                    Nope
+                                </div>
+                                <div class="ui positive right labeled icon button">
+                                    Yep, that's me
+                                    <i class="checkmark icon"></i>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
                 {{/factures}}
@@ -213,3 +226,11 @@
 
 {{> partials/footer}}
 {{{vue}}}
+
+<script>
+$(function(){
+    $('.ui.modal')
+        .facture('show');
+   });
+</script>
+

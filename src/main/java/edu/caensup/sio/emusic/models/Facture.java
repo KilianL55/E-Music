@@ -28,9 +28,5 @@ public class Facture {
 
     private String description;
 
-    private int quantite;
 
-    private int quotientFamilial;
-
-    private int prix;
 }
