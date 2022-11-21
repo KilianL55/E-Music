@@ -143,7 +143,7 @@ public class UserController {
             if(enfants.size() >= 1){
                 model.put("enfants",enfants);
             }
-            vue.addData("isActive", "account");
+            vue.addData("isActive", "planning");
             vue.addData("haveCours", realParent.getCours().size());
             vue.addData("active", "disable");
             return "/parent/index";

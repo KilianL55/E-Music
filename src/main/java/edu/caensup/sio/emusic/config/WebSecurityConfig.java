@@ -23,7 +23,7 @@ public class WebSecurityConfig {
                 .permitAll().and().logout().logoutSuccessUrl("/exit")// (6)
                 .permitAll().and().httpBasic().and().exceptionHandling().accessDeniedPage("/403");
         http.headers().frameOptions().sameOrigin(); //// (8)
-        //http.csrf().disable();
+        http.csrf().disable();
         return http.build();
     }
 

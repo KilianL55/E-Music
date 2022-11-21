@@ -76,7 +76,7 @@ main {
 
 .cours-box {
     width: 200px;
-    height: 200px;
+    height: 220px;
     padding: 10px;
     background-color: #fff;
     border-radius: 10px;
@@ -124,11 +124,9 @@ main {
 /*    z-index: 1;*/
 /*}*/
 
-/*.cours-box > .date-box {*/
-/*    position: absolute;*/
-/*    bottom: 1em;*/
-/*    z-index: 2;*/
-/*}*/
+.age-box {
+    margin-bottom: 15px;
+}
 
 /*.cours-box > .button {*/
 /*    position: absolute;*/
