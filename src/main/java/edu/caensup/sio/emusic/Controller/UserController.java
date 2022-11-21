@@ -212,4 +212,11 @@ public class UserController {
         return new RedirectView("dashboard");
     }
 
+    @RequestMapping("viewFacture/{id}")
+    public String viewFacture(@PathVariable int id, ModelMap modelMap){
+        Optional<Facture> facture=repoFacture.findById(id);
+        modelMap.put("facture",facture.get());
+        return "/parent/facture";
+    }
+
 }

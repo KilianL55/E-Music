@@ -23,12 +23,14 @@ public class Facture {
 
     private String prenom;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Responsable responsable;
 
-    private String contenu;
+    private String description;
 
-    private int prixTTC;
+    private int quantite;
 
-    private int prixHTTC;
+    private int quotientFamilial;
+
+    private int prix;
 }
