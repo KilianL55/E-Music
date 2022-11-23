@@ -133,6 +133,7 @@ public class UserController {
             vue.addData("isActive", "account");
             vue.addData("activeChildren", "disable");
             vue.addData("activeBilling", "disable");
+//            vue.addData("activePayment", "disable");
 
             return "/parent/index";
         }
@@ -213,11 +214,21 @@ public class UserController {
     public String viewFacture(@PathVariable int id, ModelMap modelMap){
         Optional<Facture> facture=repoFacture.findById(id);
         String[] desciption = facture.get().getDescription().split(",");
+        String[] quantite = facture.get().getQuantite().split(",");
         modelMap.put("facture",facture.get());
         modelMap.put("desc",desciption);
+        modelMap.put("quant",quantite);
         System.out.println();
         System.out.println();
         return "/parent/facture";
     }
+
+//    @RequestMapping("managePayment/{id}")
+//    public String manageAction(@PathVariable int id, ModelMap modelMap){
+//        Optional<Responsable> payment=repoResponsable.findById(id);
+//        modelMap.put("enfant",payment.get());
+//        vue.addData("manage","edit");
+//        return "/parent/managePayment";
+//    }
 
 }
