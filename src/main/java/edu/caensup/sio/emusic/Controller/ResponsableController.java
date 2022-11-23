@@ -18,6 +18,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
 
@@ -133,21 +134,15 @@ public class ResponsableController {
     @RequestMapping("removeChildren/{id}")
     public RedirectView removeChildren(@PathVariable int id){
         repoEnfant.deleteById(id);
-        return new RedirectView("dashboard");
+        return new RedirectView("/dashboard");
     }
 
-    @GetMapping("removeAccount")
-    public RedirectView removeAction(HttpServletRequest request, HttpServletResponse response){
-        Cookie[] cookies = request.getCookies();
-        for(int i = 0; i< cookies.length ; ++i){
-            if(cookies[i].getName().equals("JSESSIONID")){
-                cookies[i].setMaxAge(0);
-                response.addCookie(cookies[i]);
-                break;
-            }
-        }
-        Responsable resp = (Responsable) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        repoResponsable.deleteById(resp.getId());
+    @RequestMapping("removeAccount/{id}")
+    public RedirectView removeAction(HttpServletRequest request, HttpServletResponse response, @PathVariable int id){
+        HttpSession session = request.getSession();
+        session.invalidate();
+        session =request.getSession(false);
+        repoResponsable.deleteById(id);
         return new RedirectView("/");
     }
 
