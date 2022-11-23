@@ -146,6 +146,7 @@ public class UserController {
             vue.addData("isActive", "planning");
             vue.addData("haveCours", realParent.getCours().size());
             vue.addData("active", "disable");
+            vue.addData("activePayment", "disable");
             return "/parent/index";
         }
 
@@ -257,4 +258,11 @@ public class UserController {
         return new RedirectView("dashboard");
     }
 
+    @RequestMapping("managePayment/{id}")
+    public String manageActionPayment(@PathVariable int id, ModelMap modelMap){
+        Optional<Responsable> payment=repoResponsable.findById(id);
+        modelMap.put("payment",payment.get());
+        vue.addData("manage","edit");
+        return "/parent/managePayment";
+    }
 }

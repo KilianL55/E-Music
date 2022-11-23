@@ -111,4 +111,7 @@ public class Responsable extends User implements UserDetails {
     public boolean isCredentialsNonExpired() {
         return true;
     }
+
+    //moyen de payement = methode (carte / chèque etc) et données de payement = renseignement (num de carte ou chèque...)
+    
 }
