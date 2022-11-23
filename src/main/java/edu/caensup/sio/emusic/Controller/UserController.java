@@ -73,6 +73,7 @@ public class UserController {
             model.put("parent", realParent);
             vue.addData("isActive", "classes");
             vue.addData("isConnected", true);
+            vue.addData("user","parent");
             for (Cours cour : cours) {
                 vue.addData("isInscrit"+cour.getId(), cour.isInscrit(realParent));
             }
@@ -128,133 +129,17 @@ public class UserController {
     }
 
     @RequestMapping("dashboard")
-    public String dashboardAction(ModelMap model){
+    public RedirectView dashboardAction(ModelMap model){
         Object responsable = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if(responsable instanceof Enfant enfant){
             model.put("enfant",enfant);
-            return "enfant/index";
+            return new RedirectView("/enfant/dashboard");
         } else {
-            Responsable parent = (Responsable) responsable;
-            List<Enfant> enfants = repoEnfant.findByResponsable(parent);
-            Responsable realParent = repoResponsable.findById(parent.getId()).get();
-            model.put("cours", realParent.getCours());
-            parent.setAdresse2("");
-            model.put("responsable", realParent);
-            if(enfants.size() >= 1){
-                model.put("enfants",enfants);
-            }
-            vue.addData("isActive", "planning");
-            vue.addData("haveCours", realParent.getCours().size());
-            vue.addData("active", "disable");
-            return "/parent/index";
+            return new RedirectView("/parent/dashboard");
         }
 
     }
 
-    @RequestMapping("addCours/{id}")
-    public RedirectView addCoursAction(ModelMap model, @PathVariable int id){
-        Object responsable = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Responsable parent = (Responsable) responsable;
-        Optional<Cours> cours = repoCour.findById(id);
-        Responsable realParent = repoResponsable.findById(parent.getId()).get();
-        cours.ifPresent(c -> {
-            realParent.getCours().add(c);
-            repoResponsable.save(realParent);
-        });
-        return new RedirectView("/dashboard/cours");
-    }
 
-    @RequestMapping("removeCours/{id}")
-    public RedirectView removeCoursAction(ModelMap model, @PathVariable int id){
-        Object responsable = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Responsable parent = (Responsable) responsable;
-        Optional<Cours> cours = repoCour.findById(id);
-        Responsable realParent = repoResponsable.findById(parent.getId()).get();
-        cours.ifPresent(c -> {
-            realParent.getCours().remove(c);
-            repoResponsable.save(realParent);
-        });
-        return new RedirectView("/dashboard/cours");
-    }
-
-    @RequestMapping("dashboard/cours")
-    public String dashboardClassesAction(ModelMap model){
-        String result=dashboardAction(model);
-        vue.addData("isActive", "cours");
-        return result;
-    }
-
-    @PostMapping("/updateResponsable")
-    public RedirectView updateResponsable( @ModelAttribute Responsable responsable){
-        Responsable resp = (Responsable) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        resp.setNom(responsable.getNom());
-        resp.setPrenom(responsable.getPrenom());
-        resp.setUsername(responsable.getUsername());
-        resp.setAdresse(responsable.getAdresse());
-        resp.setAdresse2(responsable.getAdresse2());
-        resp.setVille(responsable.getVille());
-        resp.setCode_postal(responsable.getCode_postal());
-        resp.setQuotient_familial(responsable.getQuotient_familial());
-        resp.setTel1(responsable.getTel1());
-        resp.setTel2(responsable.getTel2());
-        resp.setTel3(responsable.getTel3());
-        repoResponsable.save(resp);
-        return new RedirectView("dashboard");
-
-    }
-
-    @PostMapping("saveChildren")
-    public RedirectView saveChildren(@ModelAttribute Enfant enfant){
-        Responsable resp = repoResponsable.findByUsername(enfant.getEmail_parent());
-        enfant.setUsername(enfant.getPrenom()+"."+enfant.getNom());
-        enfant.setPassword(passwordEncoder.encode(enfant.getPassword()));
-        enfant.setResponsable(resp);
-        enfant.setEnabled(true);
-        vue.addData("isActive","children");
-        vue.addData("active","disable");
-        repoEnfant.save(enfant);
-        return new RedirectView("dashboard");
-
-    }
-
-    @RequestMapping("removeChildren/{id}")
-    public RedirectView removeChildren(@PathVariable int id){
-        repoEnfant.deleteById(id);
-        return new RedirectView("dashboard");
-    }
-
-    @GetMapping("removeAccount")
-    public RedirectView removeAction(HttpServletRequest request, HttpServletResponse response){
-        Cookie[] cookies = request.getCookies();
-        for(int i = 0; i< cookies.length ; ++i){
-            if(cookies[i].getName().equals("JSESSIONID")){
-                cookies[i].setMaxAge(0);
-                response.addCookie(cookies[i]);
-                break;
-            }
-        }
-        Responsable resp = (Responsable) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        repoResponsable.deleteById(resp.getId());
-        return new RedirectView("/");
-    }
-
-    @RequestMapping("manageChildren/{id}")
-    public String manageAction(@PathVariable int id, ModelMap modelMap){
-        Optional<Enfant> enfant=repoEnfant.findById(id);
-        modelMap.put("enfant",enfant.get());
-        vue.addData("manage","edit");
-        return "/parent/manageChildren";
-    }
-
-    @PostMapping("editChildren")
-    public RedirectView editAction(@ModelAttribute Enfant enfant){
-        Responsable resp = (Responsable) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Enfant enfantSave = repoEnfant.findByUsernameAndResponsable(enfant.getUsername(),resp);
-        enfantSave.setDate_naissance(enfant.getDate_naissance());
-        enfantSave.setNom(enfant.getNom());
-        enfantSave.setPrenom(enfant.getPrenom());
-        repoEnfant.save(enfantSave);
-        return new RedirectView("dashboard");
-    }
 
 }

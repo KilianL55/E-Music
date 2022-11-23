@@ -27,8 +27,14 @@
                         <a class="ui disabled mini grey button" href="/cours/{{id}}">Déjà inscrit</a>
                     </div>
                     <div v-else>
-                        <a href="/addCours/{{id}}" class="ui mini red button">S'inscrire</a>
+                        <div v-show="user === 'parent'">
+                            <a href="/parent/addCours/{{id}}" class="ui mini red button">S'inscrire</a>
+                        </div>
+                        <div v-show="user === 'enfant'">
+                            <a href="/enfant/addCours/{{id}}" class="ui mini red button">S'inscrire</a>
+                        </div>
                     </div>
+
                 </div>
             </div>
             {{/cours}}
