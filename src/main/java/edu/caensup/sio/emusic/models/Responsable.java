@@ -68,7 +68,7 @@ public class Responsable extends User implements UserDetails {
     private List<Enfant> enfant;
 
     @OneToMany(mappedBy = "responsable", fetch = FetchType.EAGER)
-    private List<Facture> factures;
+    private Set<Facture> factures;
 
     @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
     private Set<Cours> cours=new HashSet<>();

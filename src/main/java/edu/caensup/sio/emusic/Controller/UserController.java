@@ -143,6 +143,7 @@ public class UserController extends AbstractController {
             Responsable parent = (Responsable) responsable;
             List<Enfant> enfants = repoEnfant.findByResponsable(parent);
             Responsable realParent = repoResponsable.findById(parent.getId()).get();
+
             model.put("cours", realParent.getCours());
             parent.setAdresse2("");
             model.put("responsable", realParent);
@@ -150,7 +151,8 @@ public class UserController extends AbstractController {
                 model.put("enfants",enfants);
             }
             vue.addData("isActive", "planning");
-            vue.addData("activeBilling", "disable");
+            vue.addData("activeBilling", false);
+            vue.addData("activeChildren", false);
             vue.addData("haveCours", realParent.getCours().size());
             vue.addData("active", "disable");
             return "/parent/index";

@@ -34,7 +34,7 @@ public class Facture {
     private int instrument;
 
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private Responsable responsable;
 
     private String description;

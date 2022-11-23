@@ -135,10 +135,10 @@
             </div>
             <div v-show="isActive === 'children'">
                 <h2>Enfant</h2>
-                <button v-show="activeChildren === 'disable'" @click="activeChildren = 'childrenForm'" class="ui red button ">Ajouter un
+                <button v-show="activeChildren === false" @click="activeChildren = 'childrenForm'" class="ui red button ">Ajouter un
                     enfant
                 </button>
-                <div v-show="activeChildren === 'disable'" class="ui equal width grid">
+                <div v-show="activeChildren === false" class="ui equal width grid">
                     <div class="row">
                         {{#enfants}}
                         <div class="column">
@@ -152,7 +152,7 @@
                 </div>
 
                 <div v-show="activeChildren === 'childrenForm'">
-                    <button @click="activeChildren = 'disable'" class="ui black button" type="submit">Retour</button>
+                    <button @click="activeChildren = false" class="ui black button" type="submit">Retour</button>
                     <form method="POST" action="./saveChildren" class="ui form"
                           style="display: flex;flex-direction: column">
                         <div class="two fields">
@@ -227,22 +227,24 @@
                 </div>
             </div>
             <div v-show="isActive === 'billing'">
-                {{#factures}}
-                <div class="cours-box">
+                <div class="cours-box-container">
+                    {{#factures}}
+                        <div class="cours-box">
 
-                    <div class="in-box">
-                        <h3>Facture #{{id}}</h3>
+                            <div class="in-box">
+                                <h3 style="text-align: center">Facture #{{id}}</h3>
 
-                        <a href="/viewFacture/{{id}}"  class="ui mini red button">Afficher la facture</a>
+                                <div class="age-box">
+                                    <p><strong>Prix :</strong> {{prix}} €</p>
+                                    <p><strong>Description :</strong> {{description}}</p>
+                                </div>
 
-                    </div>
+                                <a href="/viewFacture/{{id}}"  class="ui mini red button">Afficher la facture</a>
+
+                            </div>
+                        </div>
+                    {{/factures}}
                 </div>
-                {{/factures}}
-
-<!--                <button href="./managePayment/{{id}}" class="ui red button ">Modifier information de payement-->
-<!--                        v-show="activePayment === 'disable'" @click="activePayment = 'paymentForm'" -->
-
-<!--                </button>-->
 
             </div>
             <div v-show="isActive === 'remove'">
@@ -261,8 +263,6 @@
 </div>
 
 {{> partials/footer}}
-
-{{{vue}}}
 
 <script>
     $(function(){
