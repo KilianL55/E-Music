@@ -2,6 +2,7 @@
 <html lang="fr">
 
   <head>
+    <base href="http://127.0.0.1:8080/">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -26,13 +27,28 @@
                 <a :class="{ active : isActive === 'accueil' }" class="red item" href="./accueil">
                   Accueil
                 </a>
+                <a :class="{ active : isActive === 'classes' }" class="red item" href="/classes">
+                  Cours
+                </a>
               <div class="right menu">
-                <a :class="{ active : isActive === 'signup' }" class="red item" href="./signup">
-                  Inscription
-                </a>
-                <a :class="{ active : isActive === 'login' }" class="red item" href="./dashboard">
-                  Connexion
-                </a>
+                {{#activeUser}}
+
+                  {{#if connected}}
+                    <a :class="{ active : isActive === 'signup' }" class="red item" href="./dashboard">
+                      Tableau de bord
+                    </a>
+                    <a :class="{ active : isActive === 'login' }" class="red item" href="./logout">
+                      Déconnexion
+                    </a>
+                  {{else}}
+                    <a :class="{ active : isActive === 'signup' }" class="red item" href="./signup">
+                      Inscription
+                    </a>
+                    <a :class="{ active : isActive === 'login' }" class="red item" href="./dashboard">
+                      Connexion
+                    </a>
+                  {{/if}}
+                {{/activeUser}}
               </div>
             </div>
           </div>

@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    overflow: hidden;
 }
 
 main {
@@ -50,16 +51,32 @@ main {
     }
 }
 
+@keyframes appearContainer {
+    0% {
+        opacity: 0;
+        transform: translateY(500px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
 .cours-box-container{
+    overflow: hidden;
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
-    width: 885px;
+    flex-direction: row;
+    width: auto;
+    animation: 1s ease-in appearContainer;
 }
 
 .cours-box {
-    width: 275px;
-    height: 200px;
+    width: 200px;
+    height: 220px;
     padding: 10px;
     background-color: #fff;
     border-radius: 10px;
@@ -75,17 +92,25 @@ main {
     transform: translateY(-10px);
 }
 
-.cours-box > h3 {
+.cours-box > .in-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+}
+
+.cours-box > .in-box > .title-box {
     font-size: 1.2rem;
     font-weight: 600;
     text-align: center;
 }
 
-.cours-box > .instru-box {
-    position: absolute;
-    bottom: 1em;
-    right: 10px;
-    z-index: 99;
+.cours-box > .in-box > .bottom-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
 }
 
 .cours-box > .date-box {
