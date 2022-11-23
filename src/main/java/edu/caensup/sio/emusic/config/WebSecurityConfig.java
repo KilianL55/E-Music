@@ -20,7 +20,7 @@ public class WebSecurityConfig {
                 .anyRequest().authenticated() // (4)
                 .and().formLogin() // (5)
                 .loginPage("/login").defaultSuccessUrl("/dashboard")// (5)
-                .permitAll().and().logout().logoutSuccessUrl("/exit")// (6)
+                .permitAll().and().logout().logoutSuccessUrl("/")// (6)
                 .permitAll().and().httpBasic().and().exceptionHandling().accessDeniedPage("/403");
         http.headers().frameOptions().sameOrigin(); //// (8)
         http.csrf().disable();

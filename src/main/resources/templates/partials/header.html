@@ -30,12 +30,22 @@
                 </a>
               <div class="right menu">
                 {{#activeUser}}
+
+                  {{#if connected}}
+                    <a :class="{ active : isActive === 'signup' }" class="red item" href="./dashboard">
+                      Tableau de bord
+                    </a>
+                    <a :class="{ active : isActive === 'login' }" class="red item" href="./logout">
+                      Déconnexion
+                    </a>
+                  {{else}}
                     <a :class="{ active : isActive === 'signup' }" class="red item" href="./signup">
                       Inscription
                     </a>
                     <a :class="{ active : isActive === 'login' }" class="red item" href="./dashboard">
                       Connexion
                     </a>
+                  {{/if}}
                 {{/activeUser}}
               </div>
             </div>
