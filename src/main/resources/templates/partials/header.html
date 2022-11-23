@@ -29,12 +29,14 @@
                   Cours
                 </a>
               <div class="right menu">
-                <a :class="{ active : isActive === 'signup' }" class="red item" href="./signup">
-                  Inscription
-                </a>
-                <a :class="{ active : isActive === 'login' }" class="red item" href="./dashboard">
-                  Connexion
-                </a>
+                {{#activeUser}}
+                    <a :class="{ active : isActive === 'signup' }" class="red item" href="./signup">
+                      Inscription
+                    </a>
+                    <a :class="{ active : isActive === 'login' }" class="red item" href="./dashboard">
+                      Connexion
+                    </a>
+                {{/activeUser}}
               </div>
             </div>
           </div>
