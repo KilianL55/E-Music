@@ -23,9 +23,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 @RequestMapping("/")
@@ -269,12 +267,13 @@ public class UserController extends AbstractController {
     @RequestMapping("viewFacture/{id}")
     public String viewFacture(@PathVariable int id, ModelMap modelMap){
         Optional<Facture> facture=repoFacture.findById(id);
-        String[] desciption = facture.get().getDescription().split(",");
-        String[] quantite = facture.get().getQuantite().split(",");
+        Map<String, String> tableau = new HashMap<>();
+        tableau.put("desc", Arrays.toString(facture.get().getDescription().split(",")));
+        tableau.put("quant", Arrays.toString(facture.get().getQuantite().split(",")));
         modelMap.put("facture",facture.get());
-        modelMap.put("desc",desciption);
-        modelMap.put("quant",quantite);
-        System.out.println();
+        modelMap.put("tab",tableau);
+        System.out.println(tableau);
+        System.out.println("Taille tableau : "+tableau.size());
         System.out.println();
         return "/parent/facture";
     }

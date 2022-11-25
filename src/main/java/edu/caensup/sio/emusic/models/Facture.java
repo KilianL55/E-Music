@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -32,6 +33,8 @@ public class Facture {
     private String ville;
 
     private int instrument;
+
+    private Date date;
 
 
     @ManyToOne

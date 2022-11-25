@@ -136,9 +136,3 @@ main {
     color: #fa2f2f;
     font-family: 'Fasthand', cursive;
 }
-
-#client-shape{
-    background: linear-gradient(0.25turn, rgba(0, 0, 0, 0), #fa2f2f);
-    clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);
-    width: 15%;
-}

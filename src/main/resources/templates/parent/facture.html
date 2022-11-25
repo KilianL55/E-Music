@@ -15,10 +15,7 @@
       <h2 style="margin-top: 15px">Facture #{{id}}</h2>
     </div>
 
-    <div id="client-shape">
-        <h2>Facturé à :</h2>
-    </div>
-
+    <h2>Facturé à :</h2>
     <div style="margin-top: 1em">
       <p>{{nom}} {{prenom}}</p>
       <p>{{addresse}}</p>
@@ -26,7 +23,7 @@
     </div>
 
     <div style="margin-top: 1em">
-      <p><strong> Date de facturation : </strong></p>
+      <p><strong> Date de facturation :</strong> {{{dateFormat date "d/M/YYYY" Date}}}</p>
 
       <p><strong> Echéance : </strong></p>
 
@@ -46,17 +43,16 @@
       </thead>
       <tbody>
       {{/facture}}
-      {{#desc}}
-      <tr>
-        <td>{{.}}</td>
-        {{#facture}}
-        <td>{{quantite}}</td>
-        <td>{{quotientFamilial}}</td>
-        <td>{{prix}}</td>
-        {{/facture}}
-
-      </tr>
-      {{/desc}}
+        {{#each tab}}
+        <tr>
+          <td>{{#each tab.desc}}{{this}}{{/each}}</td>
+          {{#facture}}
+          <td>{{tab.quant}}</td>
+          <td>{{quotientFamilial}}</td>
+          <td>{{prix}}</td>
+          {{/facture}}
+        </tr>
+        {{/each}}
       </tbody>
     </table>
   </div>
