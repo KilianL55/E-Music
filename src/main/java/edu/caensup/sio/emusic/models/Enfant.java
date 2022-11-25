@@ -46,6 +46,9 @@ public class Enfant extends User implements UserDetails {
     @ManyToOne()
     private Responsable responsable= new Responsable();
 
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
+    private Set<Cours> cours=new HashSet<>();
+
     private String authorities="ENFANT"; // (2)
 
     @Override

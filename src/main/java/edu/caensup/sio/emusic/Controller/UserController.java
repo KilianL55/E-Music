@@ -65,7 +65,7 @@ public class UserController {
             Iterable<Cours> cours = repoCour.findAll();
             model.put("cours", cours);
             vue.addData("isActive", "classes");
-        } else {
+        } else if (responsable instanceof Responsable){
             Iterable<Cours> cours = repoCour.findAll();
             Responsable parent = (Responsable) responsable;
             Responsable realParent = repoResponsable.findById(parent.getId()).get();
@@ -78,6 +78,22 @@ public class UserController {
                 vue.addData("isInscrit"+cour.getId(), cour.isInscrit(realParent));
             }
             System.out.println(realParent.getCours());
+        } else if (responsable instanceof Enfant){
+            Iterable<Cours> cours = repoCour.findAll();
+            Enfant enfant = (Enfant) responsable;
+            Enfant realEnfant = repoEnfant.findById(enfant.getId()).get();
+            model.put("cours", cours);
+            model.put("parent", realEnfant);
+            vue.addData("isActive", "classes");
+            vue.addData("isConnected", true);
+            vue.addData("user","enfant");
+
+            if ( realEnfant.getCours() != null){
+                for (Cours cour : cours) {
+                    vue.addData("isInscrit"+cour.getId(), cour.isInscrit(realEnfant));
+                }
+            }
+
         }
         return "classes";
     }
@@ -129,10 +145,9 @@ public class UserController {
     }
 
     @RequestMapping("dashboard")
-    public RedirectView dashboardAction(ModelMap model){
+    public RedirectView dashboardAction(){
         Object responsable = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if(responsable instanceof Enfant enfant){
-            model.put("enfant",enfant);
             return new RedirectView("/enfant/dashboard");
         } else {
             return new RedirectView("/parent/dashboard");
