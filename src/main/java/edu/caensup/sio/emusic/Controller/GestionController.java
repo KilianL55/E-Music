@@ -9,10 +9,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class GestionController {
-  @GetMapping("/admin")
-  public String indexAction() {
-    return "index";
-  }
 
   @RequestMapping("/403")
   public @ResponseBody String accessDeniedAction() {

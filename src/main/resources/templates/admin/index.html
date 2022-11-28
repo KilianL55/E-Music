@@ -1,0 +1,84 @@
+{{> partials/header}}
+<h1 class="ui header" style="font-size: 3em; margin-top: 1em; color: #fa2f2f;">Panel d'Administration</h1>
+</div>
+<!--<a class="ui button" href="/addChildren">Ajouter un enfant</a>-->
+<div class="ui container" style="margin-top: 2em">
+  <div class="ui grid">
+    <div class="four wide column">
+      <div class="ui secondary vertical pointing menu">
+        <div>
+          <a @click="isActive='planning'" :class="{ active : isActive === 'planning' }" class="red item">
+            <div>
+              <i class="clock icon"></i>
+              <span>Mon planning</span>
+            </div>
+          </a>
+          <a @click="isActive='account'" :class="{ active : isActive === 'account' }" class="red item">
+            <div>
+              <i class="user icon"></i>
+              <span>Mon compte</span>
+            </div>
+          </a>
+          <a @click="isActive='children'" :class="{ active : isActive === 'children' }" class="red item">
+            <div>
+              <i class="child icon"></i>
+              <span>Mes enfants</span>
+            </div>
+          </a>
+
+          <a @click="isActive='cours'"  :class="{ active : isActive === 'cours' }" class="red item">
+
+            <div>
+              <i class="music icon"></i>
+              <span>Cours</span>
+            </div>
+          </a>
+          <a @click="isActive = 'billing'" :class="{ active : isActive === 'billing' }" class="red item">
+            <div>
+              <i class="file icon"></i>
+              <span>Facturation</span>
+            </div>
+          </a>
+          <a @click="isActive = 'remove'" :class="{ active : isActive === 'remove' }" class="red item">
+            <div>
+              <i class="remove icon"></i>
+              <span>Supprimer votre compte</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{> partials/footer}}
+<script>
+  $(function(){
+    $('#eventdates_calendar').calendar({
+      type : 'date',
+      text: {
+        days: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+        dayNamesShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+        dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+        months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Decembre'],
+        monthsShort: ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aou', 'Sep', 'Oct', 'Nov', 'Dec'],
+        today: 'Aujourd\'hui',
+        now: 'Maintenant',
+        am: 'AM',
+        pm: 'PM',
+        weekNo: 'Semaine'
+      },
+
+      eventDates: [
+        {{#cours}}
+    {
+      date: new Date("{{date}}"),
+              message: '{{libelle}} {{{dateFormat date "E H\'h\'mm" Date}}}',
+            class: 'inverted green'
+    },
+    {{/cours}}
+    ]
+    })});
+</script>
+
+{{{vue}}}
