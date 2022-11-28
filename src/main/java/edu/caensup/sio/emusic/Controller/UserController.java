@@ -10,6 +10,7 @@ import edu.caensup.sio.emusic.repositories.IRepoResponsable;
 import io.github.jeemv.springboot.vuejs.VueJS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.encrypt.Encryptors;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -198,7 +199,8 @@ public class UserController {
         resp.setQuotient_familial(responsable.getQuotient_familial());
         resp.setTel1(responsable.getTel1());
         resp.setTel2(responsable.getTel2());
-        resp.setTel3(responsable.getTel3());
+        resp.setPayMethod(responsable.getPayMethod());
+        resp.setPayData(responsable.getPayData());
         repoResponsable.save(resp);
         return new RedirectView("dashboard");
 
@@ -258,11 +260,4 @@ public class UserController {
         return new RedirectView("dashboard");
     }
 
-    @RequestMapping("managePayment/{id}")
-    public String manageActionPayment(@PathVariable int id, ModelMap modelMap){
-        Optional<Responsable> payment=repoResponsable.findById(id);
-        modelMap.put("payment",payment.get());
-        vue.addData("manage","edit");
-        return "/parent/managePayment";
-    }
 }

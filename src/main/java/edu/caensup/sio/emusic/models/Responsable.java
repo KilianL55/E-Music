@@ -112,6 +112,12 @@ public class Responsable extends User implements UserDetails {
         return true;
     }
 
-    //moyen de payement = methode (carte / chèque etc) et données de payement = renseignement (num de carte ou chèque...)
-    
+    //moyen de payement = payMethod (carte) et données de payement = payData (cryptogramme)
+
+    @Column(length = 50)
+    private String payMethod;
+
+    @Column(length = 50)
+    private String payData;
+
 }
