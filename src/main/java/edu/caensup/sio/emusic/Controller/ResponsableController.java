@@ -53,7 +53,7 @@ public class ResponsableController {
         Responsable realParent = repoResponsable.findById(parent.getId()).get();
         Set<Cours> cours = new HashSet<>();
         for ( Enfant enfant : enfants){
-             cours.add(enfant.getCours());
+             cours.addAll(enfant.getCours());
         }
         model.put("cours", realParent.getCours());;
         model.put("coursC", cours);
