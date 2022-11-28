@@ -7,9 +7,11 @@ import edu.caensup.sio.emusic.models.Responsable;
 import edu.caensup.sio.emusic.repositories.IRepoCour;
 import edu.caensup.sio.emusic.repositories.IRepoEnfant;
 import edu.caensup.sio.emusic.repositories.IRepoResponsable;
+import edu.caensup.sio.emusic.service.AESEncryptionDecryption;
 import io.github.jeemv.springboot.vuejs.VueJS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.encrypt.Encryptors;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -143,11 +145,8 @@ public class UserController extends AbstractController {
             return new RedirectView("/enfant/dashboard");
         } else {
             return new RedirectView("/parent/dashboard");
-
         }
 
     }
-
-
 
 }

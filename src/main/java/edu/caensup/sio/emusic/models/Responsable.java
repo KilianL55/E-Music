@@ -111,4 +111,13 @@ public class Responsable extends User implements UserDetails {
     public boolean isCredentialsNonExpired() {
         return true;
     }
+
+    //moyen de payement = payMethod (carte) et données de payement = payData (cryptogramme)
+
+    @Column(length = 50)
+    private String payMethod;
+
+    @Column(length = 50)
+    private String payData;
+
 }

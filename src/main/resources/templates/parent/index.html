@@ -128,9 +128,24 @@
                             </label>
                         </div>
                     </div>
+                    <div class="three fields">
+                        <div class="field" style="text-align: left">
+                            <label for="payMethod"><i class="red mini star of life icon"></i>Numéro de carte bancaire
+                                <input required type="text" minlength="16" maxlength="16"
+                                       name="payMethod" placeholder="N° de carte" value="{{payMethod}}">
+                            </label>
+                        </div>
+                        <div class="field" style="text-align: left">
+                            <label for="payData"><i class="red mini star of life icon"></i>Cryptogramme
+                                <input type="text" minlength="3" maxlength="3"
+                                       name="payData" placeholder="Cryptogramme" value="{{payData}}">
+                            </label>
+                        </div>
+                    </div>
                     <button type="submit" class="ui red button test" style="margin-bottom: 2em">Modifier vos
                         informations
                     </button>
+
                 </form>
             </div>
             <div v-show="isActive === 'children'">
@@ -248,8 +263,11 @@
                     </div>
                 </div>
             </div>
+
             <div v-show="isActive === 'billing'">
-                <h2>Enfant</h2>
+                <h2>Facture</h2>
+
+
             </div>
             <div v-show="isActive === 'remove'">
                 <div class="ui warning message">
@@ -294,6 +312,11 @@
             {{/cours}}
         ]
     })});
+        $('#month_year_calendar')
+            .calendar({
+                type: 'month'
+            })
+        ;
 </script>
 
 {{{vue}}}
