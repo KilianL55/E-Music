@@ -45,7 +45,7 @@
       {{/facture}}
         {{#each tab}}
         <tr>
-          <td>{{#each tab.desc}}{{this}}{{/each}}</td>
+          <td>{{#each tab}}{{tab.desc}}{{/each}}</td>
           {{#facture}}
           <td>{{tab.quant}}</td>
           <td>{{quotientFamilial}}</td>

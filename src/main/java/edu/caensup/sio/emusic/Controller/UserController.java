@@ -270,8 +270,8 @@ public class UserController extends AbstractController {
         Map<String, String> tableau = new HashMap<>();
         tableau.put("desc", Arrays.toString(facture.get().getDescription().split(",")));
         tableau.put("quant", Arrays.toString(facture.get().getQuantite().split(",")));
-        modelMap.put("facture",facture.get());
         modelMap.put("tab",tableau);
+        modelMap.put("facture",facture.get());
         System.out.println(tableau);
         System.out.println("Taille tableau : "+tableau.size());
         System.out.println();
