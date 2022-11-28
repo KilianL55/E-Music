@@ -2,7 +2,7 @@
 <html lang="fr">
 
   <head>
-    <base href="http://127.0.0.1:8080/">
+    <base href="https://srv2-vm-2107.sts-sio-caen.info/E-Music/">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -29,12 +29,24 @@
                   Cours
                 </a>
               <div class="right menu">
-                <a :class="{ active : isActive === 'signup' }" class="red item" href="./signup">
-                  Inscription
-                </a>
-                <a :class="{ active : isActive === 'login' }" class="red item" href="./dashboard">
-                  Connexion
-                </a>
+                {{#activeUser}}
+
+                  {{#if connected}}
+                    <a :class="{ active : isActive === 'signup' }" class="red item" href="./dashboard">
+                      Tableau de bord
+                    </a>
+                    <a :class="{ active : isActive === 'login' }" class="red item" href="./logout">
+                      Déconnexion
+                    </a>
+                  {{else}}
+                    <a :class="{ active : isActive === 'signup' }" class="red item" href="./signup">
+                      Inscription
+                    </a>
+                    <a :class="{ active : isActive === 'login' }" class="red item" href="./dashboard">
+                      Connexion
+                    </a>
+                  {{/if}}
+                {{/activeUser}}
               </div>
             </div>
           </div>

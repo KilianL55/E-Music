@@ -27,7 +27,7 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/")
-public class UserController {
+public class UserController extends AbstractController {
 
     @Autowired
     private IRepoResponsable repoResponsable;
@@ -65,7 +65,12 @@ public class UserController {
             Iterable<Cours> cours = repoCour.findAll();
             model.put("cours", cours);
             vue.addData("isActive", "classes");
+<<<<<<< HEAD
         } else if (responsable instanceof Responsable){
+=======
+            vue.addData("isConnected", false);
+        } else {
+>>>>>>> main
             Iterable<Cours> cours = repoCour.findAll();
             Responsable parent = (Responsable) responsable;
             Responsable realParent = repoResponsable.findById(parent.getId()).get();
