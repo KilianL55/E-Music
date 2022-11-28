@@ -152,7 +152,6 @@ public class UserController {
             vue.addData("isActive", "planning");
             vue.addData("haveCours", realParent.getCours().size());
             vue.addData("active", "disable");
-            vue.addData("activePayment", "disable");
             return "/parent/index";
         }
 
