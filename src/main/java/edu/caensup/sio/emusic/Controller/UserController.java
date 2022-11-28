@@ -7,6 +7,7 @@ import edu.caensup.sio.emusic.models.Responsable;
 import edu.caensup.sio.emusic.repositories.IRepoCour;
 import edu.caensup.sio.emusic.repositories.IRepoEnfant;
 import edu.caensup.sio.emusic.repositories.IRepoResponsable;
+import edu.caensup.sio.emusic.service.AESEncryptionDecryption;
 import io.github.jeemv.springboot.vuejs.VueJS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -130,6 +131,8 @@ public class UserController {
 
     @RequestMapping("dashboard")
     public String dashboardAction(ModelMap model){
+        String secretKey = "zadqsqgfgqsdqzdq";
+        AESEncryptionDecryption aesEncryptionDecryption = new AESEncryptionDecryption();
         Object responsable = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if(responsable instanceof Enfant enfant){
             model.put("enfant",enfant);
@@ -140,6 +143,8 @@ public class UserController {
             Responsable realParent = repoResponsable.findById(parent.getId()).get();
             model.put("cours", realParent.getCours());
             parent.setAdresse2("");
+            realParent.setPayMethod(aesEncryptionDecryption.decrypt(realParent.getPayMethod(), secretKey));
+            realParent.setPayData(aesEncryptionDecryption.decrypt(realParent.getPayData(), secretKey));
             model.put("responsable", realParent);
             if(enfants.size() >= 1){
                 model.put("enfants",enfants);
@@ -188,6 +193,8 @@ public class UserController {
 
     @PostMapping("/updateResponsable")
     public RedirectView updateResponsable( @ModelAttribute Responsable responsable){
+        String secretKey = "zadqsqgfgqsdqzdq";
+        AESEncryptionDecryption aesEncryptionDecryption = new AESEncryptionDecryption();
         Responsable resp = (Responsable) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         resp.setNom(responsable.getNom());
         resp.setPrenom(responsable.getPrenom());
@@ -199,8 +206,8 @@ public class UserController {
         resp.setQuotient_familial(responsable.getQuotient_familial());
         resp.setTel1(responsable.getTel1());
         resp.setTel2(responsable.getTel2());
-        resp.setPayMethod(responsable.getPayMethod());
-        resp.setPayData(responsable.getPayData());
+        resp.setPayMethod(aesEncryptionDecryption.encrypt(responsable.getPayMethod(), secretKey));
+        resp.setPayData(aesEncryptionDecryption.encrypt(responsable.getPayData(), secretKey));
         repoResponsable.save(resp);
         return new RedirectView("dashboard");
 
