@@ -30,6 +30,9 @@ import java.util.Optional;
 public class UserController extends AbstractController {
 
     @Autowired
+    private VueJS vue;
+
+    @Autowired
     private IRepoResponsable repoResponsable;
 
     @Autowired
@@ -43,14 +46,6 @@ public class UserController extends AbstractController {
 
     @Autowired
     private IRepoEnfant repoEnfant;
-
-    @Autowired
-    private VueJS vue;
-
-    @ModelAttribute("vue")
-    public VueJS getVue() {
-        return this.vue;
-    }
 
     @GetMapping({"accueil", "/"})
     public String indexAction(){
