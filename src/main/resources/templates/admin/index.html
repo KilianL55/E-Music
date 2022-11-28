@@ -7,46 +7,125 @@
     <div class="four wide column">
       <div class="ui secondary vertical pointing menu">
         <div>
-          <a @click="isActive='planning'" :class="{ active : isActive === 'planning' }" class="red item">
+          <a @click="isActiveAdmin='cours'" :class="{ active : isActiveAdmin === 'cours' }" class="red item">
             <div>
-              <i class="clock icon"></i>
-              <span>Mon planning</span>
+              <i class="calendar alternate icon"></i>
+              <span>Planification des cours</span>
             </div>
           </a>
-          <a @click="isActive='account'" :class="{ active : isActive === 'account' }" class="red item">
+          <a @click="isActiveAdmin='instrument'" :class="{ active : isActiveAdmin === 'instrument' }" class="red item">
+            <div>
+              <i class="drum icon"></i>
+              <span>Instrument disponible</span>
+            </div>
+          </a>
+          <a @click="isActiveAdmin='user'" :class="{ active : isActiveAdmin === 'user' }" class="red item">
             <div>
               <i class="user icon"></i>
-              <span>Mon compte</span>
+              <span>Gestion des utilisateurs</span>
             </div>
           </a>
-          <a @click="isActive='children'" :class="{ active : isActive === 'children' }" class="red item">
+          <a @click="isActiveAdmin='facture'" :class="{ active : isActiveAdmin === 'facture' }" class="red item">
             <div>
-              <i class="child icon"></i>
-              <span>Mes enfants</span>
-            </div>
-          </a>
-
-          <a @click="isActive='cours'"  :class="{ active : isActive === 'cours' }" class="red item">
-
-            <div>
-              <i class="music icon"></i>
-              <span>Cours</span>
-            </div>
-          </a>
-          <a @click="isActive = 'billing'" :class="{ active : isActive === 'billing' }" class="red item">
-            <div>
-              <i class="file icon"></i>
-              <span>Facturation</span>
-            </div>
-          </a>
-          <a @click="isActive = 'remove'" :class="{ active : isActive === 'remove' }" class="red item">
-            <div>
-              <i class="remove icon"></i>
-              <span>Supprimer votre compte</span>
+              <i class="file alternate icon"></i>
+              <span>Gestion des factures</span>
             </div>
           </a>
         </div>
       </div>
+    </div>
+    <div class="ten wide column">
+      <div v-show="isActiveAdmin === 'cours'">
+        <button @click="active = !active" class="ui red button">Ajouter un cours</button>
+        <div v-show="active" class="ui equal width grid">
+          <form method="POST" class="ui form" action="./admin/addCours" style="margin-top: 2em">
+            <div class="field" style="text-align: left">
+              <label for="libelle"><i class="red mini star of life icon"></i>Libelle
+                <input required type="text" name="libelle" id="libelle" placeholder="Libelle du cours">
+              </label>
+            </div>
+
+            <div class="three fields">
+              <div class="field" style="text-align: left">
+                <label for="ageMin"><i class="red mini star of life icon"></i>Âge min
+                  <input required type="number" name="ageMin" id="ageMin" placeholder="Âge minimum">
+                </label>
+              </div>
+
+              <div class="field" style="text-align: left">
+                <label for="ageMax"><i class="red mini star of life icon"></i>Âge max
+                  <input required type="number" name="ageMax" id="ageMax" placeholder="Âge maximum">
+                </label>
+              </div>
+
+              <div class="field" style="text-align: left">
+                <label for="nbPlaceMax"><i class="red mini star of life icon"></i>Places
+                  <input required type="number" name="nbPlaceMax" id="nbPlaceMax" placeholder="Nombre de place maximum">
+                </label>
+              </div>
+            </div>
+
+            <div class="field" style="text-align: left">
+              <label for="date"><i class="red mini star of life icon"></i>Date
+                <input required type="text" name="date" id="date" placeholder="Date des cours">
+              </label>
+            </div>
+
+            <label for="instrument"><i class="red mini star of life icon"></i>Instrument
+              <div class="ui fluid search selection dropdown">
+                   <input required type="hidden" name="instrument" id="instrument">
+                <i class="dropdown icon"></i>
+                <div class="default text">Choix de l'instrument</div>
+                <div class="menu">
+                  {{#instruments}}
+                    <div class="item" data-value="{{intitule}}">{{intitule}}</div>
+                  {{/instruments}}
+                </div>
+              </div>
+            </label>
+
+            <button type="submit" class="ui red button">Valider</button>
+          </form>
+        </div>
+        <h2>Gestion des cours</h2>
+      </div>
+
+      <div v-show="isActiveAdmin === 'instrument'">
+        <button @click="active = !active" class="ui red button">Ajouter un instrument</button>
+        <div v-show="active" class="ui equal width grid">
+          <form method="POST" class="ui form" action="./admin/addInstrument" style="margin-top: 2em">
+            <div class="field" style="text-align: left">
+              <label for="intitule"><i class="red mini star of life icon"></i>Nom
+                <input required type="text" name="intitule" id="intitule" placeholder="Nom de l'instrument">
+              </label>
+            </div>
+
+            <div class="field" style="text-align: left">
+              <label for="description"><i class="red mini star of life icon"></i>Description
+                <textarea required name="description" id="description" placeholder="Courte description de instrument"></textarea>
+              </label>
+            </div>
+            <button type="submit" class="ui red button">Valider</button>
+          </form>
+        </div>
+        <h2>Instrument(s) disponible(s)</h2>
+        {{#instruments}}
+        <div class="ui card">
+          <div class="content">
+            <div class="header">{{intitule}}</div>
+            <div class="description">
+              {{description}}
+            </div>
+          </div>
+          <div class="extra content">
+            <div class="ui two buttons">
+              <a href="./admin/editInstrument/{{id}}" class="ui basic green button">Modifier</a>
+              <a href="./admin/deleteInstrument/{{id}}" class="ui basic red button">Supprimer</a>
+            </div>
+          </div>
+        {{/instruments}}
+      </div>
+
     </div>
   </div>
 </div>
@@ -54,31 +133,8 @@
 {{> partials/footer}}
 <script>
   $(function(){
-    $('#eventdates_calendar').calendar({
-      type : 'date',
-      text: {
-        days: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
-        dayNamesShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
-        dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
-        months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Decembre'],
-        monthsShort: ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aou', 'Sep', 'Oct', 'Nov', 'Dec'],
-        today: 'Aujourd\'hui',
-        now: 'Maintenant',
-        am: 'AM',
-        pm: 'PM',
-        weekNo: 'Semaine'
-      },
-
-      eventDates: [
-        {{#cours}}
-    {
-      date: new Date("{{date}}"),
-              message: '{{libelle}} {{{dateFormat date "E H\'h\'mm" Date}}}',
-            class: 'inverted green'
-    },
-    {{/cours}}
-    ]
-    })});
+    $('.ui.dropdown').dropdown();
+  });
 </script>
 
 {{{vue}}}

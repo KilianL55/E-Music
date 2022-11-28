@@ -135,9 +135,7 @@
             </div>
             <div v-show="isActive === 'children'">
                 <h2>Enfant</h2>
-                <button v-show="active === 'disable'" @click="active = 'childrenForm'" class="ui red button ">Ajouter un
-                    enfant
-                </button>
+                <button v-show="active === 'disable'" @click="active = 'childrenForm'" class="ui red button ">Ajouter un enfant</button>
                 <div v-show="active === 'disable'" class="ui equal width grid">
                     <div class="row">
                         {{#enfants}}

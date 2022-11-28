@@ -22,6 +22,12 @@ public class Instrument {
     @Column(length = 50)
     private String intitule;
 
+    @Column
+    private String description;
+
+    @Column
+    private int inStock;
+
     @OneToMany
     private List<Cours> cours;
 }

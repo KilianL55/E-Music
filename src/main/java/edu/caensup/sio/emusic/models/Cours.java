@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -32,7 +33,7 @@ public class Cours {
     private int nbPlaceMax;
 
     @Column
-    private Date date;
+    private LocalDateTime date;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Instrument instrument;
