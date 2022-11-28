@@ -87,13 +87,9 @@ public class UserController {
             vue.addData("isActive", "classes");
             vue.addData("isConnected", true);
             vue.addData("user","enfant");
-
-            if ( realEnfant.getCours() != null){
-                for (Cours cour : cours) {
-                    vue.addData("isInscrit"+cour.getId(), cour.isInscrit(realEnfant));
-                }
+            for (Cours cour : cours) {
+                vue.addData("isInscrit"+cour.getId(), cour.isInscrit(realEnfant));
             }
-
         }
         return "classes";
     }

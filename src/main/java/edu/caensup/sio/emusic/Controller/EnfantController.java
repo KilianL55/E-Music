@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.view.RedirectView;
@@ -32,6 +33,12 @@ public class EnfantController {
 
     @Autowired
     private VueJS vue;
+
+    @ModelAttribute("vue")
+    public VueJS getVue() {
+        return this.vue;
+    }
+
     @RequestMapping("dashboard")
     public String dashboardAction(ModelMap model){
         System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
@@ -40,9 +47,7 @@ public class EnfantController {
         Optional<Enfant> realEnfant = repoEnfant.findById(enfant.getId());
         model.put("cours", realEnfant.get().getCours());
         model.put("enfant", realEnfant);
-        if (enfant.getCours() != null){
-            vue.addData("haveCours", enfant.getCours().size());
-        }
+        System.out.println(enfant.getCours());
         return "/enfant/index";
     }
 
@@ -52,10 +57,20 @@ public class EnfantController {
         Optional<Cours> cours = repoCour.findById(id);
         Enfant realEnfant = repoEnfant.findById(enfant.getId()).get();
         cours.ifPresent(c -> {
-            if (realEnfant.getCours() != null){
-                realEnfant.getCours().add(c);
-                repoEnfant.save(realEnfant);
-            }
+            realEnfant.getCours().add(c);
+            repoEnfant.save(realEnfant);
+        });
+        return new RedirectView("/enfant/dashboard/cours");
+    }
+
+    @RequestMapping("removeCours/{id}")
+    public RedirectView removeCoursAction(ModelMap model, @PathVariable int id){
+        Enfant enfant = (Enfant) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Optional<Cours> cours = repoCour.findById(id);
+        Enfant realEnfant = repoEnfant.findById(enfant.getId()).get();
+        cours.ifPresent(c -> {
+            realEnfant.getCours().remove(c);
+            repoEnfant.save(realEnfant);
         });
         return new RedirectView("/enfant/dashboard/cours");
     }

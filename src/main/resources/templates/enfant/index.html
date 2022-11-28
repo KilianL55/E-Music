@@ -6,23 +6,17 @@
         <div class="four wide column">
             <div class="ui secondary vertical pointing menu">
                 <div>
-                    <a @click="isActiveChildren='planning'" :class="{ active : isActive === 'planning' }" class="red item">
+                    <a @click="isActiveChildren='planning'" :class="{ active : isActiveChildren === 'planning' }" class="red item">
                         <div>
                             <i class="clock icon"></i>
                             <span>Mon planning</span>
                         </div>
                     </a>
-                    <a @click="isActiveChildren='cours'"  :class="{ active : isActive === 'cours' }" class="red item">
+                    <a @click="isActiveChildren='cours'"  :class="{ active : isActiveChildren === 'cours' }" class="red item">
 
                         <div>
                             <i class="music icon"></i>
                             <span>Cours</span>
-                        </div>
-                    </a>
-                    <a @click="isActiveChildren = 'remove'" :class="{ active : isActive === 'remove' }" class="red item">
-                        <div>
-                            <i class="remove icon"></i>
-                            <span>Supprimer votre compte</span>
                         </div>
                     </a>
                 </div>
@@ -36,12 +30,11 @@
                 </div>
             </div>
             <div v-show="isActiveChildren === 'cours'">
-                <h2>Vos cours (<%haveCours%>)</h2>
-                <div v-if="haveCours === 0">
-                    <h4>Vous n'avez pas encore de cours</h4>
+                <h2>Vos cours</h2>
+                <div>
                     <a class="red ui button" href="./classes">Voir les cours disponibles</a>
                 </div>
-                <div v-else>
+                <div>
                     <div class="cours-box-container">
                         {{#cours}}
                         <div class="cours-box">
@@ -60,21 +53,11 @@
                                     <p class="date-box"><i class="user icon"></i>{{nbPlaceMax}}</p>
                                     <p class="instru-box"><i class="guitar icon"></i>{{instrument.intitule}}</p>
                                 </div>
-                                <a href="/parent/removeCours/{{id}}" class="ui mini red button">Se désinscrire</a>
+                                <a href="./enfant/removeCours/{{id}}" class="ui mini red button">Se désinscrire</a>
                             </div>
                         </div>
                         {{/cours}}
                     </div>
-                </div>
-            </div>
-            <div v-show="isActiveChildren === 'remove'">
-                <div class="ui warning message">
-                    <i class="close icon"></i>
-                    <div class="header">
-                        Vous êtes sur de vouloir supprimer votre compte ?
-                    </div>
-                    <a class="ui green button" href="./parent/removeAccount/{{id}}"> Oui</a>
-                    <button class="ui red button" @click="isActive='account'">Non</button>
                 </div>
             </div>
         </div>

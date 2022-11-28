@@ -89,9 +89,4 @@ public class Enfant extends User implements UserDetails {
     public boolean isCredentialsNonExpired() {
         return true;
     }
-
-    @Override
-    public Set<Cours> getCours() {
-        return null;
-    }
 }
