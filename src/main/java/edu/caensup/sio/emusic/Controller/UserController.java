@@ -65,12 +65,8 @@ public class UserController extends AbstractController {
             Iterable<Cours> cours = repoCour.findAll();
             model.put("cours", cours);
             vue.addData("isActive", "classes");
-<<<<<<< HEAD
-        } else if (responsable instanceof Responsable){
-=======
             vue.addData("isConnected", false);
-        } else {
->>>>>>> main
+        } else if (responsable instanceof Responsable){
             Iterable<Cours> cours = repoCour.findAll();
             Responsable parent = (Responsable) responsable;
             Responsable realParent = repoResponsable.findById(parent.getId()).get();
@@ -152,6 +148,7 @@ public class UserController extends AbstractController {
             return new RedirectView("/enfant/dashboard");
         } else {
             return new RedirectView("/parent/dashboard");
+
         }
 
     }

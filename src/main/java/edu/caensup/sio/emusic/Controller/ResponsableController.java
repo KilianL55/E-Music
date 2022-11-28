@@ -19,8 +19,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 @RequestMapping("/parent/")
@@ -52,7 +51,12 @@ public class ResponsableController {
         Responsable parent = (Responsable) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<Enfant> enfants = repoEnfant.findByResponsable(parent);
         Responsable realParent = repoResponsable.findById(parent.getId()).get();
-        model.put("cours", realParent.getCours());
+        Set<Cours> cours = new HashSet<>();
+        for ( Enfant enfant : enfants){
+             cours.add(enfant.getCours());
+        }
+        model.put("cours", realParent.getCours());;
+        model.put("coursC", cours);
         parent.setAdresse2("");
         model.put("responsable", realParent);
         if(enfants.size() >= 1){
