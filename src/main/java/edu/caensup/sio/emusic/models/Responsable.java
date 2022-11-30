@@ -120,9 +120,15 @@ public class Responsable extends User implements UserDetails {
     }
 
     public String getPayMethod(){
+        if(this.payMethod == null){
+            return "";
+        }
         return this.payMethod.replaceAll("[0-9]{13}","*".repeat(13));
     }
     public String getPayData(){
+        if(this.payData == null){
+            return "";
+        }
         return this.payData.replaceAll("[0-9]{3}","*".repeat(3));
     }
 }
