@@ -96,7 +96,6 @@ public class UserController extends AbstractController {
     public String formAction(){
         vue.addData("state", true);
         vue.addData("isActive", "signup");
-        System.out.println("signup page trouver");
         vue.addData("responsable", new Responsable());
         return "signup";
     }
@@ -104,7 +103,6 @@ public class UserController extends AbstractController {
    @PostMapping("signup/register")
     public String registerAction(@ModelAttribute Responsable resp, ModelMap model){
         model.put("resp",resp);
-        System.out.println(resp.getUsername());
         return "signupRecap";
    }
 
