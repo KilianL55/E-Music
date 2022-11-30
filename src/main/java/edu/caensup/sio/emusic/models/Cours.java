@@ -1,15 +1,12 @@
 package edu.caensup.sio.emusic.models;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
+import edu.caensup.sio.emusic.Converter.DateConverter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.AllArgsConstructor;
@@ -49,5 +46,9 @@ public class Cours {
 
 	public boolean isInscrit(User user) {
 		return user.getCours().contains(this);
+	}
+
+	public Date getDate() {
+		return Date.from(date.atZone(ZoneId.systemDefault()).toInstant());
 	}
 }
