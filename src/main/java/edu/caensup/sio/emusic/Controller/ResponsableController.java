@@ -6,6 +6,7 @@ import edu.caensup.sio.emusic.models.Responsable;
 import edu.caensup.sio.emusic.repositories.IRepoCour;
 import edu.caensup.sio.emusic.repositories.IRepoEnfant;
 import edu.caensup.sio.emusic.repositories.IRepoResponsable;
+import edu.caensup.sio.emusic.service.AESEncryptionDecryption;
 import io.github.jeemv.springboot.vuejs.VueJS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -47,7 +48,8 @@ public class ResponsableController {
 
     @RequestMapping("dashboard")
     public String dashboardAction(ModelMap model){
-
+        String secretKey = "zadqsqgfgqsdqzdq";
+        AESEncryptionDecryption aesEncryptionDecryption = new AESEncryptionDecryption();
         Responsable parent = (Responsable) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<Enfant> enfants = repoEnfant.findByResponsable(parent);
         Responsable realParent = repoResponsable.findById(parent.getId()).get();
@@ -58,6 +60,8 @@ public class ResponsableController {
         model.put("cours", realParent.getCours());;
         model.put("coursC", cours);
         parent.setAdresse2("");
+        realParent.setPayMethod(aesEncryptionDecryption.decrypt(realParent.getPayMethod(), secretKey));
+        realParent.setPayData(aesEncryptionDecryption.decrypt(realParent.getPayData(), secretKey));
         model.put("responsable", realParent);
         if(enfants.size() >= 1){
             model.put("enfants",enfants);
@@ -104,6 +108,8 @@ public class ResponsableController {
 
     @PostMapping("/updateResponsable")
     public RedirectView updateResponsable( @ModelAttribute Responsable responsable){
+        String secretKey = "zadqsqgfgqsdqzdq";
+        AESEncryptionDecryption aesEncryptionDecryption = new AESEncryptionDecryption();
         Responsable resp = (Responsable) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         resp.setNom(responsable.getNom());
         resp.setPrenom(responsable.getPrenom());
@@ -116,6 +122,8 @@ public class ResponsableController {
         resp.setTel1(responsable.getTel1());
         resp.setTel2(responsable.getTel2());
         resp.setTel3(responsable.getTel3());
+        resp.setPayMethod(aesEncryptionDecryption.encrypt(responsable.getPayMethod(), secretKey));
+        resp.setPayData(aesEncryptionDecryption.encrypt(responsable.getPayData(), secretKey));
         repoResponsable.save(resp);
         return new RedirectView("/parent/dashboard");
 

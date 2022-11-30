@@ -71,6 +71,13 @@ public class Responsable extends User implements UserDetails {
     private Set<Cours> cours=new HashSet<>();
 
 
+    //moyen de payement = payMethod (carte) et données de payement = payData (cryptogramme)
+
+    @Column(length = 50)
+    private String payMethod;
+
+    @Column(length = 50)
+    private String payData;
     private String authorities="RESPONSABLE"; // (2)
 
     @Override
@@ -112,12 +119,10 @@ public class Responsable extends User implements UserDetails {
         return true;
     }
 
-    //moyen de payement = payMethod (carte) et données de payement = payData (cryptogramme)
-
-    @Column(length = 50)
-    private String payMethod;
-
-    @Column(length = 50)
-    private String payData;
-
+    public String getPayMethod(){
+        return this.payMethod.replaceAll("[0-9]{13}","*".repeat(13));
+    }
+    public String getPayData(){
+        return this.payData.replaceAll("[0-9]{3}","*".repeat(3));
+    }
 }
