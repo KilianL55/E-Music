@@ -60,8 +60,10 @@ public class ResponsableController {
         model.put("cours", realParent.getCours());;
         model.put("coursC", cours);
         parent.setAdresse2("");
-        realParent.setPayMethod(aesEncryptionDecryption.decrypt(realParent.getPayMethod(), secretKey));
-        realParent.setPayData(aesEncryptionDecryption.decrypt(realParent.getPayData(), secretKey));
+        if( realParent.getPayMethod() != null && realParent.getPayData() != null){
+            realParent.setPayMethod(aesEncryptionDecryption.decrypt(realParent.getPayMethod(), secretKey));
+            realParent.setPayData(aesEncryptionDecryption.decrypt(realParent.getPayData(), secretKey));
+        }
         model.put("responsable", realParent);
         if(enfants.size() >= 1){
             model.put("enfants",enfants);
