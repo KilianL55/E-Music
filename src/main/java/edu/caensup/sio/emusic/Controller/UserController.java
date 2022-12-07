@@ -1,5 +1,6 @@
 package edu.caensup.sio.emusic.Controller;
 
+import com.github.javafaker.Faker;
 import edu.caensup.sio.emusic.EmailService;
 import edu.caensup.sio.emusic.models.Cours;
 import edu.caensup.sio.emusic.models.Enfant;
