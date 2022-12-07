@@ -68,6 +68,12 @@ public class AdminController extends AbstractController {
 		return new RedirectView("/admin");
 	}
 
+	public RedirectView removeCours (@PathVariable int id, Cours cours) {
+		repoCours.delete(cours);
+		vue.addData("active", false);
+		return new RedirectView("/admin");
+	}
+
 	@PostMapping("addInstrument")
 	public RedirectView addInstrument(@ModelAttribute Instrument inst) {
 		repoInstrument.save(inst);
