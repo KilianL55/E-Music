@@ -107,7 +107,7 @@ public class UserController extends AbstractController {
         return "signupRecap";
    }
 
-    @RequestMapping("sendEmailVerif")
+    @GetMapping("sendEmailVerif")
     public String sendEmailVerif(@ModelAttribute Responsable resp, ModelMap model) throws MessagingException, UnsupportedEncodingException {
         int randomCode = (int) (Math.random()*100000);
         resp.setCode_verification(randomCode);
