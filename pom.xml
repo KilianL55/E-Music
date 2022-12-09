@@ -96,13 +96,6 @@
             <artifactId>spring-boot-starter-tomcat</artifactId>
             <scope>provided</scope>
         </dependency>
-<<<<<<< Updated upstream
-        <dependency>
-            <groupId>com.github.javafaker</groupId>
-            <artifactId>javafaker</artifactId>
-            <version>0.15</version>
-=======
-
         <dependency>
             <groupId>org.cicirello</groupId>
             <artifactId>chips-n-salsa</artifactId>
@@ -125,7 +118,6 @@
             <artifactId>webdrivermanager</artifactId>
             <version>5.3.1</version>
             <scope>test</scope>
->>>>>>> Stashed changes
         </dependency>
     </dependencies>
 
