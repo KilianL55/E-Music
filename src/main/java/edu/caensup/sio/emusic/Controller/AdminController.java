@@ -68,6 +68,7 @@ public class AdminController extends AbstractController {
 		return new RedirectView("/admin");
 	}
 
+	@GetMapping("removeCours")
 	public RedirectView removeCours (@PathVariable int id, Cours cours) {
 		repoCours.delete(cours);
 		vue.addData("active", false);
