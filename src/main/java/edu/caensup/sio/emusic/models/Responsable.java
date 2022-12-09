@@ -22,31 +22,31 @@ public class Responsable extends User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(length = 50)
+    @Column(length = 100)
     private String nom;
 
-    @Column(length = 50)
+    @Column(length = 100)
     private String prenom;
 
-    @Column(length = 50)
+    @Column(length = 100)
     private String adresse;
 
-    @Column(length = 50)
+    @Column(length = 100)
     private String ville;
 
-    @Column(length = 50)
+    @Column(length = 100)
     private String adresse2="";
 
-    @Column(length = 120)
+    @Column(length = 100)
     private String password;
 
-    @Column(length = 5)
+    @Column(length = 50)
     private String code_postal;
 
     @Column(length = 50)
     private String username;
 
-    @Column(length = 11)
+    @Column(length = 111)
     private int quotient_familial;
 
     @Column(length = 50)

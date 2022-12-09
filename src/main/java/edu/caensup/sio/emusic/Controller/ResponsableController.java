@@ -148,7 +148,7 @@ public class ResponsableController {
     @RequestMapping("removeChildren/{id}")
     public RedirectView removeChildren(@PathVariable int id){
         repoEnfant.deleteById(id);
-        return new RedirectView("./parent/dashboard");
+        return new RedirectView("/parent/dashboard");
     }
 
     @RequestMapping("removeAccount/{id}")

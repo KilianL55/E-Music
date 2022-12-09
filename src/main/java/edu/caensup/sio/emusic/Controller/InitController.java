@@ -6,6 +6,7 @@ import edu.caensup.sio.emusic.models.Responsable;
 import edu.caensup.sio.emusic.repositories.IRepoEnfant;
 import edu.caensup.sio.emusic.repositories.IRepoResponsable;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,9 +19,11 @@ public class InitController {
     @Autowired
     IRepoResponsable repoResponsable;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     @RequestMapping("/user/{responsable}/{enfant}/")
     public @ResponseBody String initAction(@PathVariable int responsable, @PathVariable int enfant) {
-        System.out.println("oage found");
         for (int o = 0; o < responsable; o++) {
             Responsable resp = new Responsable();
             Faker fake = new Faker();
@@ -32,12 +35,14 @@ public class InitController {
             resp.setTel1(fake.phoneNumber().phoneNumber());
             resp.setTel2(fake.phoneNumber().phoneNumber());
             resp.setTel3(fake.phoneNumber().phoneNumber());
+            resp.setPassword(passwordEncoder.encode("1234"));
             resp.setPayData(fake.finance().creditCard().replaceAll("[0-9]{13}","".repeat(13)));
             resp.setPayMethod(fake.finance().creditCard());
             resp.setAdresse(fake.address().fullAddress());
             resp.setAdresse2("");
-            resp.setCode_postal(fake.address().zipCode());
+            resp.setCode_postal("14123");
             System.out.println(resp.getUsername());
+            repoResponsable.save(resp);
             for (int g = 0; g < enfant; g++) {
                 Enfant enft = new Enfant();
                 enft.setDate_naissance(String.valueOf(fake.date().birthday()));
@@ -46,10 +51,11 @@ public class InitController {
                 enft.setNom(fake.name().lastName());
                 enft.setPrenom(fake.name().firstName());
                 enft.setUsername(enft.getPrenom()+"."+enft.getNom());
-                enft.setPassword("1234");
+                enft.setPassword(passwordEncoder.encode("1234"));
                 enft.setResponsable(resp);
+                repoEnfant.save(enft);
             }
-            repoResponsable.save(resp);
+
         }
         return "init ok";
     }
