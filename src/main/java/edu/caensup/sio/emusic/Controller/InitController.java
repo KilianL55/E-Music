@@ -48,7 +48,6 @@ public class InitController {
                 enft.setUsername(enft.getPrenom()+"."+enft.getNom());
                 enft.setPassword("1234");
                 enft.setResponsable(resp);
-                repoEnfant.save(enft);
             }
             repoResponsable.save(resp);
         }
