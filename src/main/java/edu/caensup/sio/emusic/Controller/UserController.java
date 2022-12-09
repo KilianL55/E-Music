@@ -56,7 +56,7 @@ public class UserController extends AbstractController {
         return "index";
     }
 
-    @GetMapping({"classes"})
+    @GetMapping("classes")
     public String classesAction(ModelMap model){
         Object responsable = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (responsable == "anonymousUser") {
