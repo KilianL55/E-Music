@@ -129,10 +129,10 @@ public class UserController extends AbstractController {
                 responsable.get().setEnabled(true);
                 responsable.get().setPassword(passwordEncoder.encode(responsable.get().getPassword()));
                 repoResponsable.save(responsable.get());
-                return new RedirectView("accueil");
+                return new RedirectView("./accueil");
             }
         }
-        return new RedirectView("signup");
+        return new RedirectView("./signup");
 
     }
 
@@ -140,9 +140,9 @@ public class UserController extends AbstractController {
     public RedirectView dashboardAction(){
         Object responsable = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if(responsable instanceof Enfant enfant){
-            return new RedirectView("/enfant/dashboard");
+            return new RedirectView("./enfant/dashboard");
         } else {
-            return new RedirectView("/parent/dashboard");
+            return new RedirectView("./parent/dashboard");
         }
 
     }
