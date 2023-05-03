@@ -60,7 +60,7 @@ public class EnfantController {
             realEnfant.getCours().add(c);
             repoEnfant.save(realEnfant);
         });
-        return new RedirectView("./enfant/dashboard/cours");
+        return new RedirectView("/enfant/dashboard/cours");
     }
 
     @RequestMapping("removeCours/{id}")
@@ -72,7 +72,7 @@ public class EnfantController {
             realEnfant.getCours().remove(c);
             repoEnfant.save(realEnfant);
         });
-        return new RedirectView("./enfant/dashboard/cours");
+        return new RedirectView("/enfant/dashboard/cours");
     }
 
     @RequestMapping("dashboard/cours")

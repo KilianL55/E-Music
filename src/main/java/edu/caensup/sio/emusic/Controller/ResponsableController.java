@@ -85,7 +85,7 @@ public class ResponsableController {
             realParent.getCours().add(c);
             repoResponsable.save(realParent);
         });
-        return new RedirectView("./parent/dashboard/cours");
+        return new RedirectView("/parent/dashboard/cours");
     }
 
     @RequestMapping("removeCours/{id}")
@@ -98,7 +98,7 @@ public class ResponsableController {
             realParent.getCours().remove(c);
             repoResponsable.save(realParent);
         });
-        return new RedirectView("./parent/dashboard/cours");
+        return new RedirectView("/parent/dashboard/cours");
     }
 
     @RequestMapping("dashboard/cours")

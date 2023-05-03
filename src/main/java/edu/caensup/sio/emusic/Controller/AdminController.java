@@ -65,21 +65,21 @@ public class AdminController extends AbstractController {
 		cours.setDate(LocalDateTime.now());
 		repoCours.save(cours);
 		vue.addData("active", false);
-		return new RedirectView("./admin");
+		return new RedirectView("/admin");
 	}
 
 	@PostMapping("addInstrument")
 	public RedirectView addInstrument(@ModelAttribute Instrument inst) {
 		repoInstrument.save(inst);
 		vue.addData("active", false);
-		return new RedirectView("./admin");
+		return new RedirectView("/admin");
 	}
 
 	@GetMapping("deleteInstrument/{id}")
 	public RedirectView deleteInstrument(@PathVariable int id) {
 		repoInstrument.deleteById(id);
 		vue.addData("active", false);
-		return new RedirectView("./admin");
+		return new RedirectView("/admin");
 	}
 
 //    @GetMapping("editInstrument")
