@@ -1373,3 +1373,11 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: C:/Users/chonore
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:452)
 	... 57 more
 >>>>>>> main
+2023-05-03 08:33:36 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Erreur lors de la conversion de données "'' (responsable: ""id"" INTEGER NOT NULL)"
+Data conversion error converting "'' (responsable: ""id"" INTEGER NOT NULL)"; SQL statement:
+INSERT INTO "PUBLIC"."responsable"("dtype","id","adresse","adresse2","authorities","code_postal","code_verification","enabled","nom","password","pay_data","pay_method","prenom","quotient_familial","tel1","tel2","tel3","username","ville")VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) [22018-214]
+2023-05-03 08:33:36 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Erreur lors de la conversion de données "'' (responsable: ""id"" INTEGER NOT NULL)"
+Data conversion error converting "'' (responsable: ""id"" INTEGER NOT NULL)"; SQL statement:
+INSERT INTO "PUBLIC"."responsable"("dtype","id","adresse","adresse2","authorities","code_postal","code_verification","enabled","nom","password","pay_data","pay_method","prenom","quotient_familial","tel1","tel2","tel3","username","ville")VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) [22018-214]
