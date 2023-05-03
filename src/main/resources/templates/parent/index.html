@@ -157,7 +157,7 @@
                         <div class="column">
                             <div class="ui segment">
                                 {{nom}} {{prenom}}
-                                <a href="./parent/manageChildren/{{id}}" class="ui mini blue button">Gérer votre enfant</a>
+                                <a href="/parent/manageChildren/{{id}}" class="ui mini blue button">Gérer votre enfant</a>
                             </div>
                         </div>
                         {{/enfants}}
@@ -211,7 +211,7 @@
                 <h2>Vos cours (<%haveCours%>)</h2>
                 <div v-if="haveCours === 0">
                     <h4>Vous n'avez pas encore de cours</h4>
-                    <a class="red ui button" href="./classes">Voir les cours disponibles</a>
+                    <a class="red ui button" href="/classes">Voir les cours disponibles</a>
                     <h4>Cours de vos enfants</h4>
                     {{#coursC}}
                     <div class="cours-box">
@@ -230,7 +230,7 @@
                                 <p class="date-box"><i class="user icon"></i>{{nbPlaceMax}}</p>
                                 <p class="instru-box"><i class="guitar icon"></i>{{instrument.intitule}}</p>
                             </div>
-                            <a href="./parent/removeCours/{{id}}" class="ui mini red button">Se désinscrire</a>
+                            <a href="/parent/removeCours/{{id}}" class="ui mini red button">Se désinscrire</a>
                         </div>
                     </div>
                     {{/coursC}}
@@ -254,7 +254,7 @@
                                     <p class="date-box"><i class="user icon"></i>{{nbPlaceMax}}</p>
                                     <p class="instru-box"><i class="guitar icon"></i>{{instrument.intitule}}</p>
                                 </div>
-                                <a href="./parent/removeCours/{{id}}" class="ui mini red button">Se désinscrire</a>
+                                <a href="/parent/removeCours/{{id}}" class="ui mini red button">Se désinscrire</a>
                             </div>
                         </div>
                         {{/cours}}
@@ -273,7 +273,7 @@
                     <div class="header">
                         Vous êtes sur de vouloir supprimer votre compte ?
                     </div>
-                    <a class="ui green button" href="./parent/removeAccount/{{id}}"> Oui</a>
+                    <a class="ui green button" href="/parent/removeAccount/{{id}}"> Oui</a>
                     <button class="ui red button" @click="isActive='account'">Non</button>
                 </div>
             </div>

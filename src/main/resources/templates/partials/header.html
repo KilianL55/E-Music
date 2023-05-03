@@ -22,27 +22,27 @@
         <div class="ui container">
           <div class="ui segment">
             <div class="ui secondary pointing menu">
-                <a :class="{ active : isActive === 'accueil' }" class="red item" href="./accueil">
+                <a :class="{ active : isActive === 'accueil' }" class="red item" href="/accueil">
                   Accueil
                 </a>
-                <a :class="{ active : isActive === 'classes' }" class="red item" href="./classes">
+                <a :class="{ active : isActive === 'classes' }" class="red item" href="/classes">
                   Cours
                 </a>
               <div class="right menu">
                 {{#activeUser}}
 
                   {{#if connected}}
-                    <a :class="{ active : isActive === 'signup' }" class="red item" href="./dashboard">
+                    <a :class="{ active : isActive === 'signup' }" class="red item" href="/dashboard">
                       Tableau de bord
                     </a>
-                    <a :class="{ active : isActive === 'login' }" class="red item" href="./logout">
+                    <a :class="{ active : isActive === 'login' }" class="red item" href="/logout">
                       Déconnexion
                     </a>
                   {{else}}
-                    <a :class="{ active : isActive === 'signup' }" class="red item" href="./signup">
+                    <a :class="{ active : isActive === 'signup' }" class="red item" href="/signup">
                       Inscription
                     </a>
-                    <a :class="{ active : isActive === 'login' }" class="red item" href="./dashboard">
+                    <a :class="{ active : isActive === 'login' }" class="red item" href="/dashboard">
                       Connexion
                     </a>
                   {{/if}}

@@ -32,7 +32,7 @@
             <div v-show="isActiveChildren === 'cours'">
                 <h2>Vos cours</h2>
                 <div>
-                    <a class="red ui button" href="./classes">Voir les cours disponibles</a>
+                    <a class="red ui button" href="/classes">Voir les cours disponibles</a>
                 </div>
                 <div>
                     <div class="cours-box-container">
@@ -53,7 +53,7 @@
                                     <p class="date-box"><i class="user icon"></i>{{nbPlaceMax}}</p>
                                     <p class="instru-box"><i class="guitar icon"></i>{{instrument.intitule}}</p>
                                 </div>
-                                <a href="./enfant/removeCours/{{id}}" class="ui mini red button">Se désinscrire</a>
+                                <a href="/enfant/removeCours/{{id}}" class="ui mini red button">Se désinscrire</a>
                             </div>
                         </div>
                         {{/cours}}
