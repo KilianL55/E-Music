@@ -1,6 +1,9 @@
 name: Build and deploy WAR app to VM Web App
 
-on: push
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
 
 permissions:
   contents: read

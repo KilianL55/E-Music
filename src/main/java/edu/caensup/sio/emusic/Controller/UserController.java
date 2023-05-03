@@ -1,6 +1,5 @@
 package edu.caensup.sio.emusic.Controller;
 
-import com.github.javafaker.Faker;
 import edu.caensup.sio.emusic.EmailService;
 import edu.caensup.sio.emusic.models.Cours;
 import edu.caensup.sio.emusic.models.Enfant;
@@ -56,7 +55,7 @@ public class UserController extends AbstractController {
         return "index";
     }
 
-    @GetMapping("classes")
+    @GetMapping({"classes"})
     public String classesAction(ModelMap model){
         Object responsable = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (responsable == "anonymousUser") {
@@ -107,7 +106,7 @@ public class UserController extends AbstractController {
         return "signupRecap";
    }
 
-    @GetMapping("sendEmailVerif")
+    @RequestMapping("sendEmailVerif")
     public String sendEmailVerif(@ModelAttribute Responsable resp, ModelMap model) throws MessagingException, UnsupportedEncodingException {
         int randomCode = (int) (Math.random()*100000);
         resp.setCode_verification(randomCode);
@@ -141,9 +140,9 @@ public class UserController extends AbstractController {
     public RedirectView dashboardAction(){
         Object responsable = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if(responsable instanceof Enfant enfant){
-            return new RedirectView("./enfant/dashboard");
+            return new RedirectView("/enfant/dashboard");
         } else {
-            return new RedirectView("./parent/dashboard");
+            return new RedirectView("/parent/dashboard");
         }
 
     }
