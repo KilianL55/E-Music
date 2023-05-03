@@ -54,6 +54,7 @@ public class AdminController extends AbstractController {
 			model.put("instruments", repoInstrument.findAll());
 			vue.addData("isActiveAdmin", "cours");
 			vue.addData("active", false);
+			model.put("cours", repoCours.findAll());
 			return "admin/index";
 		} else {
 			return "login";

@@ -85,7 +85,7 @@ public class ResponsableController {
             realParent.getCours().add(c);
             repoResponsable.save(realParent);
         });
-        return new RedirectView("/parent/dashboard/cours");
+        return new RedirectView("./parent/dashboard/cours");
     }
 
     @RequestMapping("removeCours/{id}")
@@ -98,7 +98,7 @@ public class ResponsableController {
             realParent.getCours().remove(c);
             repoResponsable.save(realParent);
         });
-        return new RedirectView("/parent/dashboard/cours");
+        return new RedirectView("./parent/dashboard/cours");
     }
 
     @RequestMapping("dashboard/cours")
@@ -127,7 +127,7 @@ public class ResponsableController {
         resp.setPayMethod(aesEncryptionDecryption.encrypt(responsable.getPayMethod(), secretKey));
         resp.setPayData(aesEncryptionDecryption.encrypt(responsable.getPayData(), secretKey));
         repoResponsable.save(resp);
-        return new RedirectView("/parent/dashboard");
+        return new RedirectView("./parent/dashboard");
 
     }
 
@@ -141,14 +141,14 @@ public class ResponsableController {
         vue.addData("isActive","children");
         vue.addData("active","disable");
         repoEnfant.save(enfant);
-        return new RedirectView("/parent/dashboard");
+        return new RedirectView("./parent/dashboard");
 
     }
 
     @RequestMapping("removeChildren/{id}")
     public RedirectView removeChildren(@PathVariable int id){
         repoEnfant.deleteById(id);
-        return new RedirectView("/dashboard");
+        return new RedirectView("/parent/dashboard");
     }
 
     @RequestMapping("removeAccount/{id}")
@@ -157,7 +157,7 @@ public class ResponsableController {
         session.invalidate();
         session =request.getSession(false);
         repoResponsable.deleteById(id);
-        return new RedirectView("/");
+        return new RedirectView("./");
     }
 
     @RequestMapping("manageChildren/{id}")
@@ -176,7 +176,7 @@ public class ResponsableController {
         enfantSave.setNom(enfant.getNom());
         enfantSave.setPrenom(enfant.getPrenom());
         repoEnfant.save(enfantSave);
-        return new RedirectView("/parent/dashboard");
+        return new RedirectView("./parent/dashboard");
     }
 
 }

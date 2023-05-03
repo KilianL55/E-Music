@@ -16,7 +16,7 @@ public class WebSecurityConfig {
     @Bean // (2)
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers( "/","/h2-console/**","/admin/**", "/img/**", "/css/**","/accueil", "/classes", "/signup", "/sendEmailVerif", "/codeVerif","/saveChildren","/addChildren").permitAll() // (3)
+                .antMatchers( "/init/**","/user/**","/","/h2-console/**","/admin/**", "/img/**", "/css/**","/accueil", "/classes", "/signup", "/sendEmailVerif", "/codeVerif","/saveChildren","/addChildren").permitAll() // (3)
                 .anyRequest().authenticated() // (4)
                 .and().formLogin() // (5)
                 .loginPage("/login").defaultSuccessUrl("/dashboard")// (5)
